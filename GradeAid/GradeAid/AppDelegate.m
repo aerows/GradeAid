@@ -31,7 +31,7 @@
 
     
     [LoadCourseDescriptions loadCourseDescriptions];
-    HomeViewController2 *homeViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"HomeView2"];
+    HomeViewController2 *homeViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"betygViewController"];
     
     
     [self.window setRootViewController: homeViewController];

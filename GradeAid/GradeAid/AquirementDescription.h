@@ -21,7 +21,11 @@
 @property (nonatomic, retain) NSString * sectionTitle;
 @property (nonatomic, retain) CourseDescription *course;
 @property (nonatomic, retain) NSSet *gradations;
+
+@property (nonatomic) int grade;
+
 @end
+
 
 @interface AquirementDescription (CoreDataGeneratedAccessors)
 

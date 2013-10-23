@@ -25,5 +25,6 @@ static NSString *const KeyForE_Caption            = @"e_caption";
 @interface AquirementDescription (Create)
 
 + (AquirementDescription*) descriptionWithDict:(NSDictionary *)dict inManagedObjectContext: (NSManagedObjectContext*) moc;
+- (NSAttributedString*) attributedStringForCurrentGrade:(int)grade;
 
 @end

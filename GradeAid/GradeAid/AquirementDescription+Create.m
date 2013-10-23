@@ -92,21 +92,28 @@ static NSString *const Separator = @"//";
 
 - (NSArray*) keywordsForGrade: (int) grade
 {
+
+    Gradation *gradation;
+    for (Gradation *g in self.gradations)
+    {
+        if ([g.gradationLevel isEqual: [NSNumber numberWithInt: grade]])
+        {
+            gradation = g;
+            break;
+        }
+    }
+    
+    if (gradation) return [gradation.gradationCaption componentsSeparatedByString: Separator];
+    
+    gradation = [self.gradations anyObject];
+    
     NSMutableArray *array = [[NSMutableArray alloc] init];
-//    switch (grade) {
-//        case 0:
-//        {
-//            for (int i = 0; i < [self.aCaption componentsSeparatedByString: Separator].count; i++) {
-//                [array addObject: @"..."];
-//            }
-//            break;
-//        }
-//        case 1: [array setArray: [self.eCaption componentsSeparatedByString: Separator]]; break;
-//        case 2: [array setArray: [self.cCaption componentsSeparatedByString: Separator]]; break;
-//        case 3: [array setArray: [self.aCaption componentsSeparatedByString: Separator]]; break;
-//        default: break;
-//    }
+
+    for (int i = 0; i < [gradation.gradationCaption componentsSeparatedByString: Separator].count; i++) {
+        [array addObject: @"..."];
+    }
     return array;
+
 }
 - (NSAttributedString*) attributedStringForCurrentGrade:(int)grade
 {
@@ -122,6 +129,7 @@ static NSString *const Separator = @"//";
     }
     return attributedString;
 }
+
 //
 //static NSString *const Separator = @"//";
 //

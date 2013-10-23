@@ -22,4 +22,6 @@
 @dynamic course;
 @dynamic gradations;
 
+@synthesize grade;
+
 @end
