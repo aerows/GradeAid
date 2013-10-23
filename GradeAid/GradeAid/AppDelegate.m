@@ -7,6 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "LoadCourseDescriptions.h"
+#import "betygViewController.h"
+#import "UIStoryboard+mainStoryboard.h"
+#import "HomeViewController2.h"
 
 @implementation AppDelegate
 
@@ -14,12 +19,36 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
++ (AppDelegate*) sharedDelegate
+{
+    return (AppDelegate*) [UIApplication sharedApplication].delegate;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    
+
+    
+    [LoadCourseDescriptions loadCourseDescriptions];
+    HomeViewController2 *homeViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"HomeView2"];
+    
+    
+    [self.window setRootViewController: homeViewController];
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    
+    
+//    LoginViewController *lvc    = [[LoginViewController alloc] initWithNibName: @"LoginViewController" bundle: nil];
+//    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController: lvc];
+//    [nvc.view setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed: @"background"]]];
+//    
+//    [self.window setRootViewController: nvc];
+//    
+//    self.window.backgroundColor = [UIColor whiteColor];
+//    [self.window makeKeyAndVisible];
     return YES;
 }
 

@@ -1,4 +1,127 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="13A603" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Aquirement" representedClassName="Aquirement" syncable="YES">
+        <attribute name="grade" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="aquirementDescription" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AquirementDescription" syncable="YES"/>
+        <relationship name="enrollment" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Enrollment" inverseName="aquirements" inverseEntity="Enrollment" syncable="YES"/>
+    </entity>
+    <entity name="AquirementDescription" representedClassName="AquirementDescription" syncable="YES">
+        <attribute name="aquirementDescriptionID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="aquirementType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="nrOfGradations" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sectionTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseDescription" inverseName="aquirementDescriptions" inverseEntity="CourseDescription" syncable="YES"/>
+        <relationship name="gradations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Gradation" inverseName="aquirementDescription" inverseEntity="Gradation" syncable="YES"/>
+    </entity>
+    <entity name="Course" representedClassName="Course" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="courseDescription" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CourseDescription" syncable="YES"/>
+        <relationship name="enrollments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Enrollment" inverseName="course" inverseEntity="Enrollment" syncable="YES"/>
+        <relationship name="schoolClass" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SchoolClass" syncable="YES"/>
+        <relationship name="teacher" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Teacher" inverseName="courses" inverseEntity="Teacher" syncable="YES"/>
+    </entity>
+    <entity name="CourseCentralContent" representedClassName="CourseCentralContent" syncable="YES">
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sectionTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseDescription" inverseName="centralContentItems" inverseEntity="CourseDescription" syncable="YES"/>
+    </entity>
+    <entity name="CourseDescription" representedClassName="CourseDescription" syncable="YES">
+        <attribute name="courseID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="credits" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="level" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="scope" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subjectID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="aquirementDescriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AquirementDescription" syncable="YES"/>
+        <relationship name="centralContentItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CourseCentralContent" inverseName="course" inverseEntity="CourseCentralContent" syncable="YES"/>
+        <relationship name="subject" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Subject" inverseName="courses" inverseEntity="Subject" syncable="YES"/>
+    </entity>
+    <entity name="Enrollment" representedClassName="Enrollment" syncable="YES">
+        <relationship name="aquirements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Aquirement" inverseName="enrollment" inverseEntity="Aquirement" syncable="YES"/>
+        <relationship name="course" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Course" inverseName="enrollments" inverseEntity="Course" syncable="YES"/>
+        <relationship name="student" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Student" inverseName="enrollments" inverseEntity="Student" syncable="YES"/>
+    </entity>
+    <entity name="Gradation" representedClassName="Gradation" syncable="YES">
+        <attribute name="gradationCaption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gradationLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="levelCaption" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="aquirementDescription" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AquirementDescription" inverseName="gradations" inverseEntity="AquirementDescription" syncable="YES"/>
+    </entity>
+    <entity name="Image" representedClassName="Image" parentEntity="Media" syncable="YES"/>
+    <entity name="Media" representedClassName="Media" isAbstract="YES" syncable="YES">
+        <relationship name="note" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="media" inverseEntity="Note" syncable="YES"/>
+    </entity>
+    <entity name="Note" representedClassName="Note" syncable="YES">
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="media" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Media" inverseName="note" inverseEntity="Media" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName="Person" isAbstract="YES" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="lastname" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="School" representedClassName="School" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="schoolID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="classes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SchoolClass" inverseName="school" inverseEntity="SchoolClass" syncable="YES"/>
+        <relationship name="teachers" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Teacher" inverseName="schools" inverseEntity="Teacher" syncable="YES"/>
+    </entity>
+    <entity name="SchoolClass" representedClassName="SchoolClass" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="school" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="School" inverseName="classes" inverseEntity="School" syncable="YES"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="schoolClass" inverseEntity="Student" syncable="YES"/>
+    </entity>
+    <entity name="Student" representedClassName="Student" parentEntity="Person" syncable="YES">
+        <attribute name="studentID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="enrollments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Enrollment" inverseName="student" inverseEntity="Enrollment" syncable="YES"/>
+        <relationship name="schoolClass" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SchoolClass" inverseName="students" inverseEntity="SchoolClass" syncable="YES"/>
+    </entity>
+    <entity name="Subject" representedClassName="Subject" syncable="YES">
+        <attribute name="introCaption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="objectiveCaption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="objectiveItemHeader" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subjectID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CourseDescription" inverseName="subject" inverseEntity="CourseDescription" syncable="YES"/>
+        <relationship name="objectives" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubjectObjective" inverseName="subject" inverseEntity="SubjectObjective" syncable="YES"/>
+    </entity>
+    <entity name="SubjectObjective" representedClassName="SubjectObjective" syncable="YES">
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subject" inverseName="objectives" inverseEntity="Subject" syncable="YES"/>
+    </entity>
+    <entity name="Teacher" representedClassName="Teacher" parentEntity="Person" syncable="YES">
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teacherID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="teacher" inverseEntity="Course" syncable="YES"/>
+        <relationship name="schools" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="School" inverseName="teachers" inverseEntity="School" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Aquirement" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AquirementDescription" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Course" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CourseCentralContent" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CourseDescription" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Enrollment" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Gradation" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Image" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Media" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Note" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Person" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="School" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="SchoolClass" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Student" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Subject" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="SubjectObjective" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Teacher" positionX="0" positionY="0" width="0" height="0"/>
+    </elements>
 </model>

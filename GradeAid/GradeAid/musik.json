@@ -1,0 +1,479 @@
+{
+   "subjectID":0,
+   "name":"Musik",
+   "introCaption":"Musik finns i alla kulturer och berör människor såväl kroppsligt som tanke­ och känslomässigt. Musik som estetisk uttrycksform används i en mängd sammanhang, har olika funktioner och betyder olika saker för var och en av oss. Den är också en viktig del i människors sociala gemenskap och kan påverka individens identitets­ utveckling. I vår tid förenas musik från skilda kulturer och epoker med andra konstformer i nya uttryck. Kunskaper om och i musik ökar möjligheterna att delta i samhällets kulturliv.",
+   "objectiveCaption":"Undervisningen i ämnet musik ska syfta till att eleverna utvecklar kunskaper som gör det möjligt att delta i musikaliska sammanhang, både genom att själva musicera och genom att lyssna till musik.\nUndervisningen ska ge eleverna förutsättningar att tillägna sig musik som uttrycksform och kommunikationsmedel. Genom undervisningen ska eleverna ges möjlighet att utveckla kunskap att använda röst, musikinstrument, digitala verktyg samt musikaliska begrepp och symboler i olika musikaliska former och sammanhang.\nUndervisningen ska ge eleverna förutsättningar att utveckla en musikalisk lyhördhet som gör det möjligt att i samarbete med andra skapa, bearbeta och framföra musik i olika former. Undervisningen ska ge eleverna både möjlighet att utveckla en tilltro till sin förmåga att sjunga och spela och ett intresse för att utveckla sin musikaliska kreativitet.\nGenom undervisningen ska eleverna utveckla förmågan att uppleva och reflektera över musik. Elevernas erfarenheter av musik ska utmanas och fördjupas i mötet med andras musikaliska erfarenheter. Därigenom ska undervisningen bidra till att eleverna utvecklar sina kunskaper om och förståelse för olika musikkulturer, såväl den egna som andras.",
+   "objectiveItemHeader":"Genom undervisningen i ämnet musik ska eleverna sammanfattningsvis ges förutsätt­ningar att utveckla sin förmåga att",
+   "objectiveItems":[
+      {
+         "subjectID":0,
+         "index":0,
+         "caption":"spela och sjunga i olika musikaliska former och genrer"
+      },
+      {
+         "subjectID":0,
+         "index":1,
+         "caption":"skapa musik samt gestalta och kommunicera egna musikaliska tankar och idéer"
+      },
+      {
+         "subjectID":0,
+         "index":2,
+         "caption":"analysera och samtala om musikens uttryck i olika sociala, kulturella och historiska sammanhang."
+      }
+   ],
+   "courseIDs":[
+      0,
+      1,
+      2
+   ],
+   "courses":[
+      {
+         "courseID":0,
+         "name":"Musik",
+         "level":"årskurs 1-3",
+         "credits":0,
+         "scope":"",
+         "subjectID":0,
+         "centralContentItems":[
+            {
+               "courseID":0,
+               "index":0,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Sång och spel i olika former: unison sång, kanon och växelsång samt ensemblespel."
+            },
+            {
+               "courseID":0,
+               "index":1,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Imitation och improvisation med rörelser, rytmer och toner."
+            },
+            {
+               "courseID":0,
+               "index":2,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Enkla former av musikskapande, till exempel med utgångspunkt i text eller bild."
+            },
+            {
+               "courseID":0,
+               "index":3,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Gestaltning av sånger och berättelser med ljud, rytmer och rörelser."
+            },
+            {
+               "courseID":0,
+               "index":4,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Rösten som instrument med variation av rytm, klang och dynamik."
+            },
+            {
+               "courseID":0,
+               "index":5,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Slagverk,stränginstrument och tangentinstrument med variation av rytm,klang och dynamik."
+            },
+            {
+               "courseID":0,
+               "index":6,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Rytm, klang, dynamik och tonhöjd som byggstenar för att musicera och komponera musik."
+            },
+            {
+               "courseID":0,
+               "index":7,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Musiksymboler, bilder och tecken."
+            },
+            {
+               "courseID":0,
+               "index":8,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Associationer,tankar,känslor och bilder som uppkommer när man lyssnar på musik."
+            },
+            {
+               "courseID":0,
+               "index":9,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Olika instrument från grupperna blås­, sträng­, tangent­ och slagverksinstrument. Hur instrumenten låter och ser ut."
+            },
+            {
+               "courseID":0,
+               "index":10,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Musik som knyter an till elevens vardagliga och högtidliga sammanhang, däribland nationalsången och några av de vanligaste psalmerna, samt inblickar i svensk och nordisk barnvisetradition."
+            }
+         ],
+         "aquirementDescriptionItems":{
+
+         }
+      },
+      {
+         "courseID":1,
+         "name":"Musik",
+         "level":"årskurs 4-6",
+         "credits":0,
+         "scope":"",
+         "subjectID":0,
+         "centralContentItems":[
+            {
+               "courseID":1,
+               "index":0,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Sång, melodispel och ackompanjemang i ensembleform i olika genrer."
+            },
+            {
+               "courseID":1,
+               "index":1,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Gehörsmusicerande efter musikaliska mönster, till exempel ackordföljder, perioder och kompmodeller."
+            },
+            {
+               "courseID":1,
+               "index":2,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Imitation och improvisation med röst och instrument, rytmer och toner."
+            },
+            {
+               "courseID":1,
+               "index":3,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Musikskapande med utgångspunkt i musikaliska mönster och former, till exempel ackordföljder och basgångar."
+            },
+            {
+               "courseID":1,
+               "index":4,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Musikframföranden."
+            },
+            {
+               "courseID":1,
+               "index":5,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Röst ­och hörselvård vid musikaliska aktiviteter,till exempel uppvärmningsövningar."
+            },
+            {
+               "courseID":1,
+               "index":6,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Hälsosamma ljudnivåer och olika typer av musikhörselskydd."
+            },
+            {
+               "courseID":1,
+               "index":7,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Rösten som instrument för olika vokala uttryck, till exempel sång, jojk och rap."
+            },
+            {
+               "courseID":1,
+               "index":8,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Ackord­ och melodiinstrument, bas och slagverk för melodi­ och rytmspel eller för ackompanjemang."
+            },
+            {
+               "courseID":1,
+               "index":9,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Rytm, klang och dynamik, tonhöjd, tempo, perioder, taktarter, vers och refräng som byggstenar för att komponera musik i olika genrer."
+            },
+            {
+               "courseID":1,
+               "index":10,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Musiksymboler, grafisk notation, noter och ackordbeteckningar."
+            },
+            {
+               "courseID":1,
+               "index":11,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Digitala verktyg för ljud­ och musikskapande."
+            },
+            {
+               "courseID":1,
+               "index":12,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Ljudets och musikens fysiska, tanke­ och känslomässiga påverkan på människan i olika sammanhang. Hur musik används för påverkan och rekreation och i olika rituella sammanhang."
+            },
+            {
+               "courseID":1,
+               "index":13,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Ord och begrepp som behövs för att kunna läsa, skriva och samtala om musicerande och om intryck samt upplevelser av musik."
+            },
+            {
+               "courseID":1,
+               "index":14,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Musik tillsammans med bild,text och dans. Hur olika estetiska uttryck kan samspela."
+            },
+            {
+               "courseID":1,
+               "index":15,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Indelningen i stråk­, blås­, sträng­, tangent­ och slagverksinstrument."
+            },
+            {
+               "courseID":1,
+               "index":16,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Konstmusik, folkmusik och populärmusik från olika kulturer och deras musikaliska karaktärsdrag."
+            }
+         ],
+         "aquirementDescriptionItems":[
+            {
+               "aquirementDescriptionID":0,
+               "sectionTitle":"Musicerande och musikskapande",
+               "courseID":1,
+               "caption":"Eleven kan delta i gemensam sång och följer då %@ rytm och tonhöjd.",
+               "e_caption":"i någon mån",
+               "c_caption":"relativt säkert",
+               "a_caption":"med säkerhet"
+            },
+            {
+               "aquirementDescriptionID":1,
+               "sectionTitle":"Musicerande och musikskapande",
+               "courseID":1,
+               "caption":"Eleven kan även %@ en enkel anpassad melodi­, bas­ och slagverksstämma samt %@ på ett ackordinstrument %@.",
+               "e_caption":"spela delar av//bidra till ackompanjemang//med några ackord",
+               "c_caption":"spela övervägande delar av//ackompanjera//och byter då några ackord med flyt",
+               "a_caption":"spela//ackompanjera//och byter då ackord med flyt"
+            },
+            {
+               "aquirementDescriptionID":2,
+               "sectionTitle":"Musicerande och musikskapande",
+               "courseID":1,
+               "caption":"Dessutom sjunger eller spelar eleven på något instrument %@.",
+               "e_caption":"i viss mån med tajming",
+               "c_caption":"med relativt god tajming och med relativt passande karaktär",
+               "a_caption":"med god tajming och med passande karaktär"
+            },
+            {
+               "aquirementDescriptionID":0,
+               "sectionTitle":"Musikens verktyg",
+               "courseID":1,
+               "caption":"Eleven kan, utifrån egna musikaliska idéer, %@ musik genom att med hjälp av röst, instrument eller digitala verktyg utgå från några enkla musikaliska mönster och former och pröva hur dessa kan %@ fungerande komposition.",
+               "e_caption":"bidra till att skapa//bidra till en",
+               "c_caption":"skapa//sättas samman till en i vissa delar",
+               "a_caption":"skapa//sättas samman till en i stora delar"
+            },
+            {
+               "aquirementDescriptionID":3,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "courseID":1,
+               "caption":"Eleven kan föra %@ resonemang om eget och andras musicerande.",
+               "e_caption":"enkla",
+               "c_caption":"utvecklade",
+               "a_caption":"välutvecklade"
+            },
+            {
+               "aquirementDescriptionID":4,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "courseID":1,
+               "caption":"Eleven kan även uttrycka sig på ett %@ sätt om egna musikupplevelser %@ beskriva och ge exempel på hur musik kan påverka människor.",
+               "e_caption":"enkelt//samt",
+               "c_caption":"utvecklat//samt",
+               "a_caption":"välutvecklat//och"
+            },
+            {
+               "aquirementDescriptionID":5,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "courseID":1,
+               "caption":"Dessutom kan eleven med %@ säkerhet urskilja och ge exempel på musikaliska karaktärsdrag från olika genrer och kulturer samt med %@ säkerhet ge exempel på instrument från olika instrumentgrupper.",
+               "e_caption":"viss//viss",
+               "c_caption":"relativt god//relativt god",
+               "a_caption":"god//god"
+            }
+         ]
+      },
+      {
+         "courseID":2,
+         "name":"Musik",
+         "level":"årskurs 7-9",
+         "credits":0,
+         "scope":"",
+         "subjectID":0,
+         "centralContentItems":[
+            {
+               "courseID":2,
+               "index":0,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Sång, melodispel och ackompanjemang i ensembleform med genretypiska musikaliska uttryck."
+            },
+            {
+               "courseID":2,
+               "index":1,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Gehörsmusicerande efter musikaliska mönster i olika genrer."
+            },
+            {
+               "courseID":2,
+               "index":2,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Rytmisk och melodisk improvisation till trumkomp, ackordföljder eller melodislingor med röst och instrument."
+            },
+            {
+               "courseID":2,
+               "index":3,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Musikskapande i olika genrer, till exempel visor, ljudkompositioner och låtar."
+            },
+            {
+               "courseID":2,
+               "index":4,
+               "sectionTitle":"Musicerande och musikskapande",
+               "caption":"Musikalisk gestaltning där olika uttrycksformer kombineras."
+            },
+            {
+               "courseID":2,
+               "index":5,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Röstvård, hörselvård och orsaker till att musiklyssnande och musicerande kan bidra till hörselskador samt hur hörselskador kan förebyggas."
+            },
+            {
+               "courseID":2,
+               "index":6,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Hur rösten kan varieras i flerstämmiga, vokala uttryck i olika genrer."
+            },
+            {
+               "courseID":2,
+               "index":7,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Ackord­ och melodiinstrument, bas och slagverk för spel i olika ton­ och taktarter."
+            },
+            {
+               "courseID":2,
+               "index":8,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Rytm, klang och dynamik, tonhöjd, tempo, perioder, taktarter, vers, refräng och ackord som byggstenar för att musicera och komponera musik i olika genrer och med varierande instrumentation."
+            },
+            {
+               "courseID":2,
+               "index":9,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Musiksymboler och notsystem, noter, tabulatur, ackordbeteckningar och grafisk notation."
+            },
+            {
+               "courseID":2,
+               "index":10,
+               "sectionTitle":"Musikens verktyg",
+               "caption":"Digitala verktyg för musikskapande, inspelning och bearbetning."
+            },
+            {
+               "courseID":2,
+               "index":11,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Ljudets och musikens fysiska, tanke­ och känslomässiga påverkan på människan. Musikens funktion för att markera identitet och grupptillhörighet i olika kulturer, med fokus på etnicitet och kön."
+            },
+            {
+               "courseID":2,
+               "index":12,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Hur musik används i olika medier, till exempel i film och datorspel."
+            },
+            {
+               "courseID":2,
+               "index":13,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Instrument och deras funktion i olika genrer och sammanhang, till exempel i en symfoniorkester eller i ett rockband."
+            },
+            {
+               "courseID":2,
+               "index":14,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "caption":"Konstmusik, folkmusik och populärmusik från olika epoker. Framväxten av olika genrer samt betydelsefulla tonsättare, låtskrivare och musikaliska verk."
+            }
+         ],
+         "aquirementDescriptionItems":[
+            {
+               "aquirementDescriptionID":0,
+               "sectionTitle":"Musicerande och musikskapande",
+               "courseID":2,
+               "caption":"Eleven kan delta i gemensam sång och följer då med %@ säkerhet rytm och tonhöjd.",
+               "e_caption":"viss",
+               "c_caption":"relativt god",
+               "a_caption":"god"
+            },
+            {
+               "aquirementDescriptionID":1,
+               "sectionTitle":"Musicerande och musikskapande",
+               "courseID":2,
+               "caption":"Eleven kan även spela enkla melodier, bas­ och slagverksstämmor med %@ tajming samt ackompanjera på ett ackordinstrument %@ och byter då ackord med %@ flyt.",
+               "e_caption":"viss////visst",
+               "c_caption":"relativt god////relativt gott",
+               "a_caption":"god//med passande karaktär//gott"
+            },
+            {
+               "aquirementDescriptionID":2,
+               "sectionTitle":"Musicerande och musikskapande",
+               "courseID":2,
+               "caption":"Eleven anpassar sin stämma %@ till helheten genom att lyssna och %@ uppmärksamma vad som sker i musicerandet.",
+               "e_caption":"i viss mån//till viss del",
+               "c_caption":"relativt väl//i relativt hög grad",
+               "a_caption":"väl//i hög grad"
+            },
+            {
+               "aquirementDescriptionID":3,
+               "sectionTitle":"Musicerande och musikskapande",
+               "courseID":2,
+               "caption":"Dessutom sjunger eller spelar eleven på något instrument i någon genre med %@ teknik och %@ karaktär.",
+               "e_caption":"delvis fungerande//i viss mån passande",
+               "c_caption":"relativt väl fungerande//passande",
+               "a_caption":"väl fungerande//passande"
+            },
+            {
+               "aquirementDescriptionID":4,
+               "sectionTitle":"Musicerande och musikskapande",
+               "courseID":2,
+               "caption":"Eleven kan då %@ och tolka musiken till ett personligt %@ uttryck.",
+               "e_caption":"bidra till att bearbeta//musikaliskt",
+               "c_caption":"bearbeta//delvis personligt musikaliskt",
+               "a_caption":"bearbeta//personligt musikaliskt"
+            },
+            {
+               "aquirementDescriptionID":5,
+               "sectionTitle":"Musikens verktyg",
+               "courseID":2,
+               "caption":"Eleven kan, utifrån egna musikaliska idéer, %@ musik genom att med hjälp av röst, instrument, eller digitala verktyg %@ hur olika kombinationer av musikaliska byggstenar kan forma kompositioner som %@.",
+               "e_caption":"bidra till att skapa//pröva//har en i huvudsak fungerande form",
+               "c_caption":"skapa//pröva och ompröva//efter någon bearbetning har en fungerande form och karaktäristisk stil",
+               "a_caption":"skapa//pröva och ompröva//har en fungerande form och en karaktäristisk stil"
+            },
+            {
+               "aquirementDescriptionID":6,
+               "sectionTitle":"Musikens verktyg",
+               "courseID":2,
+               "caption":"Dessutom kan eleven kombinera musik med andra uttrycksformer så att de olika uttrycken %@ samspelar.",
+               "e_caption":"väl",
+               "c_caption":"relativt väl",
+               "a_caption":"i någon mån"
+            },
+            {
+               "aquirementDescriptionID":7,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "courseID":2,
+               "caption":"Eleven kan även ge %@ omdömen om eget och andras musicerande och %@ förslag som %@ leda till att det musikaliska arbetet utvecklas.",
+               "e_caption":"enkla//bidra med//kan",
+               "c_caption":"utvecklade//ge//efter någon bearbetning kan",
+               "a_caption":"välutvecklade//ge//kan"
+            },
+            {
+               "aquirementDescriptionID":8,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "courseID":2,
+               "caption":"Eleven kan föra %@ och %@ underbyggda resonemang om musikens olika funktioner och vilken betydelse den har och historiskt har haft för individer och samhällen.",
+               "e_caption":"enkla//till viss del",
+               "c_caption":"utvecklade//relativt väl",
+               "a_caption":"välutvecklade//väl"
+            },
+            {
+               "aquirementDescriptionID":9,
+               "sectionTitle":"Musikens sammanhang och funktioner",
+               "courseID":2,
+               "caption":"Dessutom kan eleven i %@ utsträckning urskilja och jämföra musikaliska karaktärsdrag från olika genrer, epoker och kulturer samt med %@ säkerhet urskilja olika instrument och instrumentgrupper och beskriva deras funktion i olika sammanhang.",
+               "e_caption":"viss//viss",
+               "c_caption":"relativt hög//relativt god",
+               "a_caption":"hög//god"
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>8AB61135-9160-48A5-BCA0-4AD172E71434</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GradeAid</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3B7E9F02-A5D6-477B-9CE6-4F520FB34D34</key>
+		<string>https://github.com/aerows/GradeAid.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GradeAid/GradeAid.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3B7E9F02-A5D6-477B-9CE6-4F520FB34D34</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/aerows/GradeAid.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3B7E9F02-A5D6-477B-9CE6-4F520FB34D34</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3B7E9F02-A5D6-477B-9CE6-4F520FB34D34</string>
+			<key>IDESourceControlWCCName</key>
+			<string>GradeAid</string>
+		</dict>
+	</array>
+</dict>
+</plist>
