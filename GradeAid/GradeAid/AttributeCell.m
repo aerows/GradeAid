@@ -1,63 +1,45 @@
- //
-//  AttributeCell.m
+//
+//  RegisterCell.m
 //  GradeAid
 //
-//  Created by Daniel Hallin on 2013-10-04.
+//  Created by Daniel Hallin on 2013-10-30.
 //  Copyright (c) 2013 Daniel Hallin. All rights reserved.
 //
 
+static NSString *const VerifiedImage = @"check";
+static NSString *const NotVerifiedImage = @"cross";
+
 #import "AttributeCell.h"
-#import "Label.h"
 
 @implementation AttributeCell
-{
-    IBOutlet Label *warningLabel;
-}
 
-#pragma - Constructor Methods
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self = [super initWithFrame:frame];
     if (self) {
-
+        // Initialization code
     }
     return self;
 }
 
-- (id) initWithCoder:(NSCoder *)aDecoder
+- (void) updateView
 {
-    // Kan tas bort
-    self = [super initWithCoder:aDecoder];
-    return self;
+    NSString *imageName = (_attributeInput.isVerified) ? VerifiedImage : NotVerifiedImage;
+    [_imageView setImage: [UIImage imageNamed: imageName]];
 }
 
-#pragma - AttributeVerifyer View Methods
+#pragma mark - Getters and Setters
 
-- (void) attributeVerifyerDidUpdate:(id)sender
+@synthesize attributeInput = _attributeInput;
+
+- (void) setAttributeInput:(AttributeInput *)attributeInput
 {
-    [warningLabel setText: (_attributeVerifyer.isAttributeVerified) ? @"" : _attributeVerifyer.unfullfilledQriterium];
-}
-
-#pragma - Getters and Setters
-
-- (void) setAttributeVerifyer:(AttributeVerifyer *)attributeVerifyer
-{
-    _attributeVerifyer = attributeVerifyer;
-    [_attributeVerifyer setAttributeView: self];
-    [_attributeVerifyer setTextField: _textField];
-    [_textField setPlaceholder: _attributeVerifyer.attributeName];
-    [_textField setText: _attributeVerifyer.attributeValue];
-}
-
-@synthesize textField = _textField;
-@synthesize attributeVerifyer = _attributeVerifyer;
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
+    _attributeInput = attributeInput;
+    [_attributeInput setView: self];
+    [_attributeInput setTextField: _textField];
+    [_attributeTitleLabel setText: _attributeInput.attributeTitle];
     
-    // Configure the view for the selected state
+    
 }
 
 @end

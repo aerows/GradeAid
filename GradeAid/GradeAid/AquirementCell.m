@@ -11,6 +11,7 @@ CGFloat const captionLabelWidth = 728;
 #import "AquirementCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AquirementDescription+Create.h"
+#import "Aquirement+Manage.h"
 
 static CGFloat const animationDuration = 1.6f;
 
@@ -25,8 +26,8 @@ static CGFloat const animationDuration = 1.6f;
 - (void) aquirementButtonWasPressed:(id)sender
 {
     AquirementButton *button = (AquirementButton*) sender;
-    bool toggle = (_aquirementDescription.grade == button.grade);
-    _aquirementDescription.grade = (toggle) ? 0 : button.grade;
+    bool toggle = (_aquirement.grade.intValue == button.grade);
+    _aquirement.grade = (toggle) ? @(0) : @(button.grade);
     
 
     CATransition *transitionAnimation = [CATransition animation];
@@ -35,20 +36,20 @@ static CGFloat const animationDuration = 1.6f;
     [transitionAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     [transitionAnimation setFillMode:kCAFillModeBoth];
     [captionLabel.layer addAnimation:transitionAnimation forKey:@"fadeAnimation"];
-    captionLabel.attributedText = [_aquirementDescription attributedStringForCurrentGrade: _aquirementDescription.grade];
+//    captionLabel.attributedText = [_aquirementDescription attributedStringForCurrentGrade: _aquirementDescription.grade];
     
-    [self updateButtonsWithGrade: _aquirementDescription.grade];
+//    [self updateButtonsWithGrade: _aquirementDescription.grade];
 }
 
 
 
 #pragma mark - Private Methods
 
-- (void) updateButtonsWithGrade: (int) grade
+- (void) updateButtonsWithGrade: (NSNumber*) grade
 {
     for (AquirementButton *ab in buttons)
     {
-        [ab setSelected: (ab.grade == grade)];
+        [ab setSelected: (ab.grade == grade.intValue)];
     }
 }
 
@@ -78,15 +79,15 @@ static CGFloat const animationDuration = 1.6f;
 
 #pragma mark - Getters and Setters
 
-- (void) setAquirement:(AquirementDescription *)courseAquirementDescription
+- (void) setAquirement:(Aquirement *) aquirement
 {
-    if ([_aquirementDescription isEqual: courseAquirementDescription]) return;
-    _aquirementDescription = courseAquirementDescription;
-    int grade = _aquirementDescription.grade;
-    [captionLabel setAttributedText: [_aquirementDescription attributedStringForCurrentGrade: grade]];
-    [self updateButtonsWithGrade: grade];
+    if ([_aquirement isEqual: aquirement]) return;
+    _aquirement = aquirement;
+    int grade = _aquirement.grade.intValue;
+    [captionLabel setAttributedText: [_aquirement attributedStringForCurrentGrade: grade]];
+    [self updateButtonsWithGrade: _aquirement.grade];
 }
 
-@synthesize aquirement = _aquirementDescription;
+@synthesize aquirement = _aquirement;
 
 @end

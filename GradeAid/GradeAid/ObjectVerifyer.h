@@ -2,48 +2,39 @@
 //  ObjectVerifyer.h
 //  GradeAid
 //
-//  Created by Daniel Hallin on 2013-10-08.
+//  Created by Daniel Hallin on 2013-10-30.
 //  Copyright (c) 2013 Daniel Hallin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "AttributeVerifyer.h"
+#import "AttributeInput.h"
+#import "SellectionVerifyer.h"
 
 @protocol ObjectVerifyerView <NSObject>
 
-- (void) objectVerifyerDidUpdate: (id) sender;
+- (void) updateView;
 
 @end
 
-@protocol ObjectVerifyerDelegate <NSObject>
 
-- (void) objectVerifyer: (id) sender createdObject: (id) object;
+@interface ObjectVerifyer : NSObject<AttributeInputDelegate>
+{
+    void (^_completion)(NSDictionary*, NSManagedObjectContext*);
+}
 
-@end
+- (id) initWithAttributes: (NSDictionary*) attributes orderedKeys: (NSArray*) attributeKeys completion: (void (^)(NSDictionary*, NSManagedObjectContext*)) completion;
 
-@interface ObjectVerifyer : NSObject<AttributeVerifyerDelegate>
+- (id) initWithAttributes: (NSDictionary*) attributes orderedKeys: (NSArray*) attributeKeys sellectors:(NSDictionary*) sellectors sellectorKeys: (NSArray*) selectorKeys completion: (void (^)(NSDictionary*, NSManagedObjectContext*)) completion;
 
-@property (nonatomic, strong) id object;
 
-@property (nonatomic) bool createMany;
-@property (nonatomic, strong) NSString *createObjectTitle;
-@property (nonatomic, strong) UIImage *defaultImage;
-@property (nonatomic, strong) NSArray *attributeVerifyers;
-@property (nonatomic, getter = isObjectVerified) bool objectVerified;
+- (void) update;
+- (void) createInManagedObjectContext: (NSManagedObjectContext*) moc;
 
 @property (nonatomic, strong) id<ObjectVerifyerView> view;
-@property (nonatomic, strong) id<ObjectVerifyerDelegate> delegate;
-
-- (void) addAttributeVerifyer: (AttributeVerifyer*) attributeVerifyer;
-- (void) addAttributeVerifyers: (NSArray*) attributeVerifyers;
-
-- (void) saveObject;
-- (id) _saveObject;
-@end
-
-@protocol ObjectWithVerifyer <NSObject>
-
-+ (ObjectVerifyer*) objectVerifyer;
-+ (UIImage*) defaultImage;
+@property (nonatomic, strong) NSDictionary* attributeInputs;
+@property (nonatomic, strong) NSDictionary* attributeSellectionInputs;
+@property (nonatomic, strong) NSArray* orderedAttributeKeys;
+@property (nonatomic, strong) NSArray* orderedSelectorKeys;
+@property (nonatomic, getter = isVerified) bool objectVerified;
 
 @end

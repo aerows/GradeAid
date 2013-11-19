@@ -26,6 +26,7 @@ static NSString *const KeyForCourseID = @"courseID";
     if (!objectInitalized && aquiDesc)
     {
         aquiDesc.sectionTitle               = [dict objectForKey: KeyForSectionTitle];
+        aquiDesc.sectionIndex               = [dict objectForKey: KeyForSectionIndex];
         aquiDesc.caption                    = [dict objectForKey: KeyForCaption];
         aquiDesc.nrOfGradations             = [dict objectForKey: KeyForNrOfGradations];
         aquiDesc.courseID                   = [dict objectForKey: KeyForCourseID];
@@ -45,7 +46,7 @@ static NSString *const KeyForCourseID = @"courseID";
             NSDictionary *gradDict = @{KeyForGradationCaption : [gradations objectAtIndex: i],
                                        KeyForGradationLevel   : [gradationLevels objectAtIndex: i],
                                        KeyForLevelCaption     : [levelCaption objectAtIndex: i],
-                                       KeyForAquirementDescription : aquiDesc};
+                                       KeyForGradeAquirementDescription : aquiDesc};
             
             [aquiDesc addGradationsObject: [Gradation gradationWithDict: gradDict inManagedObjectContext:moc]];
         }

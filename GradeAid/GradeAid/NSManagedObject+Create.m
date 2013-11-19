@@ -35,4 +35,44 @@
     }
 }
 
++ (NSNumber*) nextIDforEntityName:(NSString*) entityName idKeyPath: (NSString*) keypath managedObjectContext:(NSManagedObjectContext*) moc
+{
+    NSNumber *nextID = nil;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity: [NSEntityDescription entityForName: entityName inManagedObjectContext: moc]];
+    [request setResultType:NSDictionaryResultType];
+    
+    NSExpression *keyPathExpression = [NSExpression
+                                       expressionForKeyPath: keypath];
+    NSExpression *earliestExpression = [NSExpression
+                                        expressionForFunction:@"max:"
+                                        arguments:[NSArray arrayWithObject:keyPathExpression]];
+    
+    NSExpressionDescription *highestExpressionDescription =
+    
+    [[NSExpressionDescription alloc] init];
+    [highestExpressionDescription setName:@"highestID"];
+    [highestExpressionDescription setExpression:earliestExpression];
+    [highestExpressionDescription setExpressionResultType:NSInteger16AttributeType];
+    
+    [request setPropertiesToFetch:[NSArray arrayWithObject:
+                                   highestExpressionDescription]];
+    NSError *error = nil;
+    NSArray *response = [moc executeFetchRequest:request error:&error];
+    
+    nextID = [[response lastObject] valueForKey:@"highestID"];
+    
+    if (nextID)
+    {
+        nextID = @(nextID.intValue + 1);
+    }
+    else
+    {
+        nextID = @0;
+    }
+    
+    return nextID;
+}
+
 @end

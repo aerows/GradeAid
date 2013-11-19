@@ -8,12 +8,16 @@
 
 #import "Aquirement.h"
 #import "CourseDescription+Create.h"
-#import "AquirementDescription.h"
+#import "AquirementDescription+Create.h"
 
+static NSString *const KeyForAquirementDescription = @"aquirementDescription";
+static NSString *const KeyForEnrollment            = @"enrollment";
 
 @interface Aquirement (Manage)
 
-+ (Aquirement*) createWithCourseAquirementDescription: (AquirementDescription*) aquirementDescription inManagedObjectContext: (NSManagedObjectContext*) moc;
+//+ (Aquirement*) aquirementWithAttributes: (NSDictionary*) attributes inManagedObjectContext: (NSManagedObjectContext*) moc;
+
++ (Aquirement*) aquirementWithDescription: (AquirementDescription*) aquirementDescription enrollment: (Enrollment*) enrollment managedObjectContext: (NSManagedObjectContext*) moc;
 
 - (NSAttributedString*) attributedStringForCurrentGrade: (int) grade;
 

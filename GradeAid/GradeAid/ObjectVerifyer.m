@@ -2,107 +2,111 @@
 //  ObjectVerifyer.m
 //  GradeAid
 //
-//  Created by Daniel Hallin on 2013-10-08.
+//  Created by Daniel Hallin on 2013-10-30.
 //  Copyright (c) 2013 Daniel Hallin. All rights reserved.
 //
 
 #import "ObjectVerifyer.h"
-#import "AppDelegate.h"
+
 
 @implementation ObjectVerifyer
-{
-    NSMutableArray *_attributeVerifyers;
-}
 
-#pragma - Constructor Methods
-
-- (id) init
+- (id) initWithAttributes:(NSDictionary *)attributes orderedKeys:(NSArray *)attributeKeys sellectors:(NSDictionary *)sellectors sellectorKeys:(NSArray *)selectorKeys completion:(void (^)(NSDictionary *, NSManagedObjectContext *))completion
 {
     if (self = [super init])
     {
-        _attributeVerifyers = [[NSMutableArray alloc] init];
+        [self setAttributeInputs: attributes];
+        _orderedAttributeKeys = attributeKeys;
+
+        [self setAttributeSellectionInputs: sellectors];
+        _orderedSelectorKeys = selectorKeys;
+        
+        _completion = completion;
     }
     return self;
 }
 
-#pragma - ObjectVerifyer Methods
 
-- (void) saveObject
+- (id) initWithAttributes: (NSDictionary*) attributes orderedKeys:(NSArray *)keys completion:(void (^)(NSDictionary *, NSManagedObjectContext *))completion
 {
-    if (!_objectVerified) return;
+    if (self = [super init])
+    {
+        self.attributeInputs = attributes;
+        _completion = completion;
+        _orderedAttributeKeys = keys;
+    }
+    return self;
+}
+
+- (void) update
+{
+    bool allInputsVerified = YES;
+    for (NSString *key in _attributeInputs.allKeys)
+    {
+        allInputsVerified &= [[_attributeInputs objectForKey: key] isVerified];
+    }
     
-    for (AttributeVerifyer *av in _attributeVerifyers)
-    {
-        [av formatAttributeValue];
-    }
-    id object = [self _saveObject];
-    [[AppDelegate sharedDelegate] saveContext];
-
-    [_delegate objectVerifyer: self createdObject: object];
-}
-
-- (id) _saveObject
-{
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
-                                 userInfo:nil];
-}
-
-#pragma - AttributeVerifyer Delegate Methods
-
-- (void) attributeVerifyerDidUpdate:(id)sender
-{
-    AttributeVerifyer *av = (AttributeVerifyer*) sender;
-    bool allAttributesVerified = YES;
-    if (!av.isAttributeVerified)
-    {
-        allAttributesVerified = NO;
-    }
-    else
-    {
-        for (AttributeVerifyer *a in _attributeVerifyers)
-        {
-            allAttributesVerified &= a.isAttributeVerified;
-        }
-    }
-    [self _setObjectVerified: allAttributesVerified];
-}
-
-- (void) _setObjectVerified:(bool)objectVerified
-{
-    if (_objectVerified == objectVerified) return;
+    if (_objectVerified == allInputsVerified) return;
     
-    _objectVerified = objectVerified;
-    [_view objectVerifyerDidUpdate: self];
+    _objectVerified = allInputsVerified;
+    [_view updateView];
 }
 
-#pragma - Getters and Setters
+- (void) createInManagedObjectContext: (NSManagedObjectContext*) moc
+{
+    NSMutableDictionary *attributes = [[NSMutableDictionary alloc] init];
+    for (NSString *key in _attributeInputs.allKeys)
+    {
+        [attributes setObject: [(AttributeInput*)[_attributeInputs objectForKey: key] value] forKey: key];
+    }
+    for (NSString *key in _attributeSellectionInputs.allKeys)
+    {
+        id object = [(SellectionVerifyer*)[_attributeSellectionInputs objectForKey: key] value];
+        if (object) [attributes setObject: object forKey: key];
+    }
+    
+    _completion(attributes, moc);
 
-@synthesize view = _view;
-@synthesize delegate = _delegate;
+    NSError *error = nil;
+    [moc save: &error];
+    if (error)
+    {
+        NSLog(@"%@", error.localizedDescription);
+    }
+}
 
-@synthesize createMany = _createMany;
+#pragma mark - Getters and Setters
 
-@synthesize createObjectTitle = _createObjectTitle;
+@synthesize attributeInputs = _attributeInputs;
+@synthesize attributeSellectionInputs = _attributeSellectionInputs;
+
+@synthesize orderedAttributeKeys = _orderedAttributeKeys;
+@synthesize orderedSelectorKeys = _orderedSelectorKeys;
+
 @synthesize objectVerified = _objectVerified;
-@synthesize defaultImage = _defaultImage;
-@synthesize attributeVerifyers = _attributeVerifyers;
+@synthesize view = _view;
 
-- (void) addAttributeVerifyer:(AttributeVerifyer *)attributeVerifyer
+
+- (void) setAttributeInputs:(NSDictionary *)attributeInputs
 {
-    if (attributeVerifyer)
+    for (NSString *key in attributeInputs.allKeys)
     {
-        [attributeVerifyer setDelegate: self];
-        [_attributeVerifyers addObject: attributeVerifyer];
+        [[attributeInputs objectForKey: key] setDelegate: self];
     }
+        
+    _attributeInputs = attributeInputs;
 }
 
-- (void) addAttributeVerifyers:(NSArray *)attributeVerifyers
+- (void) setAttributeSellectionInputs:(NSDictionary *)attributeSellectionInputs
 {
-    for (AttributeVerifyer *av in attributeVerifyers)
+    for (NSString *key in attributeSellectionInputs.allKeys)
     {
-        [self addAttributeVerifyer: av];
+        [[attributeSellectionInputs objectForKey: key] setDelegate: self];
     }
+    
+    _attributeSellectionInputs = attributeSellectionInputs;
 }
+
+
 
 @end

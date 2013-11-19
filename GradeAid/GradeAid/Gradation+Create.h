@@ -8,10 +8,10 @@
 
 #import "Gradation.h"
 
-static NSString *const KeyForGradationCaption       = @"gradationCaption";
-static NSString *const KeyForGradationLevel         = @"gradationLevel";
-static NSString *const KeyForLevelCaption           = @"levelCaption";
-static NSString *const KeyForAquirementDescription  = @"aquirementDescription";
+static NSString *const KeyForGradationCaption            = @"gradationCaption";
+static NSString *const KeyForGradationLevel              = @"gradationLevel";
+static NSString *const KeyForLevelCaption                = @"levelCaption";
+static NSString *const KeyForGradeAquirementDescription  = @"aquirementDescription";
 
 @interface Gradation (Create)
 

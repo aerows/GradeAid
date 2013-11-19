@@ -7,16 +7,47 @@
 //
 
 #import "Course+Create.h"
+#import "NSManagedObject+Create.h"
+#import "Enrollment+Create.h"
 
 @implementation Course (Create)
-+ (Course*) createCourseForTeacher:(Teacher *)teacher withCourseDescription:(CourseDescription *)desc inManagedObjectContext:(NSManagedObjectContext *)moc
+
++ (Course*) courselWithDict: (NSDictionary*) dict inManagedObjectContext: (NSManagedObjectContext*) moc
 {
+    Course *course = nil;
     
-    Course *course = [NSEntityDescription insertNewObjectForEntityForName: @"Course" inManagedObjectContext:moc];
-    course.teacher = teacher;
-    course.courseDescription = desc;
+    course = [NSEntityDescription insertNewObjectForEntityForName: @"Course" inManagedObjectContext:moc];
+    
     return course;
 }
+
+- (void) enrollStudent:(Student *)student managedObjectContext:(NSManagedObjectContext *)moc
+{
+    Enrollment *enrollment = [Enrollment enroll:student inCourse: self managedObjectContext: moc];
+    [self addEnrollmentsObject: enrollment];
+}
+
+- (void) enrollClass:(SchoolClass *)schoolClass managedObjectContext:(NSManagedObjectContext *)moc
+{
+    for (Student *student in schoolClass.students)
+    {
+        [self enrollStudent: student managedObjectContext: moc];
+    }
+}
+
+- (NSNumber*) courseID
+{
+    return self.courseEdition.courseDescription.courseID;
+}
+
+- (NSArray*) orderedEnrollments
+{
+#warning - sort this after student surname
+    
+  //  NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey: @"SELF.student" ascending:<#(BOOL)#>
+    return [self.enrollments allObjects];
+}
+
 @end
 
 

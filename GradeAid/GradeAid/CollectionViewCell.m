@@ -26,13 +26,19 @@
 
 #pragma mark - Getters and Setters
 
-@synthesize school = _school;
+@synthesize title = _title;
+@synthesize image = _image;
 
-- (void) setSchool:(School *)school
+- (void) setTitle:(NSString *)title
 {
-    _school = school;
-    [titleLabel setText: school.name];
-    [imageView setImage: [school schoolImage]];
+    _title = title;
+    [titleLabel setText: _title];
+}
+
+- (void) setImage:(UIImage *)image
+{
+    _image = image;
+    [imageView setImage: _image];
 }
 
 @end

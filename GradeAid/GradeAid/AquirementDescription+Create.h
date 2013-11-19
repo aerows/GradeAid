@@ -9,6 +9,7 @@
 #import "AquirementDescription.h"
 
 static NSString *const KeyForSectionTitle       = @"sectionTitle";
+static NSString *const KeyForSectionIndex       = @"sectionIndex";
 static NSString *const KeyForNrOfGradations     = @"nrOfGradations";
 //static NSString *const KeyForCourseID           = @"courseID";
 static NSString *const KeyForAquirementDescID   = @"aquirementDescriptionID";

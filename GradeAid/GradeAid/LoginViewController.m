@@ -9,8 +9,12 @@
 #import "LoginViewController.h"
 #import "TextField.h"
 #import "Button.h"
-#import "HomeViewController.h"
+#import "SchoolCollectionViewController.h"
 #import "UIStoryboard+mainStoryboard.h"
+#import "AppDelegate.h"
+#import "Session.h"
+
+static NSString *const SegueIdentifierLogin = @"SegueIdentifierLogin";
 
 @interface LoginViewController ()
 {
@@ -41,16 +45,34 @@
     //[self.view setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed:@"background"]]];
     
     [passwordField setSecureTextEntry: YES];
-    [loginButton addTarget: self action: @selector(login) forControlEvents: UIControlEventTouchUpInside];
     
-    [loginField setText: @"Rickard Samuelsson"];
+    [loginField setText: @"hallin.daniel@gmail.com"];
     [passwordField setText: @"password"];
 }
 
-- (void) login
+- (void) viewWillAppear:(BOOL)animated
 {
-    HomeViewController *hvc = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier: @"HomeViewController"];
-    [self.navigationController pushViewController: hvc animated: YES];
+
+    Teacher *teacher = [Session currentSession].teacher;
+
+    if (teacher)
+    {
+        [loginField setText: teacher.email];
+        [passwordField setText: teacher.password];
+    }
+}
+
+- (IBAction)login:(id)sender
+{
+    if ([[Session currentSession] loginWithEmail: loginField.text password: passwordField.text])
+    {
+        [self performSegueWithIdentifier: SegueIdentifierLogin sender: self];
+    }
+}
+
+- (IBAction)loginForSettingsView:(id)sender
+{
+    [[Session currentSession] loginWithEmail: loginField.text password: passwordField.text];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,5 +80,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Getters and Setters
+@synthesize teacher = _teacher;
+
 
 @end

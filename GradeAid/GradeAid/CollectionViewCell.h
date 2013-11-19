@@ -13,6 +13,7 @@ static NSString *const CollectionViewCellIdentifier = @"CollectionViewCellIdenti
 
 @interface CollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) School *school;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) UIImage *image;
 
 @end

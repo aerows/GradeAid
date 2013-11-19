@@ -9,12 +9,26 @@
 #import <UIKit/UIKit.h>
 #import "Button.h"
 #import "ObjectVerifyer.h"
+#import "CellPresentable.h"
 
-@interface RegisterObjectViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ObjectVerifyerView>
+@interface RegisterObjectViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ObjectVerifyerView, UIPopoverControllerDelegate>
+{
+    UIPopoverController *_currentPopoverController;
+}
 
-@property (nonatomic, strong) ObjectVerifyer* objectVerifyer;
+@property (nonatomic, strong) NSArray *attributes;
+@property (nonatomic, strong) NSArray *attributesSellectors;
 
-- (id) initWithObjectVerifyer: (ObjectVerifyer*) objectVerifyer;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+
+@property (nonatomic, weak) IBOutlet Button *cancelButton;
+@property (nonatomic, weak) IBOutlet Button *saveButton;
+@property (nonatomic, weak) IBOutlet Button *plusButton;
+
+@property (nonatomic, strong) ObjectVerifyer *objectVerifyer;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end

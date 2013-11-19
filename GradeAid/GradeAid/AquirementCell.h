@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "CourseAquirementDescription+Create.h"
 #import "AquirementButton.h"
-#import "AquirementDescription.h"
+#import "Aquirement+Manage.h"
 
 static NSString *const AquirementCellCellIdentifier = @"AquirementCellIdentifier";
 
 @interface AquirementCell : UITableViewCell<AquirementButtonDelegate>
 
-+ (CGFloat) heightForCellWithAquirement: (AquirementDescription*) courseAquirement;
-@property (nonatomic, strong) AquirementDescription *aquirement;
++ (CGFloat) heightForCellWithAquirement: (Aquirement*) aquirement;
+@property (nonatomic, strong) Aquirement *aquirement;
 
 @end

@@ -59,4 +59,57 @@
     return desc;
 }
 
++ (NSArray*) allCourseDescriptionsInManagedObjectContext: (NSManagedObjectContext*) moc;
+{
+    NSArray *allCourseDescriptions = nil;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"CourseDescription"];
+    
+    NSError *error;
+    allCourseDescriptions = [moc executeFetchRequest:request error:&error];
+    if (!allCourseDescriptions)
+    {
+        NSLog(@"%@", error.description);
+    }
+    
+    return allCourseDescriptions;
+}
+
+- (UIImage*) thumbNail
+{
+    return nil;
+}
+
+- (NSString*) title
+{
+    return [NSString stringWithFormat: @"%@, %@", self.name, self.level];
+}
+
+- (NSInteger) numberOfSectionsInCentralContentItems
+{
+    NSSet *uniqueHeaders = [NSSet setWithArray:[[self.centralContentItems allObjects] valueForKey: KeyForCentralContentSectionTitle]];
+    return uniqueHeaders.count;
+}
+
+- (NSInteger) numberOfCentralContentItemsInSection: (NSInteger) section
+{
+    NSCountedSet *countedSet = [NSCountedSet setWithArray: [self.centralContentItems allObjects]];
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey: KeyForCentralContentIndex ascending: YES];
+    NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray: [self.centralContentItems sortedArrayUsingDescriptors: @[sortDesc]]];
+    
+    return [countedSet countForObject: [orderedSet objectAtIndex: section]];
+}
+
+- (NSArray*) sortedCentralContentItems
+{
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey: KeyForCentralContentIndex ascending: YES];
+    return [[self.centralContentItems allObjects] sortedArrayUsingDescriptors: @[sortDesc]];
+}
+
+- (NSArray*) sortedCourseAquirements
+{
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey: KeyForAquirementDescID ascending: YES];
+    return [[self.aquirementDescriptions allObjects] sortedArrayUsingDescriptors: @[sortDesc]];
+}
+
 @end

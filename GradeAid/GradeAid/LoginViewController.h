@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Teacher+Create.h"
 
 @interface LoginViewController : UIViewController
+
+- (IBAction) login:(id)sender;
+
+@property (nonatomic, strong) Teacher *teacher;
+
 
 @end

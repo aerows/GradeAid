@@ -7,13 +7,13 @@
 //
 
 #import "SchoolClass.h"
-#import "ObjectVerifyer.h"
+#import "Creatable.h"
 
 static NSString *const KeyForSchoolClassName = @"name";
 static NSString *const KeyForSchoolClassYear = @"year";
 static NSString *const KeyForSchool          = @"school";
 
-@interface SchoolClass (Create)<ObjectWithVerifyer>
+@interface SchoolClass (Create) <Creatable, CellPresentable>
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * year;
@@ -21,4 +21,10 @@ static NSString *const KeyForSchool          = @"school";
 @property (nonatomic, retain) NSSet *students;
 
 + (SchoolClass*) createSchoolClassWithAttributes:(NSDictionary *) attributes InManagedObjectContext:(NSManagedObjectContext *)moc;
+
++ (NSArray*) schoolClassesForCurrentTeacher;
++ (NSArray*) schoolClassesForSchool: (School*) school;
+
+- (NSArray*) sortedStudents;
+
 @end

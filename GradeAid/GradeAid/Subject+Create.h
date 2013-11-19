@@ -22,4 +22,6 @@ static NSString *const KeyForObjectiveItemHeader = @"objectiveItemHeader";
 + (Subject*) subjectWithDict: (NSDictionary *) dict inManagedObjectContext: (NSManagedObjectContext*) moc;
 + (Subject*) subjectWithID: (NSNumber *) subjectID  inManagedObjectContext: (NSManagedObjectContext*) moc;
 
+- (NSArray*) sortedObjectivesItems;
+
 @end

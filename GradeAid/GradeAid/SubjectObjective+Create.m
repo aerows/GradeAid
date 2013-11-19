@@ -36,7 +36,7 @@
         subjectObj = [NSEntityDescription insertNewObjectForEntityForName: @"SubjectObjective" inManagedObjectContext:moc];
         
         subjectObj.index = [dict objectForKey: KeyForIndex];
-        subjectObj.caption = [dict objectForKey: KeyForObjectiveCaption];
+        subjectObj.caption = [dict objectForKey: KeyForSubjectObjectiveCaption];
         
 #warning should subject be added here as well?
         

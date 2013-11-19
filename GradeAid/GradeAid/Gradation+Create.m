@@ -16,7 +16,7 @@
 {
 
     Gradation *gradation = nil;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(gradationLevel = %@ AND aquirementDescription = %@)", [dict objectForKey: KeyForGradationLevel], [dict objectForKey: KeyForAquirementDescription]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(gradationLevel = %@ AND aquirementDescription = %@)", [dict objectForKey: KeyForGradationLevel], [dict objectForKey: KeyForGradeAquirementDescription]];
     
     bool objectInitalized = [NSManagedObject object: &gradation withEntityName: @"Gradation" predicate: predicate inManagedObjectContext: moc];
     

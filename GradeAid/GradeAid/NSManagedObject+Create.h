@@ -12,5 +12,6 @@
 
 + (BOOL) object: (NSManagedObject**) object withEntityName: (NSString*) entityName predicate: (NSPredicate*) predicate inManagedObjectContext: (NSManagedObjectContext*) moc;
 
++ (NSNumber*) nextIDforEntityName:(NSString*) entityName idKeyPath: (NSString*) keypath managedObjectContext:(NSManagedObjectContext*) moc;
 
 @end

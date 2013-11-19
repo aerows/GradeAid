@@ -51,8 +51,6 @@
                                                                                    cacheName:nil];
     _fetchedResultsController.delegate = self;
     [_fetchedResultsController performFetch: nil];
-
-    
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

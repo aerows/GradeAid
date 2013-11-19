@@ -7,10 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Student+Create.h"
 
-@interface StudentViewController : UIViewController
+@interface StudentViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    
+    IBOutlet UILabel *_titleLabel;
 }
+
+@property (nonatomic, weak) IBOutlet UITableView *studentTableView;
+
+@property (nonatomic, strong) Student *student;
+@property (nonatomic) bool inEditMode;
+
+@property (nonatomic, strong) NSArray *attributeInputs;
+
+@property (nonatomic, strong) SchoolClass *selectedSchoolClass;
 
 @end

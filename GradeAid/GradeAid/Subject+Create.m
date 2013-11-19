@@ -42,7 +42,9 @@
         
         for (NSDictionary *objective in [dict objectForKey: KeyForObjectiveItems])
         {
-            [subject addObjectivesObject: [SubjectObjective subjectObjectiveWithDict:objective inManagedObjectContext: moc]];
+            SubjectObjective *subjObj = [SubjectObjective subjectObjectiveWithDict:objective inManagedObjectContext: moc];
+            subjObj.subject = subject;
+            [subject addObjectivesObject: subjObj];
         }
         
         for (NSDictionary *courseDesc in [dict objectForKey: KeyForCourses])
@@ -80,7 +82,12 @@
     }
     
     return subject;
+}
 
+- (NSArray*) sortedObjectivesItems
+{
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey: KeyForIndex ascending: YES];
+    return [[self.objectives allObjects] sortedArrayUsingDescriptors: @[sortDesc]];
 }
 
 @end

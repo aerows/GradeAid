@@ -7,9 +7,17 @@
 //
 
 #import "Course.h"
+#import "Student+Create.h"
+#import "SchoolClass+Create.h"
 
 @interface Course (Create)
 
-+ (Course*) createCourseForTeacher: (Teacher*) teacher withCourseDescription: (CourseDescription*) desc inManagedObjectContext: (NSManagedObjectContext*) moc;
++ (Course*) courselWithDict: (NSDictionary*) dict inManagedObjectContext: (NSManagedObjectContext*) moc;
+
+- (void) enrollStudent: (Student*) student managedObjectContext: (NSManagedObjectContext*) moc;
+- (void) enrollClass: (SchoolClass*) schoolClass managedObjectContext: (NSManagedObjectContext*) moc;
+
+- (NSNumber*) courseID;
+- (NSArray*) orderedEnrollments;
 
 @end

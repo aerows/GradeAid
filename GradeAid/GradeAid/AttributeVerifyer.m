@@ -2,131 +2,61 @@
 //  AttributeVerifyer.m
 //  GradeAid
 //
-//  Created by Daniel Hallin on 2013-10-03.
+//  Created by Daniel Hallin on 2013-10-30.
 //  Copyright (c) 2013 Daniel Hallin. All rights reserved.
 //
 
 #import "AttributeVerifyer.h"
 
 @implementation AttributeVerifyer
-{
-    id<AttributeVerifyerDelegate> _delegate;
-    id<AttributeVerifyerView> _attributeView;
-    
-    bool _attributeVerified;
-    NSString *_attributeName;
-    StringFormatter *_formatter;
-    UITextField *_textField;
-    NSMutableArray *_stringQriteria;
-}
 
-#pragma - Constructor Methods
-
-- (id) initWithAttributeName:(NSString *)attributeName stringFormatter:(StringFormatter *)formatter stringQriteria:(NSArray *)qriteria
++ (attributeVerifyer) nameVerifyer
 {
-    if (self = [super init])
+    return ^ bool (NSString* stringToVerify, NSString** error)
     {
-        _attributeName = attributeName;
-        _formatter = formatter;
-        _stringQriteria = [[NSMutableArray alloc] initWithArray: qriteria];
-    }
-    return self;
-}
-
-- (id) init
-{
-    if (self = [super init])
-    {
-        _stringQriteria = [[NSMutableArray alloc] init];
-    }
-    return self;
-}
-
-#pragma - Public Methods
-
-- (NSString*) unfullfilledQriterium
-{
-    for (StringQriterium *sq in _stringQriteria)
-    {
-        if (![sq checkText: _attributeValue])
+        if (!stringToVerify || !stringToVerify.length)
         {
-            return sq.qriterium;
+            *error = @"Namn kan inte vara tomt";
+            return NO;
         }
-    }
-    return @"";
+        return YES;
+    };
 }
 
-- (void) formatAttributeValue
++ (attributeVerifyer) emailVerifyer
 {
-    _attributeValue = [_formatter formatString: _textField.text];
-    [_textField setText: _attributeValue];
-}
-
-#pragma - Private Methods
-
-- (void) verifyAttribute
-{
-    BOOL verified = YES;
-    for (StringQriterium *sq in _stringQriteria)
+    return ^ bool (NSString* stringToVerify, NSString** error)
     {
-        verified &= [sq checkText: _attributeValue];
-    }
-    
-    if (_attributeVerified == verified) return;
-    
-    _attributeVerified = verified;
-    [_delegate attributeVerifyerDidUpdate: self];
-    [_attributeView attributeVerifyerDidUpdate: self];
+        if (!stringToVerify || stringToVerify.length)
+        {
+            *error = @"Email kan inte vara tom";
+            return NO;
+        }
+        return YES;
+    };
 }
 
-#pragma - UITextField Delegate Methods
+static NSString *const allowedCharactersInNumber = @"+-0123456789 ";
 
-- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
++ (attributeVerifyer) numberVerifyer
 {
-    _attributeValue = [textField.text stringByReplacingCharactersInRange: range withString: string];
-    [self verifyAttribute];
-    
-    return YES;
-}
-
-- (void) textFieldDidEndEditing:(UITextField *)textField
-{
-    [self formatAttributeValue];
-}
-
-#pragma - Setters and Getters
-
-@synthesize delegate = _delegate;
-@synthesize attributeView = _attributeView;
-
-@synthesize attributeValue = _attributeValue;
-@synthesize attributeKey   = _attributeKey;
-
-@synthesize attributeVerified = _attributeVerified;
-@synthesize attributeName = _attributeName;
-@synthesize formatter = _formatter;
-@synthesize textField = _textField;
-
-- (void) setTextField:(UITextField *)textField
-{
-    _textField = textField;
-    _textField.delegate = self;
-}
-
-- (void) addStringQriterium:(StringQriterium *)qriterium
-{
-    if (qriterium)
+    return ^ bool (NSString* stringToVerify, NSString** error)
     {
-        [_stringQriteria addObject: qriterium];
-    }
+        if (!stringToVerify || stringToVerify.length)
+        {
+            *error = @"Numret kan inte vara tomt";
+            return NO;
+        }
+        NSCharacterSet *set = [[NSCharacterSet characterSetWithCharactersInString: allowedCharactersInNumber] invertedSet];
+        
+        if (![stringToVerify rangeOfCharacterFromSet: set].length)
+        {
+            *error = @"Nummer får bara innehålla +, - och 0-9.";
+            return NO;
+        }
+        return YES;
+    };
 }
 
-- (void) addStringQriteria:(NSArray *)qriteria
-{
-    for (StringQriterium *sq in qriteria)
-    {
-        [_stringQriteria addObject: sq];
-    }
-}
 
 @end

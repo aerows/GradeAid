@@ -19,6 +19,8 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+@synthesize session = _session;
+
 + (AppDelegate*) sharedDelegate
 {
     return (AppDelegate*) [UIApplication sharedApplication].delegate;
@@ -28,11 +30,12 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextChanged:) name:NSManagedObjectContextDidSaveNotification object:nil];
     
+    _session = [Session currentSession];
     [LoadCourseDescriptions loadCourseDescriptions];
-    HomeViewController2 *homeViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"betygViewController"];
     
+    HomeViewController2 *homeViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"loginViewController"];
     
     [self.window setRootViewController: homeViewController];
 
@@ -40,7 +43,7 @@
     [self.window makeKeyAndVisible];
     
     
-    
+//    
 //    LoginViewController *lvc    = [[LoginViewController alloc] initWithNibName: @"LoginViewController" bundle: nil];
 //    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController: lvc];
 //    [nvc.view setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed: @"background"]]];
@@ -173,6 +176,19 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (void)contextChanged:(NSNotification*)notification
+{
+    if ([notification object] == [self managedObjectContext])
+        return;
+    
+    if (![NSThread isMainThread]) {
+        [self performSelectorOnMainThread:@selector(contextChanged:) withObject:notification waitUntilDone:YES];
+        return;
+    }
+    
+    [[self managedObjectContext] mergeChangesFromContextDidSaveNotification:notification];
 }
 
 @end

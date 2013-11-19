@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "ManagedObject.h"
-#import "SchoolObjectVerifyer.h"
 
 @class SchoolClass, Teacher;
 
-@interface School : ManagedObject<ObjectWithVerifyer>
+@interface School : ManagedObject
 
 + (School*) createSchoolWithName: (NSString*) name image: (UIImage*) image InManagedObjectContext:(NSManagedObjectContext *) moc;
 + (UIImage*) defaultImage;

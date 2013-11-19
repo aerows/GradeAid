@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TestBlocks/AppDelegate.m"
-            timestampString = "403738877.627997"
+            timestampString = "404392165.365889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
             <Locations>
@@ -24,13 +24,13 @@
                   continueAfterRunningActions = "No"
                   symbolName = "-[AppDelegate application:didFinishLaunchingWithOptions:]"
                   moduleName = "TestBlocks"
-                  urlString = "file://localhost/Users/Daniel/Documents/Workspaces/Daniel/GradeAid/TestBlocks/TestBlocks/AppDelegate.m"
-                  timestampString = "403738877.832838"
+                  urlString = "file:///Users/Daniel/Documents/Workspaces/Daniel/GradeAid/TestBlocks/TestBlocks/AppDelegate.m"
+                  timestampString = "404819660.575167"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "105">
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "323">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -38,15 +38,31 @@
                   continueAfterRunningActions = "No"
                   symbolName = "__57-[AppDelegate application:didFinishLaunchingWithOptions:]_block_invoke"
                   moduleName = "TestBlocks"
-                  urlString = "file://localhost/Users/Daniel/Documents/Workspaces/Daniel/GradeAid/TestBlocks/TestBlocks/AppDelegate.m"
-                  timestampString = "403738877.833165"
+                  urlString = "file:///Users/Daniel/Documents/Workspaces/Daniel/GradeAid/TestBlocks/TestBlocks/AppDelegate.m"
+                  timestampString = "404819660.575573"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
                   offsetFromSymbolStart = "59">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestBlocks/AppDelegate.m"
+            timestampString = "404392163.129889"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "-application:didFinishLaunchingWithOptions:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

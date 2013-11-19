@@ -2,107 +2,125 @@
 //  SchoolViewController.m
 //  GradeAid
 //
-//  Created by Daniel Hallin on 2013-09-19.
+//  Created by Daniel Hallin on 2013-11-15.
 //  Copyright (c) 2013 Daniel Hallin. All rights reserved.
 //
 
 #import "SchoolViewController.h"
-#import "ClassViewViewController.h"
 #import "AppDelegate.h"
-#import "SchoolClass.h"
-#import "RegisterObjectViewController.h"
+
+#import "AttributeInput.h"
+
+#import "AttributeCell.h"
+#import "PresentAttributeCell.h"
+
+
 
 @interface SchoolViewController ()
-{
-    IBOutlet UITableView *classView;
-}
 
 @end
 
 @implementation SchoolViewController
-
-static NSString *CellIdentifier = @"CellIdentifier";
-
-#pragma mark - Constructor Methods
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
-    {}
-    return self;
+    AttributeInput *schoolNameAttribute;
 }
-
-#pragma mark - UIViewController Methods
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [classView registerClass: [UITableViewCell class] forCellReuseIdentifier: CellIdentifier];
-    [self.view setBackgroundColor: [UIColor colorWithPatternImage: [UIImage imageNamed:@"background"]]];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemAdd target: self action:@selector(addButtonPressed)];
-    [self.navigationItem setRightBarButtonItem: addButton];
     
-}
-
-- (void) setupFetchResultsController
-{
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"SchoolClass"];
-    [request setSortDescriptors: @[[NSSortDescriptor sortDescriptorWithKey: @"name" ascending: YES]]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"school.schoolID = %@", _school.schoolID];
-    request.predicate = predicate;
-    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest: request
-                                                                        managedObjectContext: [AppDelegate sharedDelegate].managedObjectContext
-                                                                          sectionNameKeyPath:nil
-                                                                                   cacheName:nil];
-}
-
-- (void) addButtonPressed
-{
-    ObjectVerifyer *objectVerifyer = [School objectVerifyer];
-    [objectVerifyer setDelegate: self];
-    RegisterObjectViewController *rovc = [[RegisterObjectViewController alloc] initWithObjectVerifyer: objectVerifyer];
+    [self setInEditMode: !_school];
     
-    [self presentViewController: rovc animated: YES completion: nil];
-}
-
-#pragma mark - ObjectVerifyer Delegate Methods
-
-- (void) objectVerifyer:(id)sender createdObject:(id)object
-{
-    [self.tableView reloadData];
-}
-
-- (void) objectVerifyerCanceled:(id)sender
-{
+    schoolNameAttribute = [AttributeInput nameAttribute];
+    schoolNameAttribute.attributeTitle = @"Namn";
+    schoolNameAttribute.attributeExample = @"Skolans namn...";
+    schoolNameAttribute.value = _school.name;
     
+    [_tableView reloadData];
 }
 
-#pragma - Table View Datasource
+#pragma mark - IBAction Methods
+
+- (IBAction) save: (id)sender
+{
+    NSManagedObjectContext *moc = [AppDelegate sharedDelegate].managedObjectContext;
+    
+    // Control input
+    
+    if (!_school)
+    {
+        _school = [School schoolWithDict: @{} inManagedObjectContext: moc];
+        [[Session currentSession].teacher addSchoolsObject: _school];
+    }
+    _school.name = schoolNameAttribute.value;
+    
+    NSError *error = nil;
+    [moc save: &error];
+    if (error)
+    {
+        NSLog(@"%@, %@", error, error.localizedDescription);
+    }
+    
+    [self setInEditMode: NO];
+}
+
+- (IBAction) cancel:(id)sender
+{
+    [self dismissViewControllerAnimated: YES completion: nil];
+}
+
+#pragma mark - UITableView DataSource Methods
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier];
-    
-    SchoolClass * schoolClass = [self.fetchedResultsController objectAtIndexPath: indexPath];
-    
-    [cell.textLabel setText: schoolClass.name];
-    return cell;
+    if (_inEditMode)
+    {
+        AttributeCell *cell = [tableView dequeueReusableCellWithIdentifier: AttributeCellIdentifier];
+        [cell setAttributeInput: schoolNameAttribute];
+        return cell;
+    }
+    else
+    {
+        PresentAttributeCell *cell = [tableView dequeueReusableCellWithIdentifier: AttributeCellIdentifier];
+        [cell setAttributeInput: schoolNameAttribute];
+        return cell;
+    }
 }
 
-
-#pragma mark - Table View Delegate
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-
-    ClassViewViewController *cvvc = [[ClassViewViewController alloc] initWithNibName: @"ClassViewViewController" bundle:nil];
-    
-    [self.navigationController pushViewController: cvvc animated: YES];
-}
-
-#pragma mark - Setters and Getters
+#pragma mark - Getters and Setters
 
 @synthesize school = _school;
+@synthesize inEditMode = _inEditMode;
+
+- (void) setInEditMode:(bool)inEditMode
+{
+    _inEditMode = inEditMode;
+    if (!_inEditMode)
+    {
+        [_titleLabel setText: _school.name];
+    }
+    else
+    {
+        if (_school)
+        {
+            [_titleLabel setText: [NSString stringWithFormat: @"Ändra skola: %@", _school.name]];
+        }
+        else
+        {
+            [_titleLabel setText: @"Skapa ny skola"];
+        }
+    }
+}
 
 @end

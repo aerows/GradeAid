@@ -2,19 +2,19 @@
 //  Course.h
 //  GradeAid
 //
-//  Created by Daniel Hallin on 2013-09-25.
+//  Created by Daniel Hallin on 2013-10-29.
 //  Copyright (c) 2013 Daniel Hallin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "ManagedObject.h"
 
-@class CourseDescription, Enrollment, SchoolClass, Teacher;
+@class CourseEdition, Enrollment, SchoolClass, Teacher;
 
-@interface Course : ManagedObject
+@interface Course : NSManagedObject
 
-@property (nonatomic, retain) CourseDescription *courseDescription;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) CourseEdition *courseEdition;
 @property (nonatomic, retain) NSSet *enrollments;
 @property (nonatomic, retain) SchoolClass *schoolClass;
 @property (nonatomic, retain) Teacher *teacher;

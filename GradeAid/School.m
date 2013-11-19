@@ -21,11 +21,6 @@
     return school;
 }
 
-+ (ObjectVerifyer*) objectVerifyer
-{
-    return [[SchoolObjectVerifyer alloc] init];
-}
-
 + (UIImage*) defaultImage
 {
     return [UIImage imageNamed: @"school"];

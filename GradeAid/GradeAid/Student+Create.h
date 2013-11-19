@@ -7,11 +7,18 @@
 //
 
 #import "Student.h"
-#import "Person+Create.h"
+#import "Creatable.h"
+#import "CellPresentable.h"
 
-static NSString *const KeyForSchoolClass = @"schoolClass";
-static NSString *const KeyForStudentID   = @"studentID";
+static NSString *const StudentKeyForSchoolClass    = @"schoolClass";
+static NSString *const StudentKeyForStudentID      = @"studentID";
+static NSString *const StudentKeyForEmail          = @"email";
+static NSString *const StudentKeyForFirstName      = @"firstname";
+static NSString *const StudentKeyForLastName       = @"lastname";
+static NSString *const StudentKeyForPicture        = @"picture";
 
-@interface Student (Create)
+@interface Student (Create) <Creatable, CellPresentable>
+
++ (Student*) studentWithDict: (NSDictionary*) dict inManagedObjectContext: (NSManagedObjectContext*) moc;
 
 @end

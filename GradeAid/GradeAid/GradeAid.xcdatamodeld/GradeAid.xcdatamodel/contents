@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="13A603" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Aquirement" representedClassName="Aquirement" syncable="YES">
         <attribute name="grade" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="aquirementDescription" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="AquirementDescription" syncable="YES"/>
@@ -11,15 +11,16 @@
         <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="courseID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="nrOfGradations" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sectionIndex" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sectionTitle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="course" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseDescription" inverseName="aquirementDescriptions" inverseEntity="CourseDescription" syncable="YES"/>
         <relationship name="gradations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Gradation" inverseName="aquirementDescription" inverseEntity="Gradation" syncable="YES"/>
     </entity>
     <entity name="Course" representedClassName="Course" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="courseDescription" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CourseDescription" syncable="YES"/>
+        <relationship name="courseEdition" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CourseEdition" syncable="YES"/>
         <relationship name="enrollments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Enrollment" inverseName="course" inverseEntity="Enrollment" syncable="YES"/>
-        <relationship name="schoolClass" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SchoolClass" syncable="YES"/>
+        <relationship name="schoolClass" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SchoolClass" inverseName="course" inverseEntity="SchoolClass" syncable="YES"/>
         <relationship name="teacher" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Teacher" inverseName="courses" inverseEntity="Teacher" syncable="YES"/>
     </entity>
     <entity name="CourseCentralContent" representedClassName="CourseCentralContent" syncable="YES">
@@ -39,6 +40,11 @@
         <relationship name="aquirementDescriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AquirementDescription" syncable="YES"/>
         <relationship name="centralContentItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CourseCentralContent" inverseName="course" inverseEntity="CourseCentralContent" syncable="YES"/>
         <relationship name="subject" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Subject" inverseName="courses" inverseEntity="Subject" syncable="YES"/>
+    </entity>
+    <entity name="CourseEdition" representedClassName="CourseEdition" syncable="YES">
+        <relationship name="aquirementDescriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AquirementDescription" syncable="YES"/>
+        <relationship name="courseDescription" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseDescription" syncable="YES"/>
+        <relationship name="teacher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Teacher" inverseName="courseEditions" inverseEntity="Teacher" syncable="YES"/>
     </entity>
     <entity name="Enrollment" representedClassName="Enrollment" syncable="YES">
         <relationship name="aquirements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Aquirement" inverseName="enrollment" inverseEntity="Aquirement" syncable="YES"/>
@@ -60,12 +66,6 @@
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="media" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Media" inverseName="note" inverseEntity="Media" syncable="YES"/>
     </entity>
-    <entity name="Person" representedClassName="Person" isAbstract="YES" syncable="YES">
-        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="firstname" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="lastname" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <entity name="School" representedClassName="School" syncable="YES">
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -77,10 +77,15 @@
     <entity name="SchoolClass" representedClassName="SchoolClass" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="course" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="schoolClass" inverseEntity="Course" syncable="YES"/>
         <relationship name="school" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="School" inverseName="classes" inverseEntity="School" syncable="YES"/>
-        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Student" inverseName="schoolClass" inverseEntity="Student" syncable="YES"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Student" inverseName="schoolClass" inverseEntity="Student" syncable="YES"/>
     </entity>
-    <entity name="Student" representedClassName="Student" parentEntity="Person" syncable="YES">
+    <entity name="Student" representedClassName="Student" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="studentID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="enrollments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Enrollment" inverseName="student" inverseEntity="Enrollment" syncable="YES"/>
         <relationship name="schoolClass" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SchoolClass" inverseName="students" inverseEntity="SchoolClass" syncable="YES"/>
@@ -99,9 +104,14 @@
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="subject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subject" inverseName="objectives" inverseEntity="Subject" syncable="YES"/>
     </entity>
-    <entity name="Teacher" representedClassName="Teacher" parentEntity="Person" syncable="YES">
+    <entity name="Teacher" representedClassName="Teacher" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="teacherID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="courseEditions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CourseEdition" inverseName="teacher" inverseEntity="CourseEdition" syncable="YES"/>
         <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Course" inverseName="teacher" inverseEntity="Course" syncable="YES"/>
         <relationship name="schools" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="School" inverseName="teachers" inverseEntity="School" syncable="YES"/>
     </entity>
@@ -111,12 +121,12 @@
         <element name="Course" positionX="0" positionY="0" width="0" height="0"/>
         <element name="CourseCentralContent" positionX="0" positionY="0" width="0" height="0"/>
         <element name="CourseDescription" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CourseEdition" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Enrollment" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Gradation" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Image" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Media" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Note" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Person" positionX="0" positionY="0" width="0" height="0"/>
         <element name="School" positionX="0" positionY="0" width="0" height="0"/>
         <element name="SchoolClass" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Student" positionX="0" positionY="0" width="0" height="0"/>
