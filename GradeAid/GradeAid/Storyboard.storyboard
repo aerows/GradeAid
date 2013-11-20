@@ -591,11 +591,11 @@
             </objects>
             <point key="canvasLocation" x="-2292" y="-1120"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - Mina skolor-->
         <scene sceneID="MAj-dx-KUu">
             <objects>
-                <navigationController definesPresentationContext="YES" id="5Wa-Uv-VVo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="in1-rS-Teb"/>
+                <navigationController title="Mina skolor" definesPresentationContext="YES" id="5Wa-Uv-VVo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Mina skolor" image="tabbaritem-school.png" id="in1-rS-Teb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VQZ-Xa-hys">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -734,7 +734,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="ED3A734D-85DC-4E71-A516-324C7E5CD49B" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="C083CF02-A789-4C96-A105-FFC71E2628B2" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="O0n-fq-lRF" id="PWk-pe-FV1"/>
                                         </connections>
@@ -1046,7 +1046,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="DD221549-613E-460B-A432-BFD5B9063775" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="0E36AFB0-0699-4B9D-A0CC-EF22E088D882" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="YkC-ih-QrT" id="z00-Cf-5UE"/>
                                         </connections>
@@ -1595,11 +1595,11 @@
             </objects>
             <point key="canvasLocation" x="-1625" y="3458"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - Mina klasser-->
         <scene sceneID="i0w-fu-54U">
             <objects>
                 <navigationController definesPresentationContext="YES" id="4QX-8K-Djf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="qiv-Aw-PES"/>
+                    <tabBarItem key="tabBarItem" title="Mina klasser" image="tabbaritem-schoolclass.png" id="qiv-Aw-PES"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aZH-7f-iLe">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1611,11 +1611,11 @@
             </objects>
             <point key="canvasLocation" x="-1328" y="84"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - Mina kurser-->
         <scene sceneID="DgI-UZ-AZ6">
             <objects>
                 <navigationController definesPresentationContext="YES" id="hjQ-Qs-kUg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="W4p-jk-vi8"/>
+                    <tabBarItem key="tabBarItem" title="Mina kurser" image="tabbaritem-course.png" id="W4p-jk-vi8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="l86-Gu-tcO">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2508,7 +2508,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="BFD7DCAE-ACC2-481A-A34A-00E860C89BD4" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="17D3D60F-5807-4643-BF8E-7B5B99663671" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="pDE-lT-c4g" id="ceM-N4-aKq"/>
                                         </connections>
@@ -2739,7 +2739,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="860784D8-6E0E-4B34-B19C-6FB49AFE2F9C" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="A80315F7-A035-4D49-986C-F8F9AF1BA6B2" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="Fwr-p1-qdF" id="tZw-ED-hS8"/>
                                         </connections>
@@ -3461,7 +3461,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="860784D8-6E0E-4B34-B19C-6FB49AFE2F9C" width="256" height="256">
+        <image name="0E36AFB0-0699-4B9D-A0CC-EF22E088D882" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -7903,7 +7903,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="BFD7DCAE-ACC2-481A-A34A-00E860C89BD4" width="256" height="256">
+        <image name="17D3D60F-5807-4643-BF8E-7B5B99663671" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -12345,7 +12345,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="DD221549-613E-460B-A432-BFD5B9063775" width="256" height="256">
+        <image name="A80315F7-A035-4D49-986C-F8F9AF1BA6B2" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -16787,7 +16787,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="ED3A734D-85DC-4E71-A516-324C7E5CD49B" width="256" height="256">
+        <image name="C083CF02-A789-4C96-A105-FFC71E2628B2" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -21237,6 +21237,9 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
         <image name="school.png" width="256" height="256"/>
         <image name="shadow-downwards-80px.png" width="10" height="80"/>
         <image name="student.jpg" width="320" height="320"/>
+        <image name="tabbaritem-course.png" width="30" height="30"/>
+        <image name="tabbaritem-school.png" width="30" height="30"/>
+        <image name="tabbaritem-schoolclass.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="lightContent"/>
