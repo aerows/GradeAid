@@ -734,7 +734,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="286FA2AC-2BDB-44EE-813B-3FCB89536500" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="ED3A734D-85DC-4E71-A516-324C7E5CD49B" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="O0n-fq-lRF" id="PWk-pe-FV1"/>
                                         </connections>
@@ -1046,7 +1046,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="DFFF22AE-23E0-43AB-82C1-62AE626F2452" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="DD221549-613E-460B-A432-BFD5B9063775" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="YkC-ih-QrT" id="z00-Cf-5UE"/>
                                         </connections>
@@ -2508,7 +2508,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="294E2608-E4D2-402B-9BC3-586BFAE1B85F" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="BFD7DCAE-ACC2-481A-A34A-00E860C89BD4" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="pDE-lT-c4g" id="ceM-N4-aKq"/>
                                         </connections>
@@ -2739,7 +2739,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="B29DB003-C49B-446D-9E7C-CCEC552859EF" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="860784D8-6E0E-4B34-B19C-6FB49AFE2F9C" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="Fwr-p1-qdF" id="tZw-ED-hS8"/>
                                         </connections>
@@ -3072,7 +3072,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="tkz-8T-Emb">
-                                <rect key="frame" x="20" y="186" width="728" height="818"/>
+                                <rect key="frame" x="20" y="198" width="728" height="778"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3423,28 +3423,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XZW-lj-L3T" userLabel="Button - Plus" customClass="Button">
-                                <rect key="frame" x="663" y="68" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dU-qM-ny8" customClass="Button">
-                                <rect key="frame" x="653" y="105" width="41" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Spara">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iuC-G9-bSe" customClass="Button">
-                                <rect key="frame" x="652" y="143" width="44" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Avbryt">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancel:" destination="nz4-zH-U5E" eventType="touchUpInside" id="gpn-MZ-sd4"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Kursvy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nid-3r-yT9" customClass="Label">
                                 <rect key="frame" x="20" y="20" width="728" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3457,14 +3435,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="iuC-G9-bSe" firstAttribute="top" secondItem="2dU-qM-ny8" secondAttribute="bottom" constant="8" id="2Zl-tI-Iso"/>
-                            <constraint firstItem="2dU-qM-ny8" firstAttribute="centerX" secondItem="XZW-lj-L3T" secondAttribute="centerX" id="9Yy-HZ-OQo"/>
-                            <constraint firstItem="2dU-qM-ny8" firstAttribute="top" secondItem="XZW-lj-L3T" secondAttribute="bottom" constant="16" id="D9R-hH-AUv"/>
                             <constraint firstItem="nid-3r-yT9" firstAttribute="leading" secondItem="jmf-Vw-och" secondAttribute="leading" constant="20" id="Gcg-YF-XJN"/>
                             <constraint firstItem="JuM-Jw-iVJ" firstAttribute="top" secondItem="tkz-8T-Emb" secondAttribute="bottom" constant="20" id="Kbl-0x-Fjs"/>
                             <constraint firstAttribute="trailing" secondItem="nid-3r-yT9" secondAttribute="trailing" constant="20" id="Kma-AO-HYo"/>
                             <constraint firstItem="tkz-8T-Emb" firstAttribute="top" secondItem="nid-3r-yT9" secondAttribute="bottom" constant="8" id="fzh-GV-haI"/>
-                            <constraint firstItem="2dU-qM-ny8" firstAttribute="centerX" secondItem="iuC-G9-bSe" secondAttribute="centerX" id="jcC-3N-2Y6"/>
                             <constraint firstItem="nid-3r-yT9" firstAttribute="top" secondItem="z1u-UB-JtG" secondAttribute="bottom" constant="20" id="wcD-mV-EhG"/>
                         </constraints>
                     </view>
@@ -3487,7 +3461,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="286FA2AC-2BDB-44EE-813B-3FCB89536500" width="256" height="256">
+        <image name="860784D8-6E0E-4B34-B19C-6FB49AFE2F9C" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -7929,7 +7903,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="294E2608-E4D2-402B-9BC3-586BFAE1B85F" width="256" height="256">
+        <image name="BFD7DCAE-ACC2-481A-A34A-00E860C89BD4" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -12371,7 +12345,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="B29DB003-C49B-446D-9E7C-CCEC552859EF" width="256" height="256">
+        <image name="DD221549-613E-460B-A432-BFD5B9063775" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -16813,7 +16787,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="DFFF22AE-23E0-43AB-82C1-62AE626F2452" width="256" height="256">
+        <image name="ED3A734D-85DC-4E71-A516-324C7E5CD49B" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

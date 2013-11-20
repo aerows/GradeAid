@@ -48,6 +48,11 @@ static NSString *const SchoolClassSegueIdentifier = @"SchoolClassSegueIdentifier
     
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [_schoolClassCollectionView reloadData];
+}
+
 - (void) setupFetchResultsController
 {
     NSManagedObjectContext *moc = [AppDelegate sharedDelegate].managedObjectContext;
