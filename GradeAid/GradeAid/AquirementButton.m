@@ -55,7 +55,16 @@
         [_titleLabel setLineBreakMode: NSLineBreakByWordWrapping];
         [self addSubview: _titleLabel];
     }
-
+    
+    if (!_defaultImage)
+    {
+        
+        _defaultImage = [UIImage imageNamed: @"empty-1px"];
+    }
+    if (!_selectedImage)
+    {
+        _selectedImage = [UIImage imageNamed: @"flik-white-50x25px"];
+    }
 }
 
 #pragma mark - Class Methods
@@ -86,9 +95,9 @@
 
 - (void) setSelected:(bool)selected
 {
-    if (_selected == selected) return;
+//    if (_selected == selected) return;
     _selected = selected;
-    [_backgroundView setHighlighted: _selected];
+    [_backgroundView setImage: (_selected) ? _selectedImage : _defaultImage];
     [_titleLabel setTextColor: (_selected) ? _textColor : [UIColor whiteColor]];
     
     //CGFloat height = (_selected) ? self.frame.size.height : 0;
@@ -106,17 +115,17 @@
     
 }
 
-- (void) setSelectedImage:(UIImage *)selectedImage
-{
-    _selectedImage = selectedImage;
-    [_backgroundView setHighlightedImage: selectedImage];
-}
-
-- (void) setDefaultImage:(UIImage *)defaultImage
-{
-    _defaultImage = defaultImage;
-    [_backgroundView setImage: defaultImage];
-}
+//- (void) setSelectedImage:(UIImage *)selectedImage
+//{
+//    _selectedImage = selectedImage;
+//    [_backgroundView setHighlightedImage: selectedImage];
+//}
+//
+//- (void) setDefaultImage:(UIImage *)defaultImage
+//{
+//    _defaultImage = defaultImage;
+//    [_backgroundView setImage: defaultImage];
+//}
 
 - (int) grade
 {

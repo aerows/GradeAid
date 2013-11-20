@@ -224,6 +224,7 @@ newIndexPath:(NSIndexPath *)newIndexPath {
     //    if (_enrollment == enrollment) return;
     _enrollment = enrollment;
     [self setupFetchResultsControllers];
+    [_tableView reloadData];
     [self setStudent: _enrollment.student];
 }
 
