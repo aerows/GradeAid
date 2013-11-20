@@ -48,6 +48,18 @@
     return [self.enrollments allObjects];
 }
 
+#pragma mark - Image Methods
+
+- (UIImage*) courseImage
+{
+    return [Course defaultImage];
+}
+
++ (UIImage*) defaultImage
+{
+    return [UIImage imageNamed:@"default-course"];
+}
+
 @end
 
 

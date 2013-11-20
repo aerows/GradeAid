@@ -61,14 +61,6 @@
     return school;
 }
 
-+ (School*) createSchoolWithName: (NSString*) name image: (UIImage*) image InManagedObjectContext:(NSManagedObjectContext *) moc
-{
-    School *school = [NSEntityDescription insertNewObjectForEntityForName: @"School" inManagedObjectContext:moc];
-    school.name = name;
-    school.image = UIImagePNGRepresentation(image);
-    return school;
-}
-
 + (NSArray*) schoolsForCurrentTeacher
 {
     Teacher *currentTeacher = [Session currentSession].teacher;
@@ -81,6 +73,15 @@
     return schools;
 }
 
++ (UIImage*) defaultImage
+{
+    return [UIImage imageNamed: @"default-school"];
+}
+
+- (UIImage*) schoolImage
+{
+    return (self.image) ? [UIImage imageWithData: self.image] : [School defaultImage];
+}
 
 #pragma mark - CellPresentable Methods
 

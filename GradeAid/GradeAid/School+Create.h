@@ -20,4 +20,9 @@ static NSString *const KeyForSchoolImageURL = @"imageURL";
 + (School*) schoolWithDict: (NSDictionary*) dict inManagedObjectContext: (NSManagedObjectContext*) moc;
 + (School*) schoolWithSchoolID: (NSNumber*) schoolID inManagedObjectContext: (NSManagedObjectContext*) moc;
 + (NSArray*) schoolsForCurrentTeacher;
+
++ (UIImage*) defaultImage;
+- (UIImage*) schoolImage;
+
+
 @end

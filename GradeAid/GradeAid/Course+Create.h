@@ -20,4 +20,7 @@
 - (NSNumber*) courseID;
 - (NSArray*) orderedEnrollments;
 
++ (UIImage*) defaultImage;
+- (UIImage*) courseImage;
+
 @end

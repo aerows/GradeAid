@@ -76,7 +76,7 @@ static NSString *const SchoolClassSegueIdentifier = @"SchoolClassSegueIdentifier
                              CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: CollectionViewCellIdentifier forIndexPath: indexPath];
                              SchoolClass *schoolClass = (SchoolClass*)[schoolClassDataFetchController objectAtIndexPath: indexPath];
                              cell.title = schoolClass.name;
-                             cell.image = nil;
+                             cell.image = [schoolClass schoolClassImage];
                              return cell;
                          }];
 }

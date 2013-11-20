@@ -109,4 +109,16 @@
     return sortedStudents;
 }
 
+#pragma mark - Image Methods
+
+- (UIImage*) schoolClassImage
+{
+    return [SchoolClass defaultImage];
+}
+
++ (UIImage*) defaultImage
+{
+    return [UIImage imageNamed: @"default-schoolclass"];
+}
+
 @end

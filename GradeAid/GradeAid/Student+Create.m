@@ -113,4 +113,18 @@
     return nil;
 }
 
+#pragma mark - Image Methods
+
+- (UIImage*) studentImage
+{
+#warning - Databas lägg till image för student
+    
+    return [Student defaultImage];
+}
+
++ (UIImage*) defaultImage
+{
+    return [UIImage imageNamed: @"default-student"];
+}
+
 @end

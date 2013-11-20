@@ -13,24 +13,6 @@
 
 @implementation School
 
-+ (School*) createSchoolWithName: (NSString*) name image: (UIImage*) image InManagedObjectContext:(NSManagedObjectContext *) moc
-{
-    School *school = [NSEntityDescription insertNewObjectForEntityForName: @"School" inManagedObjectContext:moc];
-    school.name = name;
-    school.image = UIImagePNGRepresentation(image);
-    return school;
-}
-
-+ (UIImage*) defaultImage
-{
-    return [UIImage imageNamed: @"school"];
-}
-
-- (UIImage*) schoolImage
-{
-    return ([self.image length]) ? [UIImage imageWithData: self.image] : [School defaultImage];
-}
-
 @dynamic name;
 @dynamic schoolID;
 @dynamic image;

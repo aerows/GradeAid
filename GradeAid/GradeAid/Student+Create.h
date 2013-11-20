@@ -21,4 +21,7 @@ static NSString *const StudentKeyForPicture        = @"picture";
 
 + (Student*) studentWithDict: (NSDictionary*) dict inManagedObjectContext: (NSManagedObjectContext*) moc;
 
++ (UIImage*) defaultImage;
+- (UIImage*) studentImage;
+
 @end

@@ -27,4 +27,7 @@ static NSString *const KeyForSchool          = @"school";
 
 - (NSArray*) sortedStudents;
 
++ (UIImage*) defaultImage;
+- (UIImage*) schoolClassImage;
+
 @end

@@ -83,7 +83,7 @@ static NSString *const CourseSegueIdentifier        = @"CourseSegueIdentifier";
                                   CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: CollectionViewCellIdentifier forIndexPath: indexPath];
                                   Course *course = (Course*)[courseDataFetchController objectAtIndexPath: indexPath];
                                   cell.title = course.name;
-                                  cell.image = nil;
+                                  cell.image = [course courseImage];
                                   return cell;
                               }];
 }
@@ -95,27 +95,6 @@ static NSString *const CourseSegueIdentifier        = @"CourseSegueIdentifier";
     _selectedCourse = (Course*)[courseDataFetchController objectAtIndexPath: indexPath];
 
     [self performSegueWithIdentifier:CourseSegueIdentifier sender:self];
-    
-//    CourseTableViewController *courseTableViewController = (CourseTableViewController*)[[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier: CourseTableStoryBoardIdentifier];
-//
-//    UINavigationController *courseNavigationController = [[UINavigationController alloc] initWithRootViewController: courseTableViewController];
-//
-//    EnrollmentViewController *enrollmentViewController = (EnrollmentViewController*)[[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier: EnrollmentStoryboardIdentifier];
-//    
-//    UINavigationController *enrollmentNavigationController = [[UINavigationController alloc] initWithRootViewController: enrollmentViewController];
-//    
-//    [enrollmentViewController setCourse: _selectedCourse];
-//    [courseTableViewController setEnrollmentViewController: enrollmentViewController];
-//    
-//    [enrollmentViewController setEnrollment: _selectedCourse.enrollments.allObjects.lastObject];
-//    
-//    UISplitViewController *splitController = [[UISplitViewController alloc] init];
-//    
-//    [splitController setViewControllers: @[courseNavigationController, enrollmentNavigationController]];
-//
-//    UIWindow *window = [AppDelegate sharedDelegate].window;
-//    [window setRootViewController: splitController];
-    
 }
 
 #pragma mark - Segue Methods

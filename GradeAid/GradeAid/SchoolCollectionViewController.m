@@ -8,7 +8,6 @@
 
 #import "SchoolCollectionViewController.h"
 #import "UIStoryboard+mainStoryboard.h"
-#import "School.h"
 
 #import "SchoolViewController.h"
 
@@ -69,9 +68,7 @@ static NSString *const SchoolSegueIdentifier = @"SchoolSegueIdentifier";
                              CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: CollectionViewCellIdentifier forIndexPath: indexPath];
                              School *school = (School*)[_schoolDataFetchController objectAtIndexPath: indexPath];
                              cell.title = school.name;
-                             cell.image = [UIImage imageWithData: school.image];
-#warning - Category metod så image sätts till default.
-                             
+                             cell.image = [school schoolImage];                             
                              return cell;
                          }];
 }

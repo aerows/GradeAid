@@ -14,10 +14,6 @@
 
 @interface School : ManagedObject
 
-+ (School*) createSchoolWithName: (NSString*) name image: (UIImage*) image InManagedObjectContext:(NSManagedObjectContext *) moc;
-+ (UIImage*) defaultImage;
-- (UIImage*) schoolImage;
-
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * schoolID;
 @property (nonatomic, retain) NSData * image;
