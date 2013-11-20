@@ -14,6 +14,12 @@
 static NSString *const EnrollmentStoryboardIdentifier = @"EnrollmentViewController";
 
 @interface EnrollmentViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, CourseTableDelegate>
+{
+    IBOutlet UIImageView *_studentImageView;
+    IBOutlet UILabel     *_studentNameLabel;
+    IBOutlet UILabel     *_studentSchoolClassLabel;
+    IBOutlet UILabel     *_studentSchoolLabel;
+}
 
 @property (nonatomic, strong) Course *course;
 @property (nonatomic, strong) Enrollment *enrollment;

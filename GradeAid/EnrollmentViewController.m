@@ -8,6 +8,9 @@
 
 #import "EnrollmentViewController.h"
 
+#import "Student+Create.h"
+#import "School+Create.h"
+
 #import "AppDelegate.h"
 #import "AquirementCell.h"
 
@@ -16,9 +19,14 @@ static NSString *const CourseSegueIdentifier = @"CourseSegueIdentifier";
 
 @interface EnrollmentViewController ()
 
+@property (nonatomic, strong) Student *student;
+
 @end
 
 @implementation EnrollmentViewController
+{
+    UIPopoverController *_currentPopoverController;
+}
 
 - (void)viewDidLoad
 {
@@ -26,10 +34,13 @@ static NSString *const CourseSegueIdentifier = @"CourseSegueIdentifier";
     
     if (!_enrollment && _course.enrollments.count)
     {
-        _enrollment = [_course.orderedEnrollments objectAtIndex: 0];
+        [self setEnrollment: [_course.orderedEnrollments objectAtIndex: 0]];
     }
     
+    // update
+    
     [self setupFetchResultsControllers];
+    
     [_tableView setDelegate: self];
     [_tableView setDataSource: self];
 
@@ -179,8 +190,12 @@ newIndexPath:(NSIndexPath *)newIndexPath {
 {
     if ([segue.identifier isEqualToString: CourseSegueIdentifier])
     {
+        UIStoryboardPopoverSegue *popoverSegue = (UIStoryboardPopoverSegue *)segue;
+        _currentPopoverController = popoverSegue.popoverController;
+        
         CourseTableViewController *courseTableViewController = (CourseTableViewController*)segue.destinationViewController;
         [courseTableViewController setCourse: _course];
+        [courseTableViewController setDelegate: self];
     }
 }
 
@@ -199,12 +214,27 @@ newIndexPath:(NSIndexPath *)newIndexPath {
 
 @synthesize course = _course;
 @synthesize enrollment = _enrollment;
+@synthesize student = _student;
 
 - (void) setEnrollment:(Enrollment *)enrollment
 {
-    if (_enrollment == enrollment) return;
+    [_currentPopoverController dismissPopoverAnimated: YES];
+    _currentPopoverController = nil;
+    
+    //    if (_enrollment == enrollment) return;
     _enrollment = enrollment;
     [self setupFetchResultsControllers];
+    [self setStudent: _enrollment.student];
+}
+
+- (void) setStudent:(Student *)student
+{
+    _student = student;
+    
+    [_studentImageView setImage: _student.studentImage];
+    [_studentNameLabel setText: [NSString stringWithFormat: @"%@ %@", _student.firstName, _student.lastName]];
+    [_studentSchoolClassLabel setText: _student.schoolClass.name];
+    [_studentSchoolLabel setText: _student.schoolClass.school.name];
 }
 
 @end
