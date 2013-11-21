@@ -13,8 +13,12 @@
 
 #import "AppDelegate.h"
 #import "AquirementCell.h"
+#import "ExpandableHeaderCell.h"
 
 static NSString *const CourseSegueIdentifier = @"CourseSegueIdentifier";
+
+static NSInteger const CourseAquirementHeaderSection = 0;
+static NSInteger const CourseAquirementsSectionOffset = 1;
 
 
 @interface EnrollmentViewController ()
@@ -26,6 +30,8 @@ static NSString *const CourseSegueIdentifier = @"CourseSegueIdentifier";
 @implementation EnrollmentViewController
 {
     UIPopoverController *_currentPopoverController;
+    
+    bool _courseAquirementsVisable;
 }
 
 - (void)viewDidLoad
@@ -46,25 +52,6 @@ static NSString *const CourseSegueIdentifier = @"CourseSegueIdentifier";
 
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - IBAction Methods
-
-- (IBAction) cancel:(id)sender
-{
-    [self dismissViewControllerAnimated: YES completion: nil];
-}
-
-#pragma mark - Getters and Setters
-
-@synthesize tableView = _tableView;
-@synthesize courseAquirementFetchController = _fetchedResultsController;
-
-
 - (void) setupFetchResultsControllers
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Aquirement"];
@@ -80,54 +67,111 @@ static NSString *const CourseSegueIdentifier = @"CourseSegueIdentifier";
     [_fetchedResultsController performFetch: nil];
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - IBAction Methods
+
+- (IBAction) cancel:(id)sender
 {
-    //return [AquirementCell heightForCellWithAquirement: [_fetchedResultsController objectAtIndexPath: indexPath]];
-    return 170;
+    [self dismissViewControllerAnimated: YES completion: nil];
 }
+
+
+#pragma mark - UITableView Delegate Methods
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath: indexPath animated: YES];
+    
+    if (indexPath.section == CourseAquirementHeaderSection)
+    {
+        _courseAquirementsVisable ^= YES;
+        [_tableView reloadData];
+    }
+}
+
+
 
 #pragma mark - UITableView Datasource Methods
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AquirementCell *cell = [tableView dequeueReusableCellWithIdentifier: AquirementCellCellIdentifier];
-    [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-    Aquirement *aquirement = [_fetchedResultsController objectAtIndexPath: indexPath];
-    [cell setAquirement: aquirement];
-    
-    return cell;
+    if (indexPath.section == CourseAquirementHeaderSection)
+    {
+        ExpandableHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier: ExpandableHeaderCellIdentifier];
+        [cell.textLabel setText: @"Kurskriterier"];
+        [cell.detailTextLabel setText: @"Detailed kurskriterier"];
+        [cell.expandLabel setText: (_courseAquirementsVisable) ? @"Dölj" : @"Visa"];
+        return cell;
+    }
+    else if (indexPath.section >= CourseAquirementsSectionOffset &&
+             indexPath.section <= CourseAquirementsSectionOffset + _fetchedResultsController.sections.count)
+    {
+        NSIndexPath *indexPathWithOffset = [NSIndexPath indexPathForRow: indexPath.row inSection: indexPath.section - CourseAquirementsSectionOffset];
+        AquirementCell *cell = [tableView dequeueReusableCellWithIdentifier: AquirementCellCellIdentifier];
+        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
+        Aquirement *aquirement = [_fetchedResultsController objectAtIndexPath: indexPathWithOffset];
+        [cell setAquirement: aquirement];
+        return cell;
+    }
+
+    return nil;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == CourseAquirementHeaderSection)
+    {
+        return 40.f;
+    }
+    else
+    {
+        NSIndexPath *indexPathWithOffset = [NSIndexPath indexPathForRow: indexPath.row
+                                                              inSection: indexPath.section - CourseAquirementsSectionOffset];
+        Aquirement *aq = [_fetchedResultsController objectAtIndexPath: indexPathWithOffset];
+        return [AquirementCell heightForCellWithAquirement: aq];
+    }
+    return 0;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    int count = [[_fetchedResultsController sections] count];
-    
-    int i = [[_fetchedResultsController sections] count];
-    return [[_fetchedResultsController sections] count];
+    int numberOfSection = 1; // CourseAquirementHeaderSection
+    numberOfSection += (_courseAquirementsVisable) ? [[_fetchedResultsController sections] count] : 0;
+
+    return numberOfSection;
 }
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section {
-    if ([[_fetchedResultsController sections] count] > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+    if (section == CourseAquirementHeaderSection)
+    {
+        return 1;
+    }
+    else if ([[_fetchedResultsController sections] count] > 0) {
+        NSInteger sectionWithOffset = section - CourseAquirementsSectionOffset;
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:sectionWithOffset];
         return [sectionInfo numberOfObjects];
     } else
         return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ([[_fetchedResultsController sections] count] > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+    if (section == CourseAquirementHeaderSection)
+    {
+        return nil;
+    }
+    else if ([[_fetchedResultsController sections] count] > 0) {
+        NSInteger sectionWithOffset = section - CourseAquirementsSectionOffset;
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[_fetchedResultsController sections] objectAtIndex:sectionWithOffset];
         return [sectionInfo name];
     } else
         return nil;
 }
 
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [_fetchedResultsController sectionIndexTitles];
-}
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+//    return [_fetchedResultsController sectionIndexTitles];
+//}
 
-- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    return [_fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
-}
+//- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+//    return [_fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
+//}
 
 #pragma mark - FetchedResultsController Delegate Methods
 
@@ -139,14 +183,15 @@ static NSString *const CourseSegueIdentifier = @"CourseSegueIdentifier";
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
 atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     
+    NSInteger sectionWithOffset = sectionIndex + CourseAquirementsSectionOffset;
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionWithOffset]
                           withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionWithOffset]
                           withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -158,29 +203,34 @@ atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)t
 newIndexPath:(NSIndexPath *)newIndexPath {
     
     UITableView *tableView = self.tableView;
+    NSIndexPath *indexPathWithOffset = [NSIndexPath indexPathForRow: indexPath.row
+                                                          inSection: indexPath.section + CourseAquirementsSectionOffset];
+    NSIndexPath *newIndexPathWithOffset = [NSIndexPath indexPathForRow: newIndexPath.row
+                                                          inSection: newIndexPath.section + CourseAquirementsSectionOffset];
+    
     
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPathWithOffset]
                              withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPathWithOffset]
                              withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeUpdate:
             
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath]
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPathWithOffset]
                     atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPathWithOffset]
                              withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPathWithOffset]
                              withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
@@ -201,6 +251,7 @@ newIndexPath:(NSIndexPath *)newIndexPath {
 
 - (void) configureCell: (UITableViewCell*) cell atIndexPath: (NSIndexPath*) indexPath
 {
+//    NSIndexPath *indexPathWithOffset = [NSIndexPath indexPathForRow: indexPath.row inSection: indexPath.section - CourseAquirementsSectionOffset];
     AquirementCell *aquirementCell = (AquirementCell*) cell;
     [aquirementCell setAquirement: nil];
     [aquirementCell setAquirement: [_fetchedResultsController objectAtIndexPath: indexPath]];
@@ -212,6 +263,8 @@ newIndexPath:(NSIndexPath *)newIndexPath {
 
 #pragma mark - Getters and Setters
 
+@synthesize tableView = _tableView;
+@synthesize courseAquirementFetchController = _fetchedResultsController;
 @synthesize course = _course;
 @synthesize enrollment = _enrollment;
 @synthesize student = _student;

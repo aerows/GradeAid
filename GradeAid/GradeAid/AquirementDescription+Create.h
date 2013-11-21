@@ -27,5 +27,5 @@ static NSString *const KeyForE_Caption            = @"e_caption";
 
 + (AquirementDescription*) descriptionWithDict:(NSDictionary *)dict inManagedObjectContext: (NSManagedObjectContext*) moc;
 - (NSAttributedString*) attributedStringForCurrentGrade:(int)grade;
-
+- (NSString*) longestCaption;
 @end

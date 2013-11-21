@@ -115,7 +115,10 @@ static NSString *const Separator = @"//";
     UIColor *attributeColor = [UIColor colorWithRed: 109.f/255.f green:164.f/255.f blue:675.f/255.f alpha:1.f];
     NSArray *keyWords = [self keywordsForGrade: grade];
     
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: self.aquirementDescription.caption];
+    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject: [UIFont systemFontOfSize: 14]
+                                                                forKey:NSFontAttributeName];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString: self.aquirementDescription.caption attributes: attrsDictionary];
+    
     for (NSString *string in keyWords)
     {
         NSRange range = [attributedString.string rangeOfString: @"%@"];

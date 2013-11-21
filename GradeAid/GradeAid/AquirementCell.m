@@ -6,76 +6,111 @@
 //  Copyright (c) 2013 Daniel Hallin. All rights reserved.
 //
 
-CGFloat const captionLabelWidth = 728;
-
 #import "AquirementCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AquirementDescription+Create.h"
 #import "Aquirement+Manage.h"
 
 static CGFloat const animationDuration = 1.6f;
+static CGFloat const numberOfGradations = 3;
+
+CGFloat const captionLabelWidth = 728;
+CGFloat const captionTextViewWidth = 728;
+CGFloat const gradeLabelHeight = 30.f;
+
+NSInteger const textSize = 14;
+
+#define SelectedColor       ([UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0])
+#define NonselectedColor    ([UIColor grayColor])
 
 @implementation AquirementCell
 {
     IBOutlet UILabel *captionLabel;
-    IBOutletCollection(AquirementButton) NSArray* buttons;
+    IBOutlet UITextView *captionTextView;
+    IBOutlet UIView *labelContainer;
+    IBOutletCollection(UILabel) NSArray *gradeLabels;
+    
+//    IBOutletCollection(AquirementButton) NSArray* buttons;
 }
 
-#pragma mark - AquirementButton Delegate Methods
+#pragma mark - Constructor Methods
 
-- (void) aquirementButtonWasPressed:(id)sender
+- (id) initWithCoder:(NSCoder *)aDecoder
 {
-    AquirementButton *button = (AquirementButton*) sender;
-    bool toggle = (_aquirement.grade.intValue == button.grade);
-    _aquirement.grade = (toggle) ? @(0) : @(button.grade);
-    
-
-    CATransition *transitionAnimation = [CATransition animation];
-    [transitionAnimation setType:kCATransitionFade];
-    [transitionAnimation setDuration:0.3f];
-    [transitionAnimation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-    [transitionAnimation setFillMode:kCAFillModeBoth];
-    [captionLabel.layer addAnimation:transitionAnimation forKey:@"fadeAnimation"];
-//    captionLabel.attributedText = [_aquirementDescription attributedStringForCurrentGrade: _aquirementDescription.grade];
-    
-//    [self updateButtonsWithGrade: _aquirementDescription.grade];
+    if (self = [super initWithCoder: aDecoder])
+    {
+        _tapper = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(tapGesture:)];
+        [_tapper setNumberOfTapsRequired: 1];
+        [_tapper setNumberOfTouchesRequired: 1];
+        [self.contentView addGestureRecognizer: _tapper];
+        [self.contentView setUserInteractionEnabled: YES];
+    }
+    return self;
 }
 
+#pragma mark - UIGestureRecognizer Delegate Methods
 
+- (void) tapGesture: (UIGestureRecognizer*) tapper
+{
+    CGPoint tapPoint = [tapper locationInView: self.contentView];
+    CGFloat interval = self.contentView.frame.size.width / numberOfGradations;
+    int tappedGrade = ceilf((tapPoint.x / interval));
+    [self selectGrade: @(tappedGrade)];
+
+}
+
+- (void) selectGrade: (NSNumber*) grade
+{
+    bool deselectedGrade = [_aquirement.grade isEqualToNumber: grade];
+    [_aquirement setGrade: (deselectedGrade) ? @(0) : grade];
+    [self setGrade: _aquirement.grade];
+}
 
 #pragma mark - Private Methods
 
-- (void) updateButtonsWithGrade: (NSNumber*) grade
++ (CGSize) sizeForAquirement: (Aquirement*) aquirement
 {
-    for (AquirementButton *ab in buttons)
+    static CGFloat marginCorrection = 20;
+    CGSize constrainedSize = CGSizeMake(captionTextViewWidth, CGFLOAT_MAX);
+    
+    NSString *text = aquirement.aquirementDescription.longestCaption;
+    
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize: textSize] constrainedToSize: constrainedSize lineBreakMode:NSLineBreakByWordWrapping];
+    size.height += marginCorrection;
+    return size;
+}
+
++ (CGFloat) heightForCellWithAquirement:(Aquirement *)aquirement
+{
+    return [AquirementCell sizeForAquirement: aquirement].height + gradeLabelHeight;
+}
+
+- (void) updateLabels
+{
+    for (UILabel *label in gradeLabels)
     {
-        [ab setSelected: (ab.grade == grade.intValue)];
+        if (label.tag == _grade.intValue)
+        {
+            [label setTextColor: SelectedColor];
+        }
+        else
+        {
+            [label setTextColor: NonselectedColor];
+        }
     }
 }
 
-+ (CGRect) rectForCaption: (NSString*) caption
+- (void) updateLayout
 {
-    UIFont *font = [UIFont systemFontOfSize: 17];
+    CGRect frame = captionTextView.frame;
+    frame.size.height = [AquirementCell sizeForAquirement: _aquirement].height;
+    [captionTextView setFrame: frame];
     
-    NSAttributedString *attributedText = [[NSAttributedString alloc]
-                                          initWithString: caption
-                                          attributes:@{NSFontAttributeName: font}];
-    
-    CGRect rect = [attributedText boundingRectWithSize:(CGSize){captionLabelWidth, CGFLOAT_MAX}
-                                               options:NSStringDrawingUsesLineFragmentOrigin
-                                               context:nil];
-    rect = CGRectMake(23, 10, ceilf(rect.size.width), ceilf(rect.size.height));
-    return rect;
+    CGRect labelFrame = labelContainer.frame;
+    labelFrame.origin.y = CGRectGetMaxY(frame);
+    [labelContainer setFrame: labelFrame];
     
 }
-
-//+ (CGFloat) heightForCellWithAquirement:(CourseAquirementDescription *) cad
-//{
-//    return 164;
-//    CGRect labelFrame = [AquirementCell rectForCaption: cad.caption];
-//    
-//    return labelFrame.origin.y * 2 + labelFrame.size.height + 55;
-//}
 
 #pragma mark - Getters and Setters
 
@@ -83,11 +118,18 @@ static CGFloat const animationDuration = 1.6f;
 {
     if ([_aquirement isEqual: aquirement]) return;
     _aquirement = aquirement;
-    int grade = _aquirement.grade.intValue;
-    [captionLabel setAttributedText: [_aquirement attributedStringForCurrentGrade: grade]];
-    [self updateButtonsWithGrade: _aquirement.grade];
+    [self setGrade: _aquirement.grade];
+    [self performSelector:@selector(updateLayout) withObject:nil afterDelay:0.0];
+}
+
+- (void) setGrade:(NSNumber *)grade
+{
+    _grade = grade;
+    [captionTextView setAttributedText: [_aquirement attributedStringForCurrentGrade: _grade.intValue]];
+    [self updateLabels];
 }
 
 @synthesize aquirement = _aquirement;
+@synthesize grade = _grade;
 
 @end

@@ -87,6 +87,7 @@
 		658A3DE9183CC1B5000B38D5 /* tabbaritem-course.png in Resources */ = {isa = PBXBuildFile; fileRef = 658A3DE6183CC1B5000B38D5 /* tabbaritem-course.png */; };
 		658A3DEA183CC1B5000B38D5 /* tabbaritem-school.png in Resources */ = {isa = PBXBuildFile; fileRef = 658A3DE7183CC1B5000B38D5 /* tabbaritem-school.png */; };
 		658A3DEB183CC1B5000B38D5 /* tabbaritem-schoolclass.png in Resources */ = {isa = PBXBuildFile; fileRef = 658A3DE8183CC1B5000B38D5 /* tabbaritem-schoolclass.png */; };
+		658A3DEE183CDF88000B38D5 /* ExpandableHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658A3DED183CDF88000B38D5 /* ExpandableHeaderCell.m */; };
 		65A646D718058AEC008D2C32 /* polariod.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A646D618058AEC008D2C32 /* polariod.png */; };
 		65A646DA18058CE3008D2C32 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A646D918058CE3008D2C32 /* CollectionViewCell.m */; };
 		65A646DD1805A8ED008D2C32 /* CoreDataCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A646DC1805A8ED008D2C32 /* CoreDataCollectionViewController.m */; };
@@ -309,6 +310,8 @@
 		658A3DE6183CC1B5000B38D5 /* tabbaritem-course.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbaritem-course.png"; sourceTree = "<group>"; };
 		658A3DE7183CC1B5000B38D5 /* tabbaritem-school.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbaritem-school.png"; sourceTree = "<group>"; };
 		658A3DE8183CC1B5000B38D5 /* tabbaritem-schoolclass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbaritem-schoolclass.png"; sourceTree = "<group>"; };
+		658A3DEC183CDF88000B38D5 /* ExpandableHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableHeaderCell.h; sourceTree = "<group>"; };
+		658A3DED183CDF88000B38D5 /* ExpandableHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableHeaderCell.m; sourceTree = "<group>"; };
 		65A646D618058AEC008D2C32 /* polariod.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = polariod.png; sourceTree = "<group>"; };
 		65A646D818058CE3008D2C32 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		65A646D918058CE3008D2C32 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
@@ -869,6 +872,8 @@
 				65371683183532E5004B9685 /* SubjectiveObjectiveHeaderTableViewCell.m */,
 				6537167A183392E0004B9685 /* TextTableViewCell.h */,
 				6537167B183392E0004B9685 /* TextTableViewCell.m */,
+				658A3DEC183CDF88000B38D5 /* ExpandableHeaderCell.h */,
+				658A3DED183CDF88000B38D5 /* ExpandableHeaderCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -1296,6 +1301,7 @@
 				65A646E01805AEFA008D2C32 /* CoreDataTableViewController.m in Sources */,
 				65A646DD1805A8ED008D2C32 /* CoreDataCollectionViewController.m in Sources */,
 				6550B863180C49F0003BB803 /* School+Create.m in Sources */,
+				658A3DEE183CDF88000B38D5 /* ExpandableHeaderCell.m in Sources */,
 				6544B86018210DD7007A87CF /* AttributeInput.m in Sources */,
 				65FA3C7B17FE00A000625FDB /* UIStoryboard+mainStoryboard.m in Sources */,
 				6544324117E9EF7C00997437 /* AppDelegate.m in Sources */,

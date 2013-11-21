@@ -13,9 +13,13 @@
 
 static NSString *const AquirementCellCellIdentifier = @"AquirementCellIdentifier";
 
-@interface AquirementCell : UITableViewCell<AquirementButtonDelegate>
+@interface AquirementCell : UITableViewCell
+{
+    UITapGestureRecognizer *_tapper;
+}
 
 + (CGFloat) heightForCellWithAquirement: (Aquirement*) aquirement;
 @property (nonatomic, strong) Aquirement *aquirement;
+@property (nonatomic, strong) NSNumber *grade;
 
 @end

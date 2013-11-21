@@ -131,6 +131,20 @@ static NSString *const Separator = @"//";
     return attributedString;
 }
 
+- (NSString*) longestCaption
+{
+    Gradation *longestGradation = nil;
+    for (Gradation *g in self.gradations)
+    {
+        if (!longestGradation ||
+            longestGradation.gradationCaption.length < g.gradationCaption.length)
+        {
+            longestGradation = g;
+        }
+    }
+    return [NSString stringWithFormat: @"%@%@", self.caption, longestGradation.gradationCaption];
+}
+
 //
 //static NSString *const Separator = @"//";
 //
