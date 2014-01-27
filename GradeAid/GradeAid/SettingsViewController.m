@@ -64,7 +64,7 @@ static NSString *const IdentifierForCoursePopup              = @"CoursePopupSegu
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    return;
     managedObjectContext = [AppDelegate sharedDelegate].managedObjectContext;
 
     [courseEditionsCollectionView.layer setCornerRadius: 10.f];

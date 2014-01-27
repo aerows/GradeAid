@@ -17,6 +17,8 @@
 #import "UIStoryboard+mainStoryboard.h"
 #import "Session.h"
 
+#import "SchoolTableViewController.h"
+
 #import "AttributeCell.h"
 #import "SellectionCell.h"
 #import "PresentAttributeCell.h"
@@ -25,6 +27,7 @@
 #import "SubjectiveObjectiveHeaderTableViewCell.h"
 #import "CentralContentTableViewCell.h"
 #import "AquirementTableViewCell.h"
+#import "ExpandableHeaderCell.h"
 
 
 #import "SellectionViewController.h"
@@ -42,13 +45,17 @@ static NSInteger const SubjectNameRow               = 0;
 static NSInteger const SubjectIntroCaptionRow       = 1;
 static NSInteger const SubjectObjectiveCaptionRow   = 2;
 
-static NSString *const SchoolClassCellIdentifier = @"SchoolClassCellIdentifier";
+static NSString *const SchoolClassCellIdentifier  = @"SchoolClassCellIdentifier";
 static NSString *const SelectClassSegueIdentifier = @"SelectClassSegueIdentifier";
+static NSString *const SelectStudentsIdentifier   = @"SelectStudentsIdentifier";
 
 @interface CourseEditionViewController ()
 {
+    bool subjectSectionExpanded;
     bool subjectObjectiveCaptionRowExpanded;
     bool subjectIntroCaptionRowExpanded;
+    
+    bool courseSectionExpanded;
 }
 
 @end
@@ -145,9 +152,17 @@ static NSString *const SelectClassSegueIdentifier = @"SelectClassSegueIdentifier
             {
                 case SubjectNameRow:
                 {
-                    PresentAttributeCell *cell = [tableView dequeueReusableCellWithIdentifier: PresentAttributeCellIdentifier];
-                    cell.title = @"Ämne";
-                    cell.text = _subject.name;
+                    ExpandableHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier: ExpandableHeaderCellIdentifier];
+                    [cell.detailTextLabel setText: @"Ämne"];
+                    [cell.textLabel setText: _subject.name];
+                    if (subjectSectionExpanded)
+                    {
+                        [cell.expandLabel setText: @"Dölj detaljer"];
+                    }
+                    else
+                    {
+                        [cell.expandLabel setText: @"Visa detaljer"];
+                    }
                     return cell;
                 }
                 case SubjectIntroCaptionRow:
@@ -185,9 +200,18 @@ static NSString *const SelectClassSegueIdentifier = @"SelectClassSegueIdentifier
         
         case CourseEditionSection:
         {
-            PresentAttributeCell *cell = [tableView dequeueReusableCellWithIdentifier: PresentAttributeCellIdentifier];
-            cell.title = @"Kurs";
-            cell.text = _courseDescription.name;
+            ExpandableHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier: ExpandableHeaderCellIdentifier];
+            
+            [cell.detailTextLabel setText: @"Kurs"];
+            [cell.textLabel setText: [NSString stringWithFormat: @"%@, %@",_courseDescription.name, _courseDescription.level]];
+            if (courseSectionExpanded)
+            {
+                [cell.expandLabel setText: @"Dölj detaljer"];
+            }
+            else
+            {
+                [cell.expandLabel setText: @"Visa detaljer"];
+            }
             return cell;
         }
         case CourseContentItemSection:
@@ -213,11 +237,11 @@ static NSString *const SelectClassSegueIdentifier = @"SelectClassSegueIdentifier
 {
     switch (section) {
         case SchoolClassSection: return (_schoolClasses.count) ? _schoolClasses.count : 1;
-        case SubjectSection: return 3;
-        case SubjectObjectivesSection: return _subject.sortedObjectivesItems.count + 1;
+        case SubjectSection: return (subjectSectionExpanded) ? 3 : 1;
+        case SubjectObjectivesSection: return (subjectSectionExpanded) ? _subject.sortedObjectivesItems.count + 1 : 0;
         case CourseEditionSection: return 1;
-        case CourseContentItemSection: return [_courseDescription.sortedCentralContentItems count];
-        case CourseAquirementSection: return _courseDescription.sortedCourseAquirements.count;
+        case CourseContentItemSection: return (courseSectionExpanded) ? [_courseDescription.sortedCentralContentItems count] : 0;
+        case CourseAquirementSection: return (courseSectionExpanded) ? _courseDescription.sortedCourseAquirements.count : 0;
     }
     return 0;
 }
@@ -252,13 +276,22 @@ static NSString *const SelectClassSegueIdentifier = @"SelectClassSegueIdentifier
 {
     if (indexPath.section == SchoolClassSection)
     {
-        [self performSegueWithIdentifier: SelectClassSegueIdentifier sender: self];
+        [self performSegueWithIdentifier: SelectStudentsIdentifier sender:self];
+        //[self performSegueWithIdentifier: SelectClassSegueIdentifier sender: self];
     }
     if (indexPath.section == SubjectSection)
     {
-        if (indexPath.row == SubjectNameRow) return;
         switch (indexPath.row) {
-            case SubjectNameRow: return;
+            case SubjectNameRow:
+            {
+                subjectSectionExpanded ^= YES;
+                [_tableView beginUpdates];
+                [tableView reloadSections: [NSIndexSet indexSetWithIndex: SubjectSection]  withRowAnimation:UITableViewRowAnimationAutomatic];
+                [tableView reloadSections: [NSIndexSet indexSetWithIndex: SubjectObjectivesSection]  withRowAnimation:UITableViewRowAnimationAutomatic];
+                [_tableView endUpdates];
+                
+                return;
+            }
             case SubjectIntroCaptionRow: subjectIntroCaptionRowExpanded ^= YES; break;
             case SubjectObjectiveCaptionRow: subjectObjectiveCaptionRowExpanded ^= YES; break;
             default: return;
@@ -266,6 +299,15 @@ static NSString *const SelectClassSegueIdentifier = @"SelectClassSegueIdentifier
         [_tableView beginUpdates];
         [_tableView reloadRowsAtIndexPaths: @[indexPath] withRowAnimation: UITableViewRowAnimationFade];
         [_tableView endUpdates];
+    }
+    if (indexPath.section == CourseEditionSection)
+    {
+        courseSectionExpanded ^= YES;
+        [_tableView beginUpdates];
+        [tableView reloadSections: [NSIndexSet indexSetWithIndex: CourseContentItemSection]  withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadSections: [NSIndexSet indexSetWithIndex: CourseAquirementSection]  withRowAnimation:UITableViewRowAnimationAutomatic];
+        [_tableView endUpdates];
+        return;
     }
 }
 
@@ -279,7 +321,8 @@ static NSString *const SelectClassSegueIdentifier = @"SelectClassSegueIdentifier
         [stvc setSelectedObjects: _schoolClasses];
         [stvc setSetupCellWithObject:^(UITableViewCell *cell, NSManagedObject *object) {
             SchoolClass *schoolClass = (SchoolClass*) object;
-            [cell.textLabel setText: schoolClass.name];
+            [cell.textLabel setText: [NSString stringWithFormat: @"%@%@",
+                                      schoolClass.year, schoolClass.suffix]];
             [cell.detailTextLabel setText: schoolClass.school.name];
         }];
         [stvc setOnDone:^(NSArray *selectedObjects) {
@@ -288,6 +331,12 @@ static NSString *const SelectClassSegueIdentifier = @"SelectClassSegueIdentifier
             [_tableView reloadSections: [NSIndexSet indexSetWithIndex: SchoolClassSection] withRowAnimation: UITableViewRowAnimationAutomatic];
             [_tableView endUpdates];
         }];
+    }
+    else if ([segue.identifier isEqualToString: SelectStudentsIdentifier])
+    {
+        UINavigationController *nc = (UINavigationController*) segue.destinationViewController;
+        SchoolTableViewController *stvc = (SchoolTableViewController*) [nc.viewControllers objectAtIndex: 0];
+        [stvc setSchools: [School schoolsForCurrentTeacher]];
     }
 }
 

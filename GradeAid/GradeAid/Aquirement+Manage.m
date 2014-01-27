@@ -128,5 +128,11 @@ static NSString *const Separator = @"//";
     return attributedString;
 }
 
+- (void) setGrade:(NSNumber *)grade managedObjectContext:(NSManagedObjectContext *)moc
+{
+    [self setGrade: grade];
+    [moc save: nil];
+}
+
 
 @end

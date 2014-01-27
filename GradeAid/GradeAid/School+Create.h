@@ -24,5 +24,7 @@ static NSString *const KeyForSchoolImageURL = @"imageURL";
 + (UIImage*) defaultImage;
 - (UIImage*) schoolImage;
 
++ (BOOL) deleteSchool: (School*) school;
+
 
 @end

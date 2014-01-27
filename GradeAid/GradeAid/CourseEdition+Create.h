@@ -15,5 +15,6 @@ static NSString *const KeyForAquirementDescriptions     = @"aquirementDescriptio
 @interface CourseEdition (Create)
 
 + (CourseEdition*) courseEditionWithAttributes: (NSDictionary*) attributes managedObjectContext: (NSManagedObjectContext*) moc;
++ (CourseEdition*) courseEditionForTeacher: (Teacher*) teacher courseDescription: (CourseDescription*) courseDescription managedObjectContext: (NSManagedObjectContext*) moc;
 
 @end

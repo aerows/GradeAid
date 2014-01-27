@@ -29,5 +29,7 @@
 #pragma - Getters and Setters
 
 @synthesize expandLabel = _expandLabel;
+@synthesize textLabel = _textLabel;
+@synthesize detailTextLabel = _detailTextLabel;
 
 @end

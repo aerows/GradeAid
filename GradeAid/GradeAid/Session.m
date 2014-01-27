@@ -22,6 +22,13 @@ static Session* currentSession = nil;
     return currentSession;
 }
 
++ (Session*) autoSession
+{
+    Session *autoSession = [Session currentSession];
+    [autoSession loginWithEmail: @"hallin.daniel@gmail.com" password: @"password"];
+    return autoSession;
+}
+
 - (bool) loginWithEmail:(NSString *)email password:(NSString *)password
 {
     _teacher = [Teacher teacherWithEmail: email password: password managedObjectContext: [AppDelegate sharedDelegate].managedObjectContext];

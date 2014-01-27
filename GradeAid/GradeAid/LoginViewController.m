@@ -46,13 +46,14 @@ static NSString *const SegueIdentifierLogin = @"SegueIdentifierLogin";
     
     [passwordField setSecureTextEntry: YES];
     
-    [loginField setText: @"hallin.daniel@gmail.com"];
-    [passwordField setText: @"password"];
+    [loginField setPlaceholder: @"Lärare epost"];
+    [passwordField setPlaceholder: @"Password"];
+//    [loginField setText: @"hallin.daniel@gmail.com"];
+//    [passwordField setText: @"password"];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
-
     Teacher *teacher = [Session currentSession].teacher;
 
     if (teacher)
@@ -60,14 +61,33 @@ static NSString *const SegueIdentifierLogin = @"SegueIdentifierLogin";
         [loginField setText: teacher.email];
         [passwordField setText: teacher.password];
     }
+    
+    [loginField setText: @"hallin.daniel@gmail.com"];
+    [passwordField setText: @"password"];
 }
+
 
 - (IBAction)login:(id)sender
 {
     if ([[Session currentSession] loginWithEmail: loginField.text password: passwordField.text])
     {
-        [self performSegueWithIdentifier: SegueIdentifierLogin sender: self];
+        UIViewController *tbc = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"RootViewController"];
+        tbc.modalPresentationStyle = UIModalPresentationFullScreen;
+        tbc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController: tbc animated: YES completion: nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(logout:) name: TeacherWillLogOutNotification object: [Session currentSession].teacher];
+        
+        //[self performSegueWithIdentifier: SegueIdentifierLogin sender: self];
     }
+}
+
+- (void) logout: (NSNotification*) notifcation
+{
+    [self dismissViewControllerAnimated: YES completion:^{
+        [[Session currentSession] logout];
+    }];
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
 - (IBAction)loginForSettingsView:(id)sender

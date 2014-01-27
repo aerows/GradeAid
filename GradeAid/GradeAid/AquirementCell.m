@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AquirementDescription+Create.h"
 #import "Aquirement+Manage.h"
+#import "AppDelegate.h"
 
 static CGFloat const animationDuration = 1.6f;
 static CGFloat const numberOfGradations = 3;
@@ -62,7 +63,7 @@ NSInteger const textSize = 14;
 - (void) selectGrade: (NSNumber*) grade
 {
     bool deselectedGrade = [_aquirement.grade isEqualToNumber: grade];
-    [_aquirement setGrade: (deselectedGrade) ? @(0) : grade];
+    [_aquirement setGrade: (deselectedGrade) ? @(0) : grade managedObjectContext: [AppDelegate sharedDelegate].managedObjectContext];
     [self setGrade: _aquirement.grade];
 }
 
@@ -91,16 +92,28 @@ NSInteger const textSize = 14;
     {
         if (label.tag == _grade.intValue)
         {
-            [label setTextColor: SelectedColor];
+            [label setFont: [UIFont boldSystemFontOfSize: [UIFont systemFontSize]]];
+            
+            [label setTextColor: [UIColor whiteColor]];
+            [label setBackgroundColor: SelectedColor];
+            label.layer.cornerRadius = 13;
+            label.layer.masksToBounds = YES;
         }
         else
         {
+            [label setFont: [UIFont systemFontOfSize: [UIFont systemFontSize]]];
             [label setTextColor: NonselectedColor];
+            [label setBackgroundColor: [UIColor whiteColor]];
         }
     }
 }
 
 - (void) updateLayout
+{
+    [self performSelector:@selector(_updateLayout) withObject:nil afterDelay:0.0];
+}
+
+- (void) _updateLayout
 {
     CGRect frame = captionTextView.frame;
     frame.size.height = [AquirementCell sizeForAquirement: _aquirement].height;
@@ -109,7 +122,6 @@ NSInteger const textSize = 14;
     CGRect labelFrame = labelContainer.frame;
     labelFrame.origin.y = CGRectGetMaxY(frame);
     [labelContainer setFrame: labelFrame];
-    
 }
 
 #pragma mark - Getters and Setters
@@ -119,7 +131,7 @@ NSInteger const textSize = 14;
     if ([_aquirement isEqual: aquirement]) return;
     _aquirement = aquirement;
     [self setGrade: _aquirement.grade];
-    [self performSelector:@selector(updateLayout) withObject:nil afterDelay:0.0];
+    [self updateLayout];
 }
 
 - (void) setGrade:(NSNumber *)grade

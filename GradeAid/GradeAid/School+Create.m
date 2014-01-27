@@ -9,6 +9,7 @@
 #import "School+Create.h"
 #import "NSManagedObject+Create.h"
 #import "Session.h"
+#import "AppDelegate.h"
 
 @implementation School (Create)
 
@@ -46,6 +47,8 @@
     }
     return school;
 }
+
+
 
 + (School*) schoolWithSchoolID: (NSNumber*) schoolID inManagedObjectContext: (NSManagedObjectContext*) moc
 {
@@ -119,6 +122,14 @@
                                           orderedKeys: orderedAttributeKeys
                                            completion: completion];
 }
+
++ (BOOL) deleteSchool: (School*) school
+{
+    NSManagedObjectContext *moc = [AppDelegate sharedDelegate].managedObjectContext;
+    [moc deleteObject: school];
+    return [moc save: nil];
+}
+
 
 #pragma mark - Helper Methods
 

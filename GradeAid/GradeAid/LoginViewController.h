@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Teacher+Create.h"
 
+static NSString *const TeacherWillLogOutNotification = @"TeacherWillLogOutNotification";
+
+
 @interface LoginViewController : UIViewController
 
 - (IBAction) login:(id)sender;
+
+- (void) logout: (NSNotification*) notification;
 
 @property (nonatomic, strong) Teacher *teacher;
 

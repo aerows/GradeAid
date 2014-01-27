@@ -16,6 +16,10 @@
 - (bool) loginWithEmail: (NSString*) email password: (NSString*) password;
 - (bool) logout;
 
+// Debugging
+
++ (Session*) autoSession;
+
 @property (nonatomic, readonly, getter = isActive) bool active;
 @property (nonatomic, strong) Teacher* teacher;
 

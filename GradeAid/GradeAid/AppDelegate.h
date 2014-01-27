@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Session.h"
 
+static NSString *const WillDismissViewControllerNotifification = @"WillDismissViewControllerNotifification";
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

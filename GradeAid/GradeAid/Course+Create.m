@@ -9,6 +9,8 @@
 #import "Course+Create.h"
 #import "NSManagedObject+Create.h"
 #import "Enrollment+Create.h"
+#import "Session.h"
+#import "AppDelegate.h"
 
 @implementation Course (Create)
 
@@ -19,6 +21,39 @@
     course = [NSEntityDescription insertNewObjectForEntityForName: @"Course" inManagedObjectContext:moc];
     
     return course;
+}
+
++ (Course*) courseWithCourseDescription: (CourseDescription*) courseDescription teacher: (Teacher*) teacher managedObjectContext: (NSManagedObjectContext*) moc
+{
+    Course *course = nil;
+    
+    CourseEdition *courseEdition = [CourseEdition courseEditionForTeacher: teacher courseDescription: courseDescription managedObjectContext: moc];
+    
+    course = [Course courselWithDict: @{} inManagedObjectContext: moc];
+    
+    course.teacher = teacher;
+    course.courseEdition = courseEdition;
+    
+    return course;
+}
+
++ (NSArray*) coursesForCurrentTeacher
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Course"];
+    
+    request.predicate = [NSPredicate predicateWithFormat: @"teacher = %@", [Session currentSession].teacher];
+    
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey: @"courseEdition.courseDescription.name" ascending: YES], [NSSortDescriptor sortDescriptorWithKey: @"courseEdition.courseDescription.level" ascending:YES], [NSSortDescriptor sortDescriptorWithKey: @"name" ascending: YES]];
+    
+    NSError *error;
+    NSArray *response = [[AppDelegate sharedDelegate].managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (!response)
+    {
+        NSLog(@"%@", error.localizedDescription);
+    }
+    
+    return response;
 }
 
 - (void) enrollStudent:(Student *)student managedObjectContext:(NSManagedObjectContext *)moc
@@ -58,6 +93,33 @@
 + (UIImage*) defaultImage
 {
     return [UIImage imageNamed:@"default-course"];
+}
+
++ (NSArray*) defaultSortDescriptors
+{
+    NSSortDescriptor *sortByCourseName = [NSSortDescriptor sortDescriptorWithKey: @"courseEdition.courseDescription.name" ascending: YES];
+    NSSortDescriptor *sortByCourseLevel = [NSSortDescriptor sortDescriptorWithKey: @"courseEdition.courseDescription.level" ascending: YES];
+    NSSortDescriptor *sortByDescription = [NSSortDescriptor sortDescriptorWithKey: @"name" ascending: YES];
+
+    return @[sortByCourseName, sortByCourseLevel, sortByDescription];
+}
+
+- (NSArray*) schoolClasses
+{
+    NSArray *classes = [[self.enrollments allObjects] valueForKeyPath: @"@distinctUnionOfObjects.student.schoolClass"];
+    
+    //NSSet *classes = [NSSet setWithArray:[self.enrollments valueForKeyPath:@"student.schoolClass"]];
+    NSSortDescriptor *schoolSortDesc = [NSSortDescriptor sortDescriptorWithKey: @"school.name" ascending: YES];
+    NSSortDescriptor *yearSortDesc = [NSSortDescriptor sortDescriptorWithKey: @"year" ascending: YES];
+    NSSortDescriptor *suffixSortDesc = [NSSortDescriptor sortDescriptorWithKey: @"suffix" ascending: YES];
+    return [classes sortedArrayUsingDescriptors: @[schoolSortDesc, yearSortDesc, suffixSortDesc]];
+}
+
+- (NSArray*) students
+{
+    NSSortDescriptor *firstNameSortDesc = [NSSortDescriptor sortDescriptorWithKey: @"firstName" ascending: YES];
+    NSSortDescriptor *lastNameSortDesc = [NSSortDescriptor sortDescriptorWithKey: @"lastName" ascending: YES];
+    return [[self.enrollments valueForKeyPath: @"@distinctUnionOfObjects.student"] sortedArrayUsingDescriptors: @[lastNameSortDesc, firstNameSortDesc]];
 }
 
 @end

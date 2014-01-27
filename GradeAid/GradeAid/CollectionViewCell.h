@@ -11,6 +11,8 @@
 
 static NSString *const CollectionViewCellIdentifier = @"CollectionViewCellIdentifier";
 
+
+
 @interface CollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) NSString *title;

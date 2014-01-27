@@ -10,6 +10,10 @@
 #import "Student+Create.h"
 #import "School+Create.h"
 #import "SchoolClass+Create.h"
+#import "CourseEdition+Create.h"
+#import "Enrollment+Create.h"
+#import "Session.h"
+#import "AppDelegate.h"
 
 @implementation Student (Create)
 
@@ -60,6 +64,29 @@
 - (UIImage*) thumbNail
 {
     return [UIImage imageNamed: @"student.jpg"];
+}
+
++ (NSArray*) lastNameSortDescriptors
+{
+    return @[[NSSortDescriptor sortDescriptorWithKey: @"lastName" ascending: YES],
+             [NSSortDescriptor sortDescriptorWithKey: @"firstName" ascending: YES]];
+}
+
++ (NSArray*) studentsForCurrentTeacher
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Student"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"ANY schoolClass.school.teachers == %@", [Session currentSession].teacher];
+    request.predicate = predicate;
+    request.sortDescriptors = [Student lastNameSortDescriptors];
+    
+    NSError *error = nil;
+    NSArray *response = [[AppDelegate sharedDelegate].managedObjectContext executeFetchRequest: request error: &error];
+    if (!response)
+    {
+        NSLog(@"%@", error.localizedDescription);
+    }
+    return response;
+
 }
 
 + (ObjectVerifyer*) objectVerifyer
@@ -125,6 +152,11 @@
 + (UIImage*) defaultImage
 {
     return [UIImage imageNamed: @"default-student"];
+}
+
+- (NSString*) fullName
+{
+    return [NSString stringWithFormat: @"%@ %@", self.firstName, self.lastName];
 }
 
 @end

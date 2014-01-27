@@ -135,7 +135,7 @@ static NSString *const SchoolClassCellIdentifier  = @"SchoolClassCellIdentifier"
             }
             else
             {
-                [cell.textLabel setText: _selectedSchoolClass.name];
+                [cell.textLabel setText: _selectedSchoolClass.title];
                 [cell.detailTextLabel setText: @""];
             }
             return cell;
@@ -190,7 +190,7 @@ static NSString *const SchoolClassCellIdentifier  = @"SchoolClassCellIdentifier"
         }
         [stvc setSetupCellWithObject:^(UITableViewCell *cell, NSManagedObject *object) {
             SchoolClass *schoolClass = (SchoolClass*) object;
-            [cell.textLabel setText: schoolClass.name];
+            [cell.textLabel setText: [NSString stringWithFormat: @"%@%@", schoolClass.year, schoolClass.suffix]];
             [cell.detailTextLabel setText: schoolClass.school.name];
         }];
         [stvc setOnDone:^(NSArray *selectedObjects) {

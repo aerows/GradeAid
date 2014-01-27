@@ -82,7 +82,8 @@ static NSString *CellIdentifier = @"CellIdentifier";
     
     SchoolClass * schoolClass = [self.fetchedResultsController objectAtIndexPath: indexPath];
     
-    [cell.textLabel setText: schoolClass.name];
+    [cell.textLabel setText: [NSString stringWithFormat: @"%@ %@%@",
+                              schoolClass.school, schoolClass.year, schoolClass.suffix]];
     return cell;
 }
 

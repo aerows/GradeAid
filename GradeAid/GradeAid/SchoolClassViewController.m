@@ -31,8 +31,9 @@ static NSString *const StudentViewSegueIdentifier = @"StudentViewSegueIdentifier
 
 @implementation SchoolClassViewController
 {
-    AttributeInput *schoolClassName;
     AttributeInput *schoolClassYear;
+    AttributeInput *schoolClassSuffix;
+
 }
 
 - (void)viewDidLoad
@@ -41,17 +42,17 @@ static NSString *const StudentViewSegueIdentifier = @"StudentViewSegueIdentifier
     
     [self setInEditMode: !_schoolClass];
     
-    schoolClassName = [AttributeInput nameAttribute];
-    schoolClassName.attributeTitle = @"Klassnamn";
-    schoolClassName.attributeExample = @"Klassens namn...";
-    schoolClassName.value = _schoolClass.name;
-    
-    schoolClassYear = [AttributeInput nameAttribute]; // Skall vara numberAttribute
+    schoolClassYear = [AttributeInput nameAttribute];
     schoolClassYear.attributeTitle = @"Årskull";
-    schoolClassYear.attributeExample = @"T.ex. 1, 6, 9...";
-    schoolClassYear.value = [NSString stringWithFormat: @"%@", _schoolClass.year];
+    schoolClassYear.attributeExample = @"År...";
+    schoolClassYear.value = (!_schoolClass) ? @"" : [NSString stringWithFormat: @"%@", _schoolClass.year];
     
-    _attributes = @[schoolClassName, schoolClassYear];
+    schoolClassSuffix = [AttributeInput nameAttribute]; // Skall vara numberAttribute
+    schoolClassSuffix.attributeTitle = @"Suffix";
+    schoolClassSuffix.attributeExample = @"T.ex. A, b, \"natur\"...";
+    schoolClassSuffix.value = (!_schoolClass) ? @"" : [NSString stringWithFormat: @"%@", _schoolClass.suffix];
+    
+    _attributes = @[schoolClassYear, schoolClassSuffix];
     
     [_tableView reloadData];
 }
@@ -71,12 +72,16 @@ static NSString *const StudentViewSegueIdentifier = @"StudentViewSegueIdentifier
     
     if (!_schoolClass)
     {
-        _schoolClass = [SchoolClass createSchoolClassWithAttributes: @{} InManagedObjectContext:moc];
+        _schoolClass = [SchoolClass schoolClassWithSchool: _selectedSchool year: @(schoolClassYear.value.intValue) suffix: schoolClassSuffix.value highschool: @(NO) managedObjectContext: moc];
+        
         [_selectedSchool addClassesObject: _schoolClass];
     }
-    
-    _schoolClass.name = schoolClassName.value;
-    _schoolClass.year = @(schoolClassYear.value.intValue);
+    else
+    {
+        _schoolClass.year = @(schoolClassYear.value.intValue);
+        _schoolClass.suffix = schoolClassSuffix.value;
+    }
+
     
     NSError *error = nil;
     [moc save: &error];
@@ -167,13 +172,13 @@ static NSString *const StudentViewSegueIdentifier = @"StudentViewSegueIdentifier
     _inEditMode = inEditMode;
     if (!_inEditMode)
     {
-        [_titleLabel setText: _schoolClass.name];
+        [_titleLabel setText: _schoolClass.title];
     }
     else
     {
         if (_schoolClass)
         {
-            [_titleLabel setText: [NSString stringWithFormat: @"Ändra klass: %@", _schoolClass.name]];
+            [_titleLabel setText: [NSString stringWithFormat: @"Ändra klass: %@", _schoolClass.title]];
         }
         else
         {

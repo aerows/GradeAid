@@ -9,6 +9,7 @@
 #import "Student.h"
 #import "Creatable.h"
 #import "CellPresentable.h"
+#import "Course+Create.h"
 
 static NSString *const StudentKeyForSchoolClass    = @"schoolClass";
 static NSString *const StudentKeyForStudentID      = @"studentID";
@@ -20,8 +21,12 @@ static NSString *const StudentKeyForPicture        = @"picture";
 @interface Student (Create) <Creatable, CellPresentable>
 
 + (Student*) studentWithDict: (NSDictionary*) dict inManagedObjectContext: (NSManagedObjectContext*) moc;
-
++ (NSArray*) studentsForCurrentTeacher;
 + (UIImage*) defaultImage;
 - (UIImage*) studentImage;
+
++ (NSArray*) lastNameSortDescriptors;
+
+- (NSString*) fullName;
 
 @end

@@ -11,15 +11,24 @@
 #import "Student+Create.h"
 #import "School+Create.h"
 
-#import "AppDelegate.h"
 #import "AquirementCell.h"
 #import "ExpandableHeaderCell.h"
+
+#import "AquirementListViewController.h"
+#import "TeacherAquirementViewController.h"
+#import "NotesViewController.h"
+
+// Global
+#import "AppDelegate.h"
+#import "UIStoryboard+mainStoryboard.h"
+#import "RoundCorners.h"
 
 static NSString *const CourseSegueIdentifier = @"CourseSegueIdentifier";
 
 static NSInteger const CourseAquirementHeaderSection = 0;
 static NSInteger const CourseAquirementsSectionOffset = 1;
 
+static CGRect SubViewControllerFrame = {0, 91, 768, 933};
 
 @interface EnrollmentViewController ()
 
@@ -32,24 +41,54 @@ static NSInteger const CourseAquirementsSectionOffset = 1;
     UIPopoverController *_currentPopoverController;
     
     bool _courseAquirementsVisable;
+    
+    AquirementListViewController *_aquirementListViewController;
+    TeacherAquirementViewController *_teacherAquirementViewController;
+    NotesViewController *_notesViewController;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     
     if (!_enrollment && _course.enrollments.count)
     {
         [self setEnrollment: [_course.orderedEnrollments objectAtIndex: 0]];
     }
     
-    // update
+    _aquirementListViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier: @"AquirementListViewController"];
+    _aquirementListViewController.enrollment = _enrollment;
     
-    [self setupFetchResultsControllers];
+    _teacherAquirementViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier: @"TeacherAquirementViewController"];
+    _teacherAquirementViewController.enrollment = _enrollment;
     
-    [_tableView setDelegate: self];
-    [_tableView setDataSource: self];
+    _notesViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier: @"NotesViewController"];
+    
+//    _aquirementListViewController.view.frame = SubViewControllerFrame;
+//    [self.view addSubview: _aquirementListViewController.view];
+//    [_aquirementListViewController didMoveToParentViewController: self];
 
+    [self setViewControllers: @[_aquirementListViewController, _teacherAquirementViewController, _notesViewController]];
+    [super viewDidLoad];
+
+    
+//    NSLog(@"Aquirements: %d",_enrollment.aquirements.count);
+//    
+//    // update
+//    
+//    [self setupFetchResultsControllers];
+//    
+//    [_tableView setDelegate: self];
+//    [_tableView setDataSource: self];
+}
+
+- (CGRect) subviewControllerFrame
+{
+    return CGRectMake(0, 139, 768, 885);
+}
+
+- (void) willPresentViewControllerWithIndex:(NSInteger)index
+{
+    [[self.viewControllers objectAtIndex: index] setEnrollment: _enrollment];
 }
 
 - (void) setupFetchResultsControllers
@@ -69,9 +108,9 @@ static NSInteger const CourseAquirementsSectionOffset = 1;
 
 #pragma mark - IBAction Methods
 
-- (IBAction) cancel:(id)sender
+- (IBAction) done:(id)sender
 {
-    [self dismissViewControllerAnimated: YES completion: nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName: WillDismissViewControllerNotifification object: self];
 }
 
 
@@ -97,8 +136,8 @@ static NSInteger const CourseAquirementsSectionOffset = 1;
     if (indexPath.section == CourseAquirementHeaderSection)
     {
         ExpandableHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier: ExpandableHeaderCellIdentifier];
-        [cell.textLabel setText: @"Kurskriterier"];
-        [cell.detailTextLabel setText: @"Detailed kurskriterier"];
+        [cell.textLabel setText: @"Kunskapskrav"];
+        [cell.detailTextLabel setText: @""];//[NSString stringWithFormat: @"%@", _course.name]];
         [cell.expandLabel setText: (_courseAquirementsVisable) ? @"Dölj" : @"Visa"];
         return cell;
     }
@@ -116,6 +155,11 @@ static NSInteger const CourseAquirementsSectionOffset = 1;
     return nil;
 }
 
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [RoundCorners tableView: _tableView willDisplayCell: cell forRowAtIndexPath: indexPath];
+}
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == CourseAquirementHeaderSection)
@@ -236,6 +280,18 @@ newIndexPath:(NSIndexPath *)newIndexPath {
     }
 }
 
+- (void) configureCell: (UITableViewCell*) cell atIndexPath: (NSIndexPath*) indexPath
+{
+//    NSIndexPath *indexPathWithOffset = [NSIndexPath indexPathForRow: indexPath.row inSection: indexPath.section - CourseAquirementsSectionOffset];
+    AquirementCell *aquirementCell = (AquirementCell*) cell;
+    [aquirementCell setAquirement: nil];
+    [aquirementCell setAquirement: [_fetchedResultsController objectAtIndexPath: indexPath]];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString: CourseSegueIdentifier])
@@ -249,16 +305,58 @@ newIndexPath:(NSIndexPath *)newIndexPath {
     }
 }
 
-- (void) configureCell: (UITableViewCell*) cell atIndexPath: (NSIndexPath*) indexPath
+#pragma mark - View Display Methods
+
+- (void) viewDidAppear:(BOOL)animated
 {
-//    NSIndexPath *indexPathWithOffset = [NSIndexPath indexPathForRow: indexPath.row inSection: indexPath.section - CourseAquirementsSectionOffset];
-    AquirementCell *aquirementCell = (AquirementCell*) cell;
-    [aquirementCell setAquirement: nil];
-    [aquirementCell setAquirement: [_fetchedResultsController objectAtIndexPath: indexPath]];
+    [super viewDidAppear: animated];
+    [self reloadViews];
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.tableView endUpdates];
+#pragma mark - Helper Methods
+
+- (void) reloadViews
+{
+    [_courseNameLabel setText: _course.name];
+    [_studentNameLabel setText: _enrollment.student.fullName];
+    [_studentSchoolClassLabel setText: _enrollment.student.schoolClass.fullSchoolClassName];
+    
+    NSInteger currentIndex = [_course.orderedEnrollments indexOfObject: _enrollment];
+    if (currentIndex - 1 >= 0)
+    {
+        Student *previousStudent = [[_course.orderedEnrollments objectAtIndex: currentIndex - 1] student];
+        [_previousStudentButton setTitle: previousStudent.fullName forState: UIControlStateNormal];
+        [_previousStudentButton setEnabled: YES];
+    }
+    else
+    {
+        [_previousStudentButton setTitle: @"" forState: UIControlStateNormal];
+        [_previousStudentButton setEnabled: NO];
+    }
+    
+    if (currentIndex + 1 < _course.enrollments.count)
+    {
+        Student *nextStudent = [[_course.orderedEnrollments objectAtIndex: currentIndex + 1] student];
+        [_nextStudentButton setTitle: nextStudent.fullName forState: UIControlStateNormal];
+        [_nextStudentButton setEnabled: YES];
+    }
+    else
+    {
+        [_nextStudentButton setTitle: @"" forState: UIControlStateNormal];
+        [_nextStudentButton setEnabled: NO];
+    }
+}
+
+- (IBAction) nextStudent: (UIButton*) sender
+{
+    NSInteger currentIndex = [_course.orderedEnrollments indexOfObject: _enrollment];
+    [self setEnrollment: [_course.orderedEnrollments objectAtIndex: currentIndex + 1]];
+}
+
+- (IBAction) previousStudent:(UIButton*) sender
+{
+    NSInteger currentIndex = [_course.orderedEnrollments indexOfObject: _enrollment];
+    [self setEnrollment: [_course.orderedEnrollments objectAtIndex: currentIndex - 1]];
 }
 
 #pragma mark - Getters and Setters
@@ -274,22 +372,14 @@ newIndexPath:(NSIndexPath *)newIndexPath {
     [_currentPopoverController dismissPopoverAnimated: YES];
     _currentPopoverController = nil;
     
-    //    if (_enrollment == enrollment) return;
     _enrollment = enrollment;
     [self setupFetchResultsControllers];
     [_tableView reloadData];
-    [self setStudent: _enrollment.student];
+    [self reloadViews];
+    [_aquirementListViewController setEnrollment: _enrollment];
+    [_teacherAquirementViewController setEnrollment: _enrollment];
 }
 
-- (void) setStudent:(Student *)student
-{
-    _student = student;
-    
-    [_studentImageView setImage: _student.studentImage];
-    [_studentNameLabel setText: [NSString stringWithFormat: @"%@ %@", _student.firstName, _student.lastName]];
-    [_studentSchoolClassLabel setText: _student.schoolClass.name];
-    [_studentSchoolLabel setText: _student.schoolClass.school.name];
-}
 
 @end
 

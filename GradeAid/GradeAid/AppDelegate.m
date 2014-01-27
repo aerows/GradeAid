@@ -35,13 +35,44 @@
     _session = [Session currentSession];
     [LoadCourseDescriptions loadCourseDescriptions];
     
+/* Loginview  */
+
     HomeViewController2 *homeViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"loginViewController"];
     
     [self.window setRootViewController: homeViewController];
 
+/* Loginview end */
+
+    
+/* Debugging Courseview */
+    
+//    _session = [Session autoSession];
+//    UITabBarController *tbc = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"TabBarController"];
+//    
+//    [self.window setRootViewController: tbc];
+//    [tbc setSelectedIndex: 2];
+//    
+
+/* Debugging Courseview end */
+ 
+    /* Debugging Courseview */
+    
+//    _session = [Session autoSession];
+//    UIViewController *tbc = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"RootViewController"];
+//
+//    [self.window setRootViewController: tbc];
+
+    
+    /* Debugging Courseview end */
+    
+    
+    
+    
+    
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
     
 //    
 //    LoginViewController *lvc    = [[LoginViewController alloc] initWithNibName: @"LoginViewController" bundle: nil];

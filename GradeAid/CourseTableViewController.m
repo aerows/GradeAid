@@ -49,7 +49,9 @@ static NSString *const CourseTableViewCellIdentifier = @"CourseTableViewCellIden
     Enrollment *enrollment = [_enrollments objectAtIndex: indexPath.row];
     Student *student = enrollment.student;
     [cell.textLabel setText: [NSString stringWithFormat: @"%@, %@", student.lastName, student.firstName]];
-    [cell.detailTextLabel setText: student.schoolClass.name];
+    SchoolClass *class = student.schoolClass;
+    [cell.detailTextLabel setText: [NSString stringWithFormat: @"%@ %@%@",
+                                    class.school, class.year, class.suffix]];
     
     return cell;
 }

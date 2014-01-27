@@ -64,7 +64,9 @@ static NSString *const SchoolClassSegueIdentifier = @"SchoolClassSegueIdentifier
         [schoolFetchRequest setPredicate: predicate];
     }
     
-    schoolFetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"name" ascending: YES]];
+    schoolFetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"school.name" ascending: YES],
+                                           [[NSSortDescriptor alloc] initWithKey: @"year" ascending: YES],
+                                           [[NSSortDescriptor alloc] initWithKey: @"suffix" ascending: YES]];
     
     schoolClassDataFetchController = [[NSFetchedResultsController alloc] initWithFetchRequest: schoolFetchRequest managedObjectContext: moc sectionNameKeyPath: nil cacheName: nil];
     
@@ -75,7 +77,7 @@ static NSString *const SchoolClassSegueIdentifier = @"SchoolClassSegueIdentifier
                          cellBlock: ^UICollectionViewCell *(UICollectionView *collectionView, NSIndexPath *indexPath) {
                              CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: CollectionViewCellIdentifier forIndexPath: indexPath];
                              SchoolClass *schoolClass = (SchoolClass*)[schoolClassDataFetchController objectAtIndexPath: indexPath];
-                             cell.title = schoolClass.name;
+                             cell.title = schoolClass.fullSchoolClassName;
                              cell.image = [schoolClass schoolClassImage];
                              return cell;
                          }];

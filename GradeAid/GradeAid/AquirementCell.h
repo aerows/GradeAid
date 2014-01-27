@@ -19,6 +19,8 @@ static NSString *const AquirementCellCellIdentifier = @"AquirementCellIdentifier
 }
 
 + (CGFloat) heightForCellWithAquirement: (Aquirement*) aquirement;
+- (void) updateLayout;
+
 @property (nonatomic, strong) Aquirement *aquirement;
 @property (nonatomic, strong) NSNumber *grade;
 

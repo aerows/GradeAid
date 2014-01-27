@@ -11,20 +11,27 @@
 #import "Enrollment+Create.h"
 #import "CourseTableViewController.h"
 
+#import "SegmentedNavigationController.h"
+
 static NSString *const EnrollmentStoryboardIdentifier = @"EnrollmentViewController";
 
-@interface EnrollmentViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, CourseTableDelegate>
+@interface EnrollmentViewController : SegmentedNavigationController<UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, CourseTableDelegate>
 {
-    IBOutlet UIImageView *_studentImageView;
+    IBOutlet UILabel     *_courseNameLabel;
     IBOutlet UILabel     *_studentNameLabel;
     IBOutlet UILabel     *_studentSchoolClassLabel;
-    IBOutlet UILabel     *_studentSchoolLabel;
+    
+    IBOutlet UIButton    *_nextStudentButton;
+    IBOutlet UIButton    *_previousStudentButton;
+    
+    IBOutlet UITableView *_tableView;
+    IBOutlet UIBarButtonItem *_doneButton;
 }
 
 @property (nonatomic, strong) Course *course;
 @property (nonatomic, strong) Enrollment *enrollment;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSFetchedResultsController *courseAquirementFetchController;
 
 @end

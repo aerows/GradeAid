@@ -13,8 +13,12 @@ static NSString *const ExpandableHeaderCellIdentifier = @"ExpandableHeaderCellId
 @interface ExpandableHeaderCell : UITableViewCell
 {
     IBOutlet UILabel *_expandLabel;
+    IBOutlet UILabel *_detailTextLabel;
+    IBOutlet UILabel *_textLabel;
 }
 
+@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UILabel *detailTextLabel;
 @property (nonatomic, strong) UILabel *expandLabel;
 
 @end

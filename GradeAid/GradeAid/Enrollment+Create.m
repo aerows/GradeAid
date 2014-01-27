@@ -7,6 +7,7 @@
 //
 
 #import "Enrollment+Create.h"
+#import "TeacherAquirement+Create.h"
 
 @implementation Enrollment (Create)
 
@@ -31,10 +32,10 @@
     }
     else
     {
-        enrollment = [NSEntityDescription insertNewObjectForEntityForName: @"Enrollment" inManagedObjectContext:moc];
+        enrollment = [Enrollment enrollmentForStudent: student courseDescription: course.courseEdition.courseDescription managedObjectContext: moc];
         
-        enrollment.student = student;
         enrollment.course = course;
+        [enrollment addCourseEditionsObject: course.courseEdition];
     }
     
     [enrollment updateEnrollmentInManagedObjectContext: moc];
@@ -42,18 +43,52 @@
     return enrollment;
 }
 
++ (Enrollment*) enrollmentForStudent: (Student*) student courseDescription: (CourseDescription*) courseDescription managedObjectContext: (NSManagedObjectContext*) moc
+{
+    Enrollment *enrollment = nil;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Enrollment"];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(courseDescription = %@ AND student = %@)", courseDescription, student];
+    request.predicate = predicate;
+    
+    NSError *error;
+    NSArray *response = [moc executeFetchRequest:request error: &error];
+    
+    if (!response || response.count > 1)
+    {
+        NSLog(@"%@", error.description);
+    }
+    else if (response.count == 1)
+    {
+        enrollment = [response lastObject];
+    }
+    else
+    {
+        enrollment = [NSEntityDescription insertNewObjectForEntityForName: @"Enrollment" inManagedObjectContext:moc];
+        
+        enrollment.student = student;
+        enrollment.courseDescription = courseDescription;
+    }
+    
+    [enrollment updateEnrollmentInManagedObjectContext: moc];
+    
+    return  enrollment;
+}
+
+
 - (void) updateEnrollmentInManagedObjectContext:(NSManagedObjectContext *)moc
 {
-    for (AquirementDescription *ad in self.course.courseEdition.courseDescription.aquirementDescriptions)
+    for (AquirementDescription *ad in self.courseDescription.aquirementDescriptions)
     {
         Aquirement *aquirement = [Aquirement aquirementWithDescription: ad enrollment: self managedObjectContext: moc];
         [self addAquirementsObject: aquirement];
     }
     
-    for (AquirementDescription *ad in self.course.courseEdition.aquirementDescriptions)
+    for (TeacherAquirementDescription *tad in self.course.courseEdition.teacherAquirementDescriptions)
     {
-        Aquirement *aquirement = [Aquirement aquirementWithDescription: ad enrollment: self managedObjectContext: moc];
-        [self addAquirementsObject: aquirement];
+        TeacherAquirement *teacherAquirement = [TeacherAquirement teacherAquirementWithDescription:tad enrollment:self managedObjectContext:moc];
+        [self addTeacherAquirementsObject: teacherAquirement];
     }
 }
 
@@ -108,5 +143,36 @@
 //
 //    return enrollment;
 //}
+
++ (NSArray*) studentLastNameSortDescriptors
+{
+    return @[[NSSortDescriptor sortDescriptorWithKey: @"student.lastName" ascending: YES],
+             [NSSortDescriptor sortDescriptorWithKey: @"student.firstName" ascending: YES]];
+}
+
++ (NSArray*) enrollmentsForStudents: (NSArray*) students withCourseDescription: (CourseDescription*) courseDescription managedObjectContext: (NSManagedObjectContext*) moc
+{
+    NSMutableArray *enrollments = [[NSMutableArray alloc] initWithCapacity: students.count];
+    for (Student *s in students)
+    {
+        [enrollments addObject: [Enrollment enrollmentForStudent: s courseDescription: courseDescription managedObjectContext: moc]];
+    }
+    return enrollments;
+}
+
+- (void) enrollInCourse: (Course*) course managedObjectContext: (NSManagedObjectContext*) moc
+{
+    self.course = course;
+    [course addEnrollmentsObject: self];
+    [self addCourseEditionsObject: course.courseEdition];
+    [self updateEnrollmentInManagedObjectContext: moc];
+}
+
+- (void) unEnrollCourseInManagedObjectContext:(NSManagedObjectContext *)moc
+{
+    Course *course = self.course;
+    [course removeEnrollmentsObject: self];
+    self.course = nil;
+}
 
 @end

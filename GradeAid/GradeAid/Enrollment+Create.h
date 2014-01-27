@@ -23,6 +23,15 @@ static NSString *const KeyForCourse  = @"course";
 //
 //+ (Enrollment*) enrollmentWithAttributes: (NSDictionary*) attributes inManagedObjectContext: (NSManagedObjectContext*) moc;
 
++ (NSArray*) students: (NSArray*) students enrolledInOtherCourseThan: (Course*) course;
+
++ (NSArray*) enrollmentsForStudents: (NSArray*) students withCourseDescription: (CourseDescription*) courseDescription managedObjectContext: (NSManagedObjectContext*) moc;
+
++ (NSArray*) studentLastNameSortDescriptors;
+
 - (void) updateEnrollmentInManagedObjectContext: (NSManagedObjectContext*) moc;
+
+- (void) enrollInCourse: (Course*) course managedObjectContext: (NSManagedObjectContext*) moc;
+- (void) unEnrollCourseInManagedObjectContext: (NSManagedObjectContext*) moc;
 
 @end

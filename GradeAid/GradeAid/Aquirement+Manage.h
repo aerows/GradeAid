@@ -20,6 +20,6 @@ static NSString *const KeyForEnrollment            = @"enrollment";
 + (Aquirement*) aquirementWithDescription: (AquirementDescription*) aquirementDescription enrollment: (Enrollment*) enrollment managedObjectContext: (NSManagedObjectContext*) moc;
 
 - (NSAttributedString*) attributedStringForCurrentGrade: (int) grade;
-
+- (void) setGrade:(NSNumber *)grade managedObjectContext: (NSManagedObjectContext*) moc;
 
 @end

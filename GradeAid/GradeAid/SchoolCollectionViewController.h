@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CoreDataCollectionViewController.h"
 #import "CollectionViewDataFetcher.h"
 #import "School+Create.h"
 

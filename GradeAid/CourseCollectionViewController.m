@@ -11,6 +11,7 @@
 
 #import "CourseEditionViewController.h"
 #import "CourseViewController.h"
+#import "CourseEnrollmentSuiteViewController.h"
 
 #import "AppDelegate.h"
 #import "CollectionViewCell.h"
@@ -23,13 +24,14 @@
 
 #import "SettingsCell.h"
 
-
-
 #import "CourseTableViewController.h"
 #import "EnrollmentViewController.h"
 
 static NSString *const CoursePopupSegueIdentifier   = @"CoursePopupSegueIdentifier";
 static NSString *const CourseEditionSegueIdentifier = @"CourseEditionSegueIdentifier";
+
+static NSString *const CourseDescriptionSegueIdentifier = @"CourseDescriptionSegueIdentifier";
+
 static NSString *const CourseSegueIdentifier        = @"CourseSegueIdentifier";
 
 @interface CourseCollectionViewController ()
@@ -41,6 +43,8 @@ static NSString *const CourseSegueIdentifier        = @"CourseSegueIdentifier";
     CollectionViewDataFetcher *courseDataFetcher;
     NSFetchedResultsController *courseDataFetchController;
     
+    // State
+    bool popOverIsShowing;
     UIPopoverController *currentPopoverController;
     
     /* Temporary Pointers */
@@ -65,12 +69,7 @@ static NSString *const CourseSegueIdentifier        = @"CourseSegueIdentifier";
     NSManagedObjectContext *moc = [AppDelegate sharedDelegate].managedObjectContext;
     NSFetchRequest *schoolFetchRequest = [[NSFetchRequest alloc] init];
     [schoolFetchRequest setEntity: [NSEntityDescription entityForName: @"Course" inManagedObjectContext:moc]];
-//    if (_selectedSchool)
-//    {
-//        NSPredicate *predicate = [NSPredicate predicateWithFormat: @"%@ = %@", KeyForSchool, _selectedSchool];
-//        [schoolFetchRequest setPredicate: predicate];
-//    }
-    
+
     schoolFetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey: @"name" ascending: YES]];
     
     courseDataFetchController = [[NSFetchedResultsController alloc] initWithFetchRequest: schoolFetchRequest managedObjectContext: moc sectionNameKeyPath: nil cacheName: nil];
@@ -94,7 +93,27 @@ static NSString *const CourseSegueIdentifier        = @"CourseSegueIdentifier";
 {
     _selectedCourse = (Course*)[courseDataFetchController objectAtIndexPath: indexPath];
 
-    [self performSegueWithIdentifier:CourseSegueIdentifier sender:self];
+    CourseEnrollmentSuiteViewController *cesvc = [[CourseEnrollmentSuiteViewController alloc] initWithCourse: _selectedCourse];
+    cesvc.modalPresentationStyle = UIModalPresentationPageSheet;
+    cesvc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    [self presentViewController: cesvc animated: YES completion: nil];
+}
+
+#pragma mark - IBAction Methods
+
+- (IBAction) addCourseButtonPressed:(id) sender
+{
+    if (!popOverIsShowing)
+    {
+        [self performSegueWithIdentifier:CoursePopupSegueIdentifier sender: self];
+        popOverIsShowing = YES;
+    }
+    else
+    {
+        [currentPopoverController dismissPopoverAnimated: YES];
+        popOverIsShowing = NO;
+    }
 }
 
 #pragma mark - Segue Methods
@@ -116,27 +135,50 @@ static NSString *const CourseSegueIdentifier        = @"CourseSegueIdentifier";
             [cell.detailTextLabel setText: @""];
         }];
         [ptvc setOnSelectObject:^(NSManagedObject *object) {
-            CourseDescription *desc = (CourseDescription*) object;
-            _selectedCourseDescription = desc;
-            [self performSegueWithIdentifier: CourseEditionSegueIdentifier sender: self];
+            [currentPopoverController dismissPopoverAnimated: YES];
+            popOverIsShowing = NO;
+            
+            CourseEnrollmentSuiteViewController *cesvc = [[CourseEnrollmentSuiteViewController alloc] initWithCourseDescription: (CourseDescription*) object];
+            cesvc.modalPresentationStyle = UIModalPresentationPageSheet;
+            cesvc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            
+            [self presentViewController: cesvc animated: YES completion: nil];
+
         }];
     }
     else if ([segue.identifier isEqualToString: CourseEditionSegueIdentifier])
     {
         [currentPopoverController dismissPopoverAnimated: YES];
+        popOverIsShowing = NO;
         
         CourseEditionViewController *cevc = (CourseEditionViewController*) segue.destinationViewController;
-        [cevc setTitle: @"Lägg till ny kurs"];
         [cevc setCourseDescription: _selectedCourseDescription];
         _selectedCourseDescription = nil;
     }
     else if ([segue.identifier isEqualToString: CourseSegueIdentifier])
     {
-        CourseViewController *cvc = (CourseViewController*) segue.destinationViewController;
+        UINavigationController *nav = (UINavigationController*) segue.destinationViewController;
+        CourseViewController *cvc = (CourseViewController*) [nav.viewControllers objectAtIndex: 0];
         [cvc setCourse: _selectedCourse];
         _selectedCourse = nil;
     }
+    else if ([segue.identifier isEqualToString: CourseDescriptionSegueIdentifier])
+    {
+        CourseEnrollmentSuiteViewController *cesvc = [[CourseEnrollmentSuiteViewController alloc] initWithCourseDescription: _selectedCourseDescription];
+        cesvc.modalPresentationStyle = UIModalPresentationPageSheet;
+        cesvc.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        
+        [currentPopoverController dismissPopoverAnimated: YES];
+        popOverIsShowing = NO;
+        
+        CourseViewController *cvc = (CourseViewController*) segue.destinationViewController;
+        
+        [cvc setCourseDescription: _selectedCourseDescription];
+        [cvc setCourse: _selectedCourse];
+        
+        _selectedCourse = nil;
+        _selectedCourseDescription = nil;
+    }
 }
-
 
 @end

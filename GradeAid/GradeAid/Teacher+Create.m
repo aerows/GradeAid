@@ -40,6 +40,15 @@
     
     if (!response || response.count > 1)
     {
+        for (Teacher *t in response)
+        {
+            if (!t.schools.count)
+            {
+                [moc deleteObject: t];
+                [moc save: nil];
+            }
+        }
+        
         NSLog(@"%@", error.description);
     }
     else if (response.count == 1)
