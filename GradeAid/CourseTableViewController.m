@@ -10,6 +10,7 @@
 
 #import "Enrollment+Create.h"
 #import "Student+Create.h"
+#import "School+Create.h"
 
 static NSString *const CourseTableViewCellIdentifier = @"CourseTableViewCellIdentifier";
 
@@ -50,8 +51,7 @@ static NSString *const CourseTableViewCellIdentifier = @"CourseTableViewCellIden
     Student *student = enrollment.student;
     [cell.textLabel setText: [NSString stringWithFormat: @"%@, %@", student.lastName, student.firstName]];
     SchoolClass *class = student.schoolClass;
-    [cell.detailTextLabel setText: [NSString stringWithFormat: @"%@ %@%@",
-                                    class.school, class.year, class.suffix]];
+    [cell.detailTextLabel setText: class.fullSchoolClassName];
     
     return cell;
 }

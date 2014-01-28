@@ -28,8 +28,6 @@ static NSString *const CourseSegueIdentifier = @"CourseSegueIdentifier";
 static NSInteger const CourseAquirementHeaderSection = 0;
 static NSInteger const CourseAquirementsSectionOffset = 1;
 
-static CGRect SubViewControllerFrame = {0, 91, 768, 933};
-
 @interface EnrollmentViewController ()
 
 @property (nonatomic, strong) Student *student;

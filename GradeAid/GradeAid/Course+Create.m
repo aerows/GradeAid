@@ -77,10 +77,8 @@
 
 - (NSArray*) orderedEnrollments
 {
-#warning - sort this after student surname
-    
-  //  NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey: @"SELF.student" ascending:<#(BOOL)#>
-    return [self.enrollments allObjects];
+    return [[self.enrollments allObjects] sortedArrayUsingDescriptors: [Enrollment studentLastNameSortDescriptors]];
+    //return [self.enrollments allObjects];
 }
 
 #pragma mark - Image Methods
