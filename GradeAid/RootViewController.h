@@ -17,6 +17,8 @@ static NSString *const PlusButtonPressed = @"PlusButtonPressed";
 {
     IBOutlet UICollectionView *_filterItemCollectionView;
     IBOutlet UIView *_mainView;
+    
+    IBOutlet UIView *_filterItemPresentationView;
 }
 
 @property (nonatomic, strong) UICollectionView *filterItemCollectionView;

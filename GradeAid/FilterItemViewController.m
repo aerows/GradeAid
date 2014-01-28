@@ -243,14 +243,13 @@ didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void) updateFlowLayoutAnimated: (bool) animated
 {
+    return;
     NSInteger cellCount = (_inEditMode) ? _filterItem.selectableItems.count + 1 : _filterItem.selectableItems.count;
     CGFloat cellWidthSum = cellCount * cellWidth;
     
-    if (cellWidthSum < self.filterItemCollectionView.frame.size.width)
-    {
-        
+    
         CGFloat collectionViewWidth = self.filterItemCollectionView.frame.size.width;
-        CGFloat leftInset = (collectionViewWidth - cellWidthSum) / 2;
+    CGFloat leftInset = (cellWidthSum < self.filterItemCollectionView.frame.size.width) ?(collectionViewWidth - cellWidthSum) / 2 : 0;
         UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)_filterItemCollectionView.collectionViewLayout;
         CGFloat previousInset = flowLayout.sectionInset.left;
 
@@ -266,7 +265,8 @@ didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
             [_filterItemCollectionView setContentOffset: offset animated: YES];
             
         }
-    }
+
+    
 }
 
 #pragma mark - Setters and Getters

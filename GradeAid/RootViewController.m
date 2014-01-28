@@ -30,7 +30,7 @@
 #import "LoginViewController.h"
 // Global
 #import "UIStoryboard+mainStoryboard.h"
-
+static CGFloat topMargin = 80.f;
 static CGFloat cellWidth = 150.f;
 
 @interface RootViewController ()
@@ -188,7 +188,9 @@ static CGFloat cellWidth = 150.f;
 
 - (CGRect) subviewControllerFrame
 {
-    return CGRectMake(0, 69, 768, 944-69);
+    CGRect frame = UIEdgeInsetsInsetRect(_mainView.frame, UIEdgeInsetsMake(topMargin, 0, 0, 0));
+    
+    return frame;
 }
 
 #pragma mark - CollectionView DataSource Methods
@@ -237,32 +239,57 @@ static CGFloat cellWidth = 150.f;
 
 - (void) presentFilterItemViewController: (FilterItemViewController*) filterItemViewController
 {
+    [self.view bringSubviewToFront: _filterItemPresentationView];
+    
     FilterItemViewController *previousFilterItemViewController = _currentFilterViewController;
     _currentFilterViewController = filterItemViewController;
     [_currentFilterViewController.view setClipsToBounds: YES];
-    
-    CGRect currentViewStartFrame = _currentFilterViewController.view.frame;
+
+    CGRect currentViewStartFrame = _filterItemPresentationView.bounds;
     currentViewStartFrame.size.height = 0;
-    currentViewStartFrame.origin.y = _mainView.frame.size.height;
-    
-    CGRect currentViewEndFrame = _currentFilterViewController.view.frame;
-    currentViewEndFrame.size.height = _currentFilterViewController.neededHeight;
-    currentViewEndFrame.origin.y = _mainView.frame.size.height - _currentFilterViewController.neededHeight;
-    
-    CGRect previousViewEndFrame = previousFilterItemViewController.view.frame;
+    currentViewStartFrame.origin.y = _filterItemPresentationView.frame.size.height;
+
+    CGRect currentViewEndFrame = _filterItemPresentationView.bounds;
+
+    CGRect previousViewEndFrame = _filterItemPresentationView.bounds;
     previousViewEndFrame.size.height = 0;
-    previousViewEndFrame.origin.y = _mainView.frame.size.height;
-    
+    previousViewEndFrame.origin.y = _filterItemPresentationView.frame.size.height;
+
     _currentFilterViewController.view.frame = currentViewStartFrame;
-    [self.view addSubview: _currentFilterViewController.view];
-    [_currentFilterViewController didMoveToParentViewController: self];
     
+    _currentFilterViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [_filterItemPresentationView addSubview: _currentFilterViewController.view];
+    [_currentFilterViewController didMoveToParentViewController: self];
+
+    if (_currentFilterViewController)
+    {
+        UIView *subview = _currentFilterViewController.view;
+        NSDictionary *views = NSDictionaryOfVariableBindings(subview);
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subview]|"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subview]|"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:views]];
+    }
+
     [UIView animateWithDuration: 0.3 animations:^{
         _currentFilterViewController.view.frame = currentViewEndFrame;
-        previousFilterItemViewController.view.frame = previousViewEndFrame;
+        if (_currentFilterViewController && previousFilterItemViewController)
+        {
+            previousFilterItemViewController.view.alpha = 0.1;
+        } else {
+            previousFilterItemViewController.view.frame = previousViewEndFrame;
+        }
+        
+        
     } completion:^(BOOL finished) {
         [previousFilterItemViewController.view removeFromSuperview];
         [previousFilterItemViewController removeFromParentViewController];
+        [self updateViewConstraints];
     }];
 }
 
