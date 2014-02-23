@@ -34,4 +34,5 @@ static NSString *const KeyForCourse  = @"course";
 - (void) enrollInCourse: (Course*) course managedObjectContext: (NSManagedObjectContext*) moc;
 - (void) unEnrollCourseInManagedObjectContext: (NSManagedObjectContext*) moc;
 
+
 @end

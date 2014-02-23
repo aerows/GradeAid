@@ -120,6 +120,12 @@
     return [[self.enrollments valueForKeyPath: @"@distinctUnionOfObjects.student"] sortedArrayUsingDescriptors: @[lastNameSortDesc, firstNameSortDesc]];
 }
 
+- (NSString*) fullNameDescription
+{
+    return [NSString stringWithFormat: @"%@, %@ - %@", self.courseEdition.courseDescription.name,
+            self.courseEdition.courseDescription.level, self.name];
+}
+
 @end
 
 

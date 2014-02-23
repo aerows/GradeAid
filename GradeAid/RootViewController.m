@@ -99,6 +99,11 @@ static CGFloat cellWidth = 150.f;
      }];
 }
 
+- (IBAction) editButtonPressed: (id)sender
+{
+    [self setEditMode: !_editMode];
+}
+
 #pragma mark - PlusButton Delegate Methods
 
 - (void) plusTableViewController:(id)plusTableViewController plusButtonSelectedIndex:(NSInteger)index
@@ -146,10 +151,12 @@ static CGFloat cellWidth = 150.f;
             [pcvc setDoneCreatingBlock:^(PromptViewController *pcvc, id object)
              {
                  [_filter filterItemDidUpdate: _filter.schoolFilterItem];
+                 [[NSNotificationCenter defaultCenter] postNotificationName: FilterItemWasCreatedNotification object: nil];
                  [pcvc dismiss];
              }];
             [pnc pushPromptViewController: pcvc animated: YES];
             [self presentViewController: pnc animated: YES completion: nil];
+            
             break;
         }
         case createSchoolClassIndex:
@@ -158,6 +165,7 @@ static CGFloat cellWidth = 150.f;
             [pcvc setDoneCreatingBlock:^(PromptViewController *pcvc, id object)
              {
                  [_filter filterItemDidUpdate: _filter.schoolClassFilterItem];
+                 [[NSNotificationCenter defaultCenter] postNotificationName: FilterItemWasCreatedNotification object: nil];
                  [pcvc dismiss];
              }];
             [pnc pushPromptViewController: pcvc animated: YES];
@@ -211,6 +219,7 @@ static CGFloat cellWidth = 150.f;
 }
 
 #pragma mark - CollectionView Delegate Methods
+
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView deselectItemAtIndexPath: indexPath animated: NO];
@@ -293,6 +302,23 @@ static CGFloat cellWidth = 150.f;
     }];
 }
 
+- (void) updateViewOnEditModeChange
+{
+    if (_editMode)
+    {
+        [_editButton setImage: [UIImage imageNamed: @"pen-active"] forState: UIControlStateNormal];
+    }
+    else
+    {
+        [_editButton setImage: [UIImage imageNamed: @"pen"] forState: UIControlStateNormal];
+    }
+    
+    [_plusButton setEnabled: !_editMode];
+    [_logoutButton setEnabled: !_editMode];
+    [_segmentedControl setEnabled: !_editMode];
+    [_filteredStudentCollectionViewController setEditMode: _editMode];
+}
+
 #pragma mark - Segmented NavigationController Methods
 
 - (void) willPresentViewControllerWithIndex:(NSInteger)index
@@ -324,6 +350,7 @@ static CGFloat cellWidth = 150.f;
 {
     [super viewDidAppear: animated];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(filterDidUpdate:) name: FilterDidUpdateNotification object: _filter];
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(filteredStudentCollectionViewControllerDidEnterEditMode:) name: FilteredStudentCollectionViewControllerDidEnterEditModeNotification object:nil];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -332,11 +359,16 @@ static CGFloat cellWidth = 150.f;
     [[NSNotificationCenter defaultCenter] removeObserver: self];
 }
 
-#pragma mark - FilterDelegateUpdate
+#pragma mark - Notification Methods
 
 - (void) filterDidUpdate:(NSNotification*) notification
 {
     [_filterItemCollectionView reloadData];
+}
+
+- (void) filteredStudentCollectionViewControllerDidEnterEditMode: (NSNotification*) notifcation
+{
+    [self setEditMode: YES];
 }
 
 #pragma mark - Getters and Setters
@@ -347,5 +379,17 @@ static CGFloat cellWidth = 150.f;
 
 // Model
 @synthesize filter = _filter;
+
+// Controller
+@synthesize editMode = _editMode;
+
+- (void) setEditMode:(BOOL)editMode
+{
+    if (editMode == _editMode) return;
+    _editMode = editMode;
+    [self updateViewOnEditModeChange];
+
+    
+}
 
 @end

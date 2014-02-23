@@ -19,10 +19,16 @@ static NSString *const PlusButtonPressed = @"PlusButtonPressed";
     IBOutlet UIView *_mainView;
     
     IBOutlet UIView *_filterItemPresentationView;
+
+    IBOutlet UIButton *_editButton;
+    IBOutlet UIButton *_plusButton;
+    IBOutlet UIButton *_logoutButton;
 }
 
 @property (nonatomic, strong) UICollectionView *filterItemCollectionView;
 @property (nonatomic, strong) UIView *mainView;
+
+@property (nonatomic, getter = isInEditMode) BOOL editMode;
 
 
 @end

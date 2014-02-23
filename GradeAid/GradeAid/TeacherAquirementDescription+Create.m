@@ -10,6 +10,8 @@
 #import "CourseEdition+Create.h"
 #import "Enrollment+Create.h"
 
+#import "AppDelegate.h"
+
 @implementation TeacherAquirementDescription (Create)
 
 + (TeacherAquirementDescription*) teacherAquirementDescriptionWithCourseDescription: (CourseEdition*) courseEdition teacher: (Teacher*) teacher caption: (NSString*) caption managedObjectContext: (NSManagedObjectContext*) moc
@@ -40,5 +42,13 @@
     
     return teacherAquirementDescription;
 }
+
++ (BOOL) deleteTeacherAquirement:(TeacherAquirementDescription *) teacherAquirementDescription
+{
+    NSManagedObjectContext *moc = [AppDelegate sharedDelegate].managedObjectContext;
+    [moc deleteObject: teacherAquirementDescription];
+    return [moc save: nil];
+}
+
 
 @end

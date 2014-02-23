@@ -41,6 +41,28 @@ static CGFloat cellWidth = 150.f;
     [self.view addGestureRecognizer: _panGestureRecognizer];
 }
 
+#pragma mark - Appearing Methods
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear: animated];
+    [[NSNotificationCenter defaultCenter] addObserver: self selector:@selector(filterItemCreated:) name:FilterItemWasCreatedNotification object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear: animated];
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+}
+
+#pragma mark - Notification Methods
+
+- (void) filterItemCreated: (NSNotification*) notification
+{
+    [_filterItem reloadItems];
+    [_filterItemCollectionView reloadData];
+}
+
 #pragma mark - GestureRecognizer Methods
 
 -(void) panning: (UIPanGestureRecognizer*) panGestureRecognizer

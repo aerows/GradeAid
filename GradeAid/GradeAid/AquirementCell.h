@@ -11,11 +11,16 @@
 #import "AquirementButton.h"
 #import "Aquirement+Manage.h"
 
+static NSString *const AquirementCellDidEnableEditNotification = @"AquirementCellDidEnableEditNotification";
+
+typedef void(^EnableEdit)();
+
 static NSString *const AquirementCellCellIdentifier = @"AquirementCellIdentifier";
 
 @interface AquirementCell : UITableViewCell
 {
-    UITapGestureRecognizer *_tapper;
+    UITapGestureRecognizer       *_tapper;
+    UILongPressGestureRecognizer *_presser;
 }
 
 + (CGFloat) heightForCellWithAquirement: (Aquirement*) aquirement;
@@ -23,5 +28,7 @@ static NSString *const AquirementCellCellIdentifier = @"AquirementCellIdentifier
 
 @property (nonatomic, strong) Aquirement *aquirement;
 @property (nonatomic, strong) NSNumber *grade;
+@property (nonatomic) bool editmode;
+@property (nonatomic, copy) EnableEdit enableEdit;
 
 @end

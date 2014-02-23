@@ -109,12 +109,6 @@ static NSString *const DoneTitle    = @"Klar";
     _customAquirementListViewController  = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"CustomAquirementListViewController"];
     
     _subjectViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"SubjectViewController"];
-    
-//    _customAquirementListViewController  = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier:@"CustomAquirementListViewController"];
-//    _aquirementViewController = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier: @"MultiSegmentedNavigationController"];
-//    [_aquirementViewController setViewControllers: @[_customAquirementListViewController, _subjectViewController]];
-//    [_aquirementViewController setViewControllerTitles: @[@"Egna kunskapskrav", @"Kurs kunskapskrav"]];
-//    
 }
 
 - (void)viewDidLoad
@@ -352,11 +346,11 @@ static int const transitionDirectionRight = 2;
     else if (_inEditMode)
     {
         _saveButton.title = @"Klar";
-        items = @[_saveButton, flexibleItem, _titleItem, flexibleItem, _deleteButton];
+        items = @[_deleteButton, flexibleItem, _titleItem, flexibleItem, _saveButton];
     }
     else
     {
-        items = @[_editButton, flexibleItem, _titleItem, flexibleItem, _doneButton];
+        items = @[_doneButton, flexibleItem, _titleItem, flexibleItem, _editButton];
     }
     [_toolbar setItems: items animated: YES];
     

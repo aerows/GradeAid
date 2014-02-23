@@ -32,4 +32,6 @@
 - (NSArray*) schoolClasses;
 - (NSArray*) students;
 
+- (NSString*) fullNameDescription;
+
 @end

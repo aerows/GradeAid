@@ -29,4 +29,8 @@ static NSString *const StudentKeyForPicture        = @"picture";
 
 - (NSString*) fullName;
 
+- (NSArray*) sortedEnrollments;
+
++ (BOOL) deleteStudent: (Student*) student;
+
 @end

@@ -104,6 +104,11 @@
     
     AquirementCell *cell = [tableView dequeueReusableCellWithIdentifier: AquirementCellCellIdentifier forIndexPath:indexPath];
     [cell setAquirement: aquirement];
+    [cell setEditmode: _inEditMode];
+    [cell setEnableEdit: ^()
+     {
+         
+     }];
     return cell;
 }
 
@@ -203,6 +208,18 @@
     [_aquirementTableView endUpdates];
 }
 
+#pragma mark - Helper methods
+
+- (void) updateEditModeForCells
+{
+    NSArray *indexPaths = [_aquirementTableView indexPathsForVisibleRows];
+    for (NSIndexPath *indexPath in indexPaths)
+    {
+        AquirementCell *cell = (AquirementCell*)[_aquirementTableView cellForRowAtIndexPath: indexPath];
+        [cell setEditmode: _inEditMode];
+    }
+}
+
 #pragma mark - Setters and Getters
 
 - (void) setEnrollment:(Enrollment *)enrollment
@@ -212,6 +229,13 @@
 }
 
 @synthesize inEditMode = _inEditMode;
+
+- (void) setInEditMode:(bool)inEditMode
+{
+    _inEditMode = inEditMode;
+    [self updateEditModeForCells];
+}
+
 @synthesize enrollment = _enrollment;
 @synthesize aquirementTableView = _aquirementTableView;
 @synthesize noAquirementDescriptionsLabel = _noAquirementDescriptionsLabel;

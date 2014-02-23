@@ -21,8 +21,9 @@ CGFloat const gradeLabelHeight = 30.f;
 
 NSInteger const textSize = 14;
 
-#define SelectedColor       ([UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0])
-#define NonselectedColor    ([UIColor grayColor])
+#define SelectedEditColor    ([UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0])
+#define SelectedNonEditColor ([UIColor grayColor])
+#define NonselectedColor     ([UIColor grayColor])
 
 @implementation AquirementCell
 {
@@ -30,8 +31,6 @@ NSInteger const textSize = 14;
     IBOutlet UITextView *captionTextView;
     IBOutlet UIView *labelContainer;
     IBOutletCollection(UILabel) NSArray *gradeLabels;
-    
-//    IBOutletCollection(AquirementButton) NSArray* buttons;
 }
 
 #pragma mark - Constructor Methods
@@ -45,6 +44,12 @@ NSInteger const textSize = 14;
         [_tapper setNumberOfTouchesRequired: 1];
         [self.contentView addGestureRecognizer: _tapper];
         [self.contentView setUserInteractionEnabled: YES];
+        
+        _presser = [[UILongPressGestureRecognizer alloc] initWithTarget: self action: @selector(pressGesture:)];
+        [_presser setMinimumPressDuration: 0.8];
+        [self.contentView addGestureRecognizer: _presser];
+        
+        [_tapper requireGestureRecognizerToFail: _presser];
     }
     return self;
 }
@@ -53,11 +58,27 @@ NSInteger const textSize = 14;
 
 - (void) tapGesture: (UIGestureRecognizer*) tapper
 {
-    CGPoint tapPoint = [tapper locationInView: self.contentView];
+    if (_editmode)
+    {
+        [self gesture: tapper];
+    }
+}
+
+- (void) pressGesture: (UIGestureRecognizer*) presser
+{
+    if (presser.state == UIGestureRecognizerStateBegan)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName: AquirementCellDidEnableEditNotification object: nil];
+        [self gesture: presser];
+    }
+}
+
+- (void) gesture: (UIGestureRecognizer*) gesture
+{
+    CGPoint tapPoint = [gesture locationInView: self.contentView];
     CGFloat interval = self.contentView.frame.size.width / numberOfGradations;
     int tappedGrade = ceilf((tapPoint.x / interval));
     [self selectGrade: @(tappedGrade)];
-
 }
 
 - (void) selectGrade: (NSNumber*) grade
@@ -95,7 +116,7 @@ NSInteger const textSize = 14;
             [label setFont: [UIFont boldSystemFontOfSize: [UIFont systemFontSize]]];
             
             [label setTextColor: [UIColor whiteColor]];
-            [label setBackgroundColor: SelectedColor];
+            [label setBackgroundColor: (_editmode) ? SelectedEditColor : SelectedNonEditColor];
             label.layer.cornerRadius = 13;
             label.layer.masksToBounds = YES;
         }
@@ -103,7 +124,7 @@ NSInteger const textSize = 14;
         {
             [label setFont: [UIFont systemFontOfSize: [UIFont systemFontSize]]];
             [label setTextColor: NonselectedColor];
-            [label setBackgroundColor: [UIColor whiteColor]];
+            [label setBackgroundColor: [UIColor clearColor]];
         }
     }
 }
@@ -122,6 +143,22 @@ NSInteger const textSize = 14;
     CGRect labelFrame = labelContainer.frame;
     labelFrame.origin.y = CGRectGetMaxY(frame);
     [labelContainer setFrame: labelFrame];
+    
+    [self updateBackground];
+}
+
+- (void) updateBackground
+{
+    if ([_grade isEqualToNumber: @0])
+    {
+        [self.contentView setBackgroundColor: [UIColor colorWithWhite:235.f/255.f alpha:1.0]];
+        [captionTextView setAlpha: 0.8];
+    }
+    else
+    {
+        [self.contentView setBackgroundColor: [UIColor whiteColor]];
+        [captionTextView setAlpha: 1.0];
+    }
 }
 
 #pragma mark - Getters and Setters
@@ -139,9 +176,18 @@ NSInteger const textSize = 14;
     _grade = grade;
     [captionTextView setAttributedText: [_aquirement attributedStringForCurrentGrade: _grade.intValue]];
     [self updateLabels];
+    [self updateBackground];
+}
+
+- (void) setEditmode:(bool)editmode
+{
+    _editmode = editmode;
+    if (!_editmode) [self updateLabels];
 }
 
 @synthesize aquirement = _aquirement;
 @synthesize grade = _grade;
+@synthesize editmode = _editmode;
+@synthesize enableEdit = _enableEdit;
 
 @end

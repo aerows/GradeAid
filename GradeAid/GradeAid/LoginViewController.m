@@ -47,7 +47,7 @@ static NSString *const SegueIdentifierLogin = @"SegueIdentifierLogin";
     [passwordField setSecureTextEntry: YES];
     
     [loginField setPlaceholder: @"Lärare epost"];
-    [passwordField setPlaceholder: @"Password"];
+    [passwordField setPlaceholder: @"Lösenord"];
 //    [loginField setText: @"hallin.daniel@gmail.com"];
 //    [passwordField setText: @"password"];
 }
@@ -61,9 +61,13 @@ static NSString *const SegueIdentifierLogin = @"SegueIdentifierLogin";
         [loginField setText: teacher.email];
         [passwordField setText: teacher.password];
     }
+    else
+    {
+        [loginField setText: [self getLastEmail]];
+    }
     
-    [loginField setText: @"hallin.daniel@gmail.com"];
-    [passwordField setText: @"password"];
+//    [loginField setText: @"hallin.daniel@gmail.com"];
+//    [passwordField setText: @"password"];
 }
 
 
@@ -77,8 +81,8 @@ static NSString *const SegueIdentifierLogin = @"SegueIdentifierLogin";
         [self presentViewController: tbc animated: YES completion: nil];
         
         [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(logout:) name: TeacherWillLogOutNotification object: [Session currentSession].teacher];
-        
-        //[self performSegueWithIdentifier: SegueIdentifierLogin sender: self];
+        [self setLastEmail: loginField.text];
+        passwordField.text = @"";
     }
 }
 
@@ -99,6 +103,22 @@ static NSString *const SegueIdentifierLogin = @"SegueIdentifierLogin";
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Save last email methods
+
+static NSString *const KeyForLastEmail = @"KeyForLastEmail";
+
+- (void) setLastEmail: (NSString*) lastEmail
+{
+    [[NSUserDefaults standardUserDefaults] setObject: lastEmail forKey:KeyForLastEmail];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString*) getLastEmail
+{
+    NSString *lastEmail = [[NSUserDefaults standardUserDefaults] objectForKey: KeyForLastEmail];
+    return (lastEmail) ? lastEmail : @"";
 }
 
 #pragma mark - Getters and Setters

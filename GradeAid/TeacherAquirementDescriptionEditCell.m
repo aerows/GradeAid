@@ -42,9 +42,15 @@
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    if ([textField.text isEqualToString: @""])
+    NSString *text = textField.text;
+    text = [text stringByReplacingOccurrencesOfString: @" " withString: @""];
+    if ([text isEqualToString: @""])
     {
-        [[AppDelegate sharedDelegate].managedObjectContext delete: _teacherAquirementDescription];
+        [TeacherAquirementDescription deleteTeacherAquirement: _teacherAquirementDescription];
+    }
+    else
+    {
+        _teacherAquirementDescription.caption = textField.text;
         [[AppDelegate sharedDelegate].managedObjectContext save: nil];
     }
     [textField resignFirstResponder];
@@ -55,10 +61,13 @@
 {
     if (_teacherAquirementDescription)
     {
-        _teacherAquirementDescription.caption = textField.text;
-        [[AppDelegate sharedDelegate].managedObjectContext save: nil];
+//        _teacherAquirementDescription.caption = textField.text;
+//        [[AppDelegate sharedDelegate].managedObjectContext save: nil];
     }
 }
+
+#warning - Lägg in så att vid slut av editing, inte enter.
+#warning - Ta bort gamla kriterier
 
 #pragma mark - Setters and Getters
 

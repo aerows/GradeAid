@@ -116,10 +116,7 @@
     [_teacherAquirementTableView beginUpdates];
 }
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [RoundCorners tableView: _teacherAquirementTableView willDisplayCell: cell forRowAtIndexPath:indexPath];
-}
+
 
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
@@ -178,6 +175,12 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [_teacherAquirementTableView endUpdates];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated];
+    [_enrollment updateEnrollmentInManagedObjectContext: [AppDelegate sharedDelegate].managedObjectContext];
 }
 
 #pragma mark - Setters and Getters

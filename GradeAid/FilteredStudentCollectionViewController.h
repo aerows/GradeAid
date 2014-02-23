@@ -12,12 +12,21 @@
 #import "Student+Create.h"
 #import "Filter.h"
 
+// View
+#import "GraidAidCollectionViewCell.h"
+
 // Controller
 #import "CollectionViewFetchedDataSource.h"
 
+#import "Student+Create.h"
+
+static NSString *const FilteredStudentCollectionViewControllerDidEnterEditModeNotification = @"FilteredStudentCollectionViewControllerDidEnterEditModeNotification";
+
+static NSString *const StudentGradeAidCollectionViewCell = @"StudentGradeAidCollectionViewCell";
+
 @interface FilteredStudentCollectionViewController : UICollectionViewController<CollectionViewFetchedDataSourceDelegate>
 
+@property (nonatomic) BOOL editMode;
 @property (nonatomic, strong) Filter *filter;
-//@property (nonatomic, strong) NSArray *students;
 
 @end

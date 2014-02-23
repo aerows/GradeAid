@@ -111,6 +111,9 @@
 		658A3DEA183CC1B5000B38D5 /* tabbaritem-school.png in Resources */ = {isa = PBXBuildFile; fileRef = 658A3DE7183CC1B5000B38D5 /* tabbaritem-school.png */; };
 		658A3DEB183CC1B5000B38D5 /* tabbaritem-schoolclass.png in Resources */ = {isa = PBXBuildFile; fileRef = 658A3DE8183CC1B5000B38D5 /* tabbaritem-schoolclass.png */; };
 		658A3DEE183CDF88000B38D5 /* ExpandableHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 658A3DED183CDF88000B38D5 /* ExpandableHeaderCell.m */; };
+		659A92C5189805BD0014B3BE /* pen.png in Resources */ = {isa = PBXBuildFile; fileRef = 659A92C4189805BD0014B3BE /* pen.png */; };
+		659A92C9189816C50014B3BE /* pen-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 659A92C8189816C50014B3BE /* pen-active.png */; };
+		659A92CC189846500014B3BE /* GraidAidCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A92CB189846500014B3BE /* GraidAidCollectionViewCell.m */; };
 		65A646D718058AEC008D2C32 /* polariod.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A646D618058AEC008D2C32 /* polariod.png */; };
 		65A646DA18058CE3008D2C32 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A646D918058CE3008D2C32 /* CollectionViewCell.m */; };
 		65A646DD1805A8ED008D2C32 /* CollectionViewFetchedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A646DC1805A8ED008D2C32 /* CollectionViewFetchedDataSource.m */; };
@@ -136,6 +139,7 @@
 		65C075E7181FD77B00C6A0FF /* Teacher+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C075E6181FD77B00C6A0FF /* Teacher+Create.m */; };
 		65C075E9181FF08700C6A0FF /* course.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C075E8181FF08700C6A0FF /* course.png */; };
 		65C075EC18204A6100C6A0FF /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C075EB18204A6100C6A0FF /* Session.m */; };
+		65C1EB9E189EBA1B00126518 /* StudentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C1EB9D189EBA1B00126518 /* StudentInfoViewController.m */; };
 		65CB30BF187EADF4007181D2 /* SchoolFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB30BE187EADF4007181D2 /* SchoolFilterItem.m */; };
 		65CB30C2187ED0FD007181D2 /* SchoolClassFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB30C1187ED0FD007181D2 /* SchoolClassFilterItem.m */; };
 		65CB30C5187ED9D7007181D2 /* CourseFilterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CB30C4187ED9D7007181D2 /* CourseFilterItem.m */; };
@@ -435,6 +439,10 @@
 		658A3DE8183CC1B5000B38D5 /* tabbaritem-schoolclass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbaritem-schoolclass.png"; sourceTree = "<group>"; };
 		658A3DEC183CDF88000B38D5 /* ExpandableHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableHeaderCell.h; sourceTree = "<group>"; };
 		658A3DED183CDF88000B38D5 /* ExpandableHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableHeaderCell.m; sourceTree = "<group>"; };
+		659A92C4189805BD0014B3BE /* pen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pen.png; sourceTree = "<group>"; };
+		659A92C8189816C50014B3BE /* pen-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pen-active.png"; sourceTree = "<group>"; };
+		659A92CA189846500014B3BE /* GraidAidCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraidAidCollectionViewCell.h; sourceTree = "<group>"; };
+		659A92CB189846500014B3BE /* GraidAidCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraidAidCollectionViewCell.m; sourceTree = "<group>"; };
 		65A646D618058AEC008D2C32 /* polariod.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = polariod.png; sourceTree = "<group>"; };
 		65A646D818058CE3008D2C32 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		65A646D918058CE3008D2C32 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
@@ -480,6 +488,8 @@
 		65C075E8181FF08700C6A0FF /* course.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = course.png; sourceTree = "<group>"; };
 		65C075EA18204A6100C6A0FF /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		65C075EB18204A6100C6A0FF /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		65C1EB9C189EBA1B00126518 /* StudentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentInfoViewController.h; sourceTree = "<group>"; };
+		65C1EB9D189EBA1B00126518 /* StudentInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentInfoViewController.m; sourceTree = "<group>"; };
 		65CB30BD187EADF4007181D2 /* SchoolFilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolFilterItem.h; sourceTree = "<group>"; };
 		65CB30BE187EADF4007181D2 /* SchoolFilterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolFilterItem.m; sourceTree = "<group>"; };
 		65CB30C0187ED0FD007181D2 /* SchoolClassFilterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolClassFilterItem.h; sourceTree = "<group>"; };
@@ -835,6 +845,8 @@
 		6544322217E9EF7B00997437 = {
 			isa = PBXGroup;
 			children = (
+				659A92CA189846500014B3BE /* GraidAidCollectionViewCell.h */,
+				659A92CB189846500014B3BE /* GraidAidCollectionViewCell.m */,
 				6528938E1884C28F00CD78B9 /* PlusTableViewController.h */,
 				6528938F1884C28F00CD78B9 /* PlusTableViewController.m */,
 				651DBAC218832FC900B6914B /* PromptController.h */,
@@ -1041,11 +1053,9 @@
 		6544329917EA096A00997437 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				659A92C31898059A0014B3BE /* Icons */,
 				658A3DCB183CBF19000B38D5 /* Deafults */,
 				658A3DCA183CBF10000B38D5 /* TabBarItems */,
-				6536739D182143B20063DDE0 /* check.png */,
-				65CB3101188002DD007181D2 /* plus.png */,
-				6536739E182143B20063DDE0 /* cross.png */,
 				65F965E4180F7399004728C7 /* empty-1px.png */,
 				65F965E2180F71FC004728C7 /* flik-white-50x25px.png */,
 				65E5E53B180EC252005D0141 /* shadow-downwards-80px.png */,
@@ -1216,6 +1226,18 @@
 				65CB30F6187F52ED007181D2 /* selectedOneStudent.png */,
 			);
 			name = Deafults;
+			sourceTree = "<group>";
+		};
+		659A92C31898059A0014B3BE /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				659A92C8189816C50014B3BE /* pen-active.png */,
+				659A92C4189805BD0014B3BE /* pen.png */,
+				6536739D182143B20063DDE0 /* check.png */,
+				65CB3101188002DD007181D2 /* plus.png */,
+				6536739E182143B20063DDE0 /* cross.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 		65A95AE91823BBC200BEBDD8 /* Not used anymore */ = {
@@ -1594,6 +1616,8 @@
 		65FDDADF18461D4F00C53B6D /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				65C1EB9C189EBA1B00126518 /* StudentInfoViewController.h */,
+				65C1EB9D189EBA1B00126518 /* StudentInfoViewController.m */,
 				65FDDADC1845FEC900C53B6D /* SubjectTableView.h */,
 				65FDDADD1845FEC900C53B6D /* SubjectTableView.m */,
 				65FDDAE21846423F00C53B6D /* EnrollmentTableView.h */,
@@ -1730,6 +1754,7 @@
 				65CB30D5187F32B1007181D2 /* manySchools.png in Resources */,
 				6544329D17EA0E1D00997437 /* background@2x~ipad.png in Resources */,
 				658A3DE5183CC166000B38D5 /* tabbaritem-schoolclass@2x.png in Resources */,
+				659A92C9189816C50014B3BE /* pen-active.png in Resources */,
 				65F8B11D180D9FF8003F1DDF /* musik.json in Resources */,
 				6544329E17EA0E1D00997437 /* background~ipad.png in Resources */,
 				658A3DEA183CC1B5000B38D5 /* tabbaritem-school.png in Resources */,
@@ -1738,6 +1763,7 @@
 				6537166D18314328004B9685 /* schoolclass.gif in Resources */,
 				654432A517EA107A00997437 /* skola1.png in Resources */,
 				65278A2917F86AB300A41102 /* StudentViewController.xib in Resources */,
+				659A92C5189805BD0014B3BE /* pen.png in Resources */,
 				654432A617EA107A00997437 /* skola2.png in Resources */,
 				658A3DD9183CBF49000B38D5 /* default-student.png in Resources */,
 				65CB30D4187F32B1007181D2 /* manyCourses.png in Resources */,
@@ -1854,6 +1880,7 @@
 				65EB7CD51879A43800E4501F /* TeacherAquirement.m in Sources */,
 				6537168118352A9F004B9685 /* SubjectObjectiveTableViewCell.m in Sources */,
 				65EB7CD81879A43800E4501F /* TeacherAquirementDescription.m in Sources */,
+				659A92CC189846500014B3BE /* GraidAidCollectionViewCell.m in Sources */,
 				65F8B109180D98D2003F1DDF /* CourseCentralContent+Create.m in Sources */,
 				650184D91865E95D00A444FA /* SubjectViewController.m in Sources */,
 				6544329617EA043700997437 /* SchoolCollectionViewController.m in Sources */,
@@ -1890,6 +1917,7 @@
 				65A646DA18058CE3008D2C32 /* CollectionViewCell.m in Sources */,
 				65E051B017F35B0D00D9B376 /* Aquirement.m in Sources */,
 				65E5E540180ED56B005D0141 /* AquirementButton.m in Sources */,
+				65C1EB9E189EBA1B00126518 /* StudentInfoViewController.m in Sources */,
 				651DBAC118830FE900B6914B /* CreateSchoolPromptViewController.m in Sources */,
 				651DBACA18834DCF00B6914B /* PromptCreateViewController.m in Sources */,
 				65DD657F18805450009CFE51 /* MultiSelectSegmentedControl.m in Sources */,

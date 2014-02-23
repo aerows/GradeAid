@@ -12,4 +12,6 @@
 
 + (TeacherAquirementDescription*) teacherAquirementDescriptionWithCourseDescription: (CourseEdition*) courseEdition teacher: (Teacher*) teacher caption: (NSString*) caption managedObjectContext: (NSManagedObjectContext*) moc;
 
++ (BOOL) deleteTeacherAquirement:(TeacherAquirementDescription *) teacherAquirementDescription;
+
 @end

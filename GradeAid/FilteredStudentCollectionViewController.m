@@ -13,9 +13,14 @@
 
 // View
 #import "CollectionViewCell.h"
+#import "GraidAidCollectionViewCell.h"
+#import "StudentInfoViewController.h"
 
 // Controller
 #import "AppDelegate.h"
+#import "UIAlertView+MKBlockAdditions.h"
+#import "UIStoryboard+mainStoryboard.h"
+
 
 @interface FilteredStudentCollectionViewController ()
 {
@@ -48,6 +53,7 @@
     /* Setup Student FetchedDataSource */
     _collectionViewFetchedDataSource = [[CollectionViewFetchedDataSource alloc] initWithCollectionView:self.collectionView fetchRequest: request delegate: self];
     [_collectionViewFetchedDataSource performFetch];
+    self.collectionView.delegate = nil;
 }
 
 - (void) updateFetcherPredicate
@@ -71,13 +77,60 @@
 
 - (UICollectionViewCell*) collectionViewCellForObject:(NSObject *)object atIndexPath:(NSIndexPath *)indexPath
 {
-    CollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier: CollectionViewCellIdentifier forIndexPath:indexPath];
+//    CollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier: CollectionViewCellIdentifier forIndexPath:indexPath];
+//
+//    Student *student = (Student*) object;
+//
+//    cell.image = student.studentImage;
+//    cell.title = student.fullName;
+    
+    
+    GraidAidCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:StudentGradeAidCollectionViewCell forIndexPath: indexPath];
+    
+    __block Student *student = (Student*) object;
+    
+    cell.imageView.image = student.studentImage;
+    cell.textLabel.text = student.fullName;
 
-    Student *student = (Student*) object;
+    [cell setEditMode: _editMode];
+    
+    cell.cellTappedBlock = ^(UICollectionViewCell *cell, BOOL editMode)
+    {
+        if (!editMode)
+        {
+            StudentInfoViewController *sivc = [[UIStoryboard mainStoryboard] instantiateViewControllerWithIdentifier: @"StudentInfoViewController"];
+            [sivc setStudent: student];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController: sivc];
+            [nav setModalPresentationStyle: UIModalPresentationPageSheet];
+            [nav setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
 
-    cell.image = student.studentImage;
-    cell.title = student.fullName;
-
+            [self presentViewController: nav animated: YES completion: nil];
+        }
+    };
+    cell.cellLongPressedBlock = ^(UICollectionViewCell *cell, BOOL editMode)
+    {
+        if (!_editMode)
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName: FilteredStudentCollectionViewControllerDidEnterEditModeNotification object: nil];
+        }
+    };
+    cell.deleteiconPressedBlock = ^(UICollectionViewCell* cell)
+    {
+        NSString *message = [NSString stringWithFormat: @"Är du säker på att du vill ta bort \"%@\"? All sparad information kommer förloras.", student.fullName];
+        [UIAlertView alertViewWithTitle:@"Ta bort elev"
+                                message: message
+                      cancelButtonTitle:@"Nej"
+                      otherButtonTitles:@[@"Ja"]
+                              onDismiss:^(int buttonIndex)
+         {
+             [Student deleteStudent: student];
+         }
+                               onCancel:^()
+         {
+             NSLog(@"Cancelled");
+         }];
+    };
+    
     return cell;
 }
 
@@ -123,6 +176,14 @@
     _filter = filter;
 }
 
+- (void) setEditMode:(BOOL)editMode
+{
+    if (_editMode == editMode) return;
+    _editMode = editMode;
+    [self.collectionView reloadData];
+}
+
+@synthesize editMode = _editMode;
 @synthesize filter = _filter;
 
 @end

@@ -89,57 +89,6 @@
 
 }
 
-+ (ObjectVerifyer*) objectVerifyer
-{
-//    NSArray *orderedAttributeKeys = @[KeyForFirstName, KeyForLastName, KeyForEmail];
-//    
-//    __block AttributeInput *studentFirstName = [AttributeInput nameAttribute];
-//    studentFirstName.attributeTitle = @"Förnamn";
-//    studentFirstName.attributeExample = @"Förnamn...";
-//    
-//    __block AttributeInput *studentLastName = [AttributeInput nameAttribute];
-//    studentLastName.attributeTitle = @"Efternamn";
-//    studentLastName.attributeExample = @"Efternamn...";
-//    
-//    __block AttributeInput *studentEmail = [AttributeInput nameAttribute]; // Skall vara epostAttribute
-//    studentLastName.attributeTitle = @"Epost";
-//    studentLastName.attributeExample = @"namn@mail.se...";
-//    
-//    
-//    NSDictionary *attributes = @{   KeyForFirstName : studentFirstName,
-//                                    KeyForLastName  : studentLastName,
-//                                    KeyForEmail     : studentEmail};
-//    
-//    NSArray *orderedSelectionKeys = @[KeyForSchoolClass];
-//    
-//    __block SellectionVerifyer *schoolSelection = [[SellectionVerifyer alloc] initWithArray: [School schoolsForCurrentTeacher]];
-//    
-//    NSDictionary *selectors = @{KeyForSchool : schoolSelection};
-//    
-//    
-//    void(^completion)(NSDictionary*, NSManagedObjectContext*);
-//    completion = ^(NSDictionary *attributes, NSManagedObjectContext *moc) {
-//        
-//        NSMutableDictionary *atr = [[NSMutableDictionary alloc] initWithDictionary:
-//                                    @{KeyForSchoolClassName : schoolClassName.value,
-//                                      KeyForSchoolClassYear : @(schoolClassYear.value.intValue)}];
-//        if (schoolSelection.value)
-//        {
-//            [atr setObject: ((School*)schoolSelection.value).schoolID forKey: KeyForSchoolID];
-//        }
-//        [SchoolClass createSchoolClassWithAttributes: atr InManagedObjectContext: moc];
-//        
-//    };
-//    
-//    return [[ObjectVerifyer alloc] initWithAttributes: attributes
-//                                          orderedKeys: orderedAttributeKeys
-//                                           sellectors: selectors
-//                                        sellectorKeys: orderedSelectionKeys
-//                                           completion: completion];
-    NSLog(@"Not using objectVerifyers more");
-    return nil;
-}
-
 #pragma mark - Image Methods
 
 - (UIImage*) studentImage
@@ -158,5 +107,24 @@
 {
     return [NSString stringWithFormat: @"%@ %@", self.firstName, self.lastName];
 }
+
+- (NSArray*) sortedEnrollments
+{
+    return [self.enrollments.allObjects sortedArrayUsingDescriptors: [Student defualtEnrollmentSortDescriptors]];
+}
+
++ (NSArray*) defualtEnrollmentSortDescriptors
+{
+    return @[[NSSortDescriptor sortDescriptorWithKey: @"course.courseEdition.courseDescription.name" ascending: YES], [NSSortDescriptor sortDescriptorWithKey: @"course.courseEdition.courseDescription.level" ascending:YES], [NSSortDescriptor sortDescriptorWithKey: @"course.name" ascending: YES]];
+}
+
+
++ (BOOL) deleteStudent:(Student *)student
+{
+    NSManagedObjectContext *moc = [AppDelegate sharedDelegate].managedObjectContext;
+    [moc deleteObject: student];
+    return [moc save: nil];
+}
+
 
 @end

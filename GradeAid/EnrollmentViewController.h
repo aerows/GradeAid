@@ -26,7 +26,14 @@ static NSString *const EnrollmentStoryboardIdentifier = @"EnrollmentViewControll
     
     IBOutlet UITableView *_tableView;
     IBOutlet UIBarButtonItem *_doneButton;
+    IBOutlet UIBarButtonItem *_popdownStudentButton;
+    
+    IBOutlet UIButton    *_penButton;
+    IBOutlet UIButton    *_editButton;
+    IBOutlet UIButton    *_cancelEditingButton;
 }
+
+@property (nonatomic) bool isEditing;
 
 @property (nonatomic, strong) Course *course;
 @property (nonatomic, strong) Enrollment *enrollment;

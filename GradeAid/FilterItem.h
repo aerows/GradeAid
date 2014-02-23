@@ -13,6 +13,8 @@
 #import "PromptViewController.h"
 #import "PromptCreateViewController.h"
 
+static NSString *const FilterItemWasCreatedNotification = @"FilterItemWasCreatedNotification";
+
 @protocol FilterItemDelegate <NSObject>
 
 - (void) filterItemDidUpdate: (id) filterItem;
