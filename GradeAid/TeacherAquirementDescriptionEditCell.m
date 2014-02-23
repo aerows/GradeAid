@@ -8,6 +8,7 @@
 
 #import "TeacherAquirementDescriptionEditCell.h"
 #import "AppDelegate.h"
+#import "UIAlertView+MKBlockAdditions.h"
 
 @implementation TeacherAquirementDescriptionEditCell
 
@@ -40,30 +41,39 @@
 
 #pragma mark - TextField Delegate Methods
 
-- (BOOL) textFieldShouldReturn:(UITextField *)textField
+- (void) textFieldDidChange: (UITextField*) textField
 {
-    NSString *text = textField.text;
-    text = [text stringByReplacingOccurrencesOfString: @" " withString: @""];
-    if ([text isEqualToString: @""])
+    // Nop
+}
+
+- (BOOL) textFieldShouldEndEditing:(UITextField *)textField
+{
+    if (!textField.text.length)
     {
-        [TeacherAquirementDescription deleteTeacherAquirement: _teacherAquirementDescription];
+        if (_teacherAquirementDescription.caption.length)
+        {
+            textField.text = _teacherAquirementDescription.caption;
+        } else {
+            [_textField resignFirstResponder];
+            [self performSelector: @selector(deleteTeacherAquirement) withObject: nil afterDelay:0.01];
+        }
+        return YES;
     }
-    else
-    {
-        _teacherAquirementDescription.caption = textField.text;
-        [[AppDelegate sharedDelegate].managedObjectContext save: nil];
-    }
-    [textField resignFirstResponder];
+    _teacherAquirementDescription.caption = textField.text;
+    [[AppDelegate sharedDelegate].managedObjectContext save: nil];
+
     return YES;
 }
 
-- (void) textFieldDidChange: (UITextField*) textField
+- (IBAction) delete: (UIButton*) button
 {
-    if (_teacherAquirementDescription)
-    {
-//        _teacherAquirementDescription.caption = textField.text;
-//        [[AppDelegate sharedDelegate].managedObjectContext save: nil];
-    }
+    [_textField resignFirstResponder];
+    [self performSelector: @selector(deleteTeacherAquirement) withObject: nil afterDelay:0.01];
+}
+
+- (void) deleteTeacherAquirement
+{
+    [TeacherAquirementDescription deleteTeacherAquirement: _teacherAquirementDescription];
 }
 
 #warning - Lägg in så att vid slut av editing, inte enter.

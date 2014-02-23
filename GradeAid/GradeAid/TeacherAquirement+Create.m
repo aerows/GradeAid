@@ -47,4 +47,17 @@
     [moc save: nil];
 }
 
++ (NSFetchRequest*) fetchRequestForTeacherAquirementsForEnrollment: (Enrollment*) enrollment
+{
+    CourseEdition *courseEdition = enrollment.course.courseEdition;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName: @"TeacherAquirement"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"((teacherAquirementDescription IN %@) AND enrollment == %@)", courseEdition.teacherAquirementDescriptions, enrollment];
+    
+    fetchRequest.predicate = predicate;
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey: @"teacherAquirementDescription.caption" ascending:YES]];
+    return fetchRequest;
+}
+
+
+
 @end

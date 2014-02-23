@@ -47,9 +47,7 @@
 
 - (void) setupFetchResultsControllers
 {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"TeacherAquirement"];
-    request.predicate = [NSPredicate predicateWithFormat: @"enrollment = %@", _enrollment];
-    [request setSortDescriptors: @[[NSSortDescriptor sortDescriptorWithKey: @"teacherAquirementDescription.caption" ascending: YES]]];
+    NSFetchRequest *request = [TeacherAquirement fetchRequestForTeacherAquirementsForEnrollment: _enrollment];
     
     _fetchedAquirementController = [[NSFetchedResultsController alloc] initWithFetchRequest: request
                                                                        managedObjectContext: [AppDelegate sharedDelegate].managedObjectContext

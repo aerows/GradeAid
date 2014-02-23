@@ -597,7 +597,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="95DCD1F9-07F7-41CF-8BF6-EBF544B66D5B" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="0B81FF71-7024-4687-99F8-AD1A932D38B6" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="O0n-fq-lRF" id="PWk-pe-FV1"/>
                                         </connections>
@@ -909,7 +909,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="9D7F4A59-7B25-4EF7-A9A7-10891AF06658" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="FA74A2CC-60CC-4A95-9639-DC9D2F98D0F0" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="YkC-ih-QrT" id="z00-Cf-5UE"/>
                                         </connections>
@@ -1569,12 +1569,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="quR-2F-ofO">
-                                                    <rect key="frame" x="18" y="8" width="730" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Kunskapskrav beskrivning" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="quR-2F-ofO">
+                                                    <rect key="frame" x="18" y="8" width="704" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwY-90-Q8j">
+                                                    <rect key="frame" x="723" y="2" width="39" height="39"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" image="delete.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="delete:" destination="iyj-5s-OlC" eventType="touchUpInside" id="tBG-vH-rhL"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -4145,7 +4156,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="84A87E55-5DF3-47B4-8262-66CA36147EFA" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="6710225B-0B95-4C5A-8A59-442B93D9FEEA" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="pDE-lT-c4g" id="ceM-N4-aKq"/>
                                         </connections>
@@ -4376,7 +4387,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="4F863B4C-39A7-4B67-8BDB-6F8AF6B4694B" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="D7A4ADF0-8D84-48D7-909A-7AF91B1F003E" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="Fwr-p1-qdF" id="tZw-ED-hS8"/>
                                         </connections>
@@ -5710,7 +5721,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="4F863B4C-39A7-4B67-8BDB-6F8AF6B4694B" width="256" height="256">
+        <image name="0B81FF71-7024-4687-99F8-AD1A932D38B6" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -10152,7 +10163,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="84A87E55-5DF3-47B4-8262-66CA36147EFA" width="256" height="256">
+        <image name="6710225B-0B95-4C5A-8A59-442B93D9FEEA" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -14594,7 +14605,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="95DCD1F9-07F7-41CF-8BF6-EBF544B66D5B" width="256" height="256">
+        <image name="D7A4ADF0-8D84-48D7-909A-7AF91B1F003E" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -19036,7 +19047,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="9D7F4A59-7B25-4EF7-A9A7-10891AF06658" width="256" height="256">
+        <image name="FA74A2CC-60CC-4A95-9639-DC9D2F98D0F0" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

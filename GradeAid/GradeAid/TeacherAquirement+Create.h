@@ -14,4 +14,6 @@
 + (TeacherAquirement*) teacherAquirementWithDescription: (TeacherAquirementDescription*) teacherAquirementDescription enrollment: (Enrollment*) enrollment managedObjectContext: (NSManagedObjectContext*) moc;
 
 - (void) setGrade:(NSNumber *)grade managedObjectContext: (NSManagedObjectContext*) moc;
++ (NSFetchRequest*) fetchRequestForTeacherAquirementsForEnrollment: (Enrollment*) enrollment;
+
 @end
