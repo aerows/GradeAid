@@ -11,6 +11,8 @@
 #import "StudentTableViewController.h"
 #import "Enrollment+Create.h"
 
+#import "UIAlertView+MKBlockAdditions.h"
+
 static NSString *const CellIdentifier = @"SubtitleCell";
 static NSString *const SelectManyCellIdentifier = @"SelectManyCellIdentifier";
 
@@ -118,11 +120,21 @@ static NSInteger const ClosedEnrollmentSection = 3;
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
     if (indexPath.section == AddClassSection)
     {
-        NSLog(@"Alla selected");
+        UIAlertView *alert = [UIAlertView alertViewWithTitle: @"Lägg till alla" message: @"Vill du lägga till alla elever?" cancelButtonTitle: @"Nej" otherButtonTitles: @[@"Ja"] onDismiss:^(int buttonIndex)
+        {
+            [self addEnrollmentsToCourse: [_openEnrollments arrayByAddingObjectsFromArray: _closedEnrollments]];
+            [tableView reloadData];
+        } onCancel: nil];
+        [alert show];
     }
     else if (indexPath.section == AddUnEnrolledStudentSection)
     {
-        NSLog(@"Klass selected");
+        UIAlertView *alert = [UIAlertView alertViewWithTitle: @"Lägg till alla" message: @"Vill du lägga till alla lediga elever?" cancelButtonTitle: @"Nej" otherButtonTitles: @[@"Ja"] onDismiss:^(int buttonIndex)
+                              {
+                                  [self addEnrollmentsToCourse: _closedEnrollments];
+                                  [tableView reloadData];
+                              } onCancel: nil];
+        [alert show];
     }
     else if (indexPath.section == OpenEnrollmentSection)
     {
@@ -149,10 +161,31 @@ static NSInteger const ClosedEnrollmentSection = 3;
     }
     else if (indexPath.section == ClosedEnrollmentSection)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Varning" message: @"Meddelande" delegate: nil cancelButtonTitle: @"OK" otherButtonTitles: nil];
+        UIAlertView *alert = [UIAlertView alertViewWithTitle: @"Lägg till upptagen elev" message: @"Vill du lägga till elev från annan lektion?" cancelButtonTitle: @"Nej" otherButtonTitles: @[@"Ja"] onDismiss:^(int buttonIndex)
+                              {
+                                  [self addEnrollmentsToCourse: @[[_closedEnrollments objectAtIndex:indexPath.row]]];
+                                  [tableView reloadData];
+                              } onCancel: nil];
         [alert show];
     }
 }
+
+- (void) addEnrollmentsToCourse: (NSArray*) enrollments
+{
+    NSManagedObjectContext *moc = AppDelegate.sharedDelegate.managedObjectContext;
+    for (Enrollment *e in enrollments)
+    {
+        [e enrollInCourse: _course managedObjectContext: moc];
+    }
+    NSError *error = nil;
+    [moc save: &error];
+    if (error)
+    {
+        
+    }
+    [self setStudents: _students];
+}
+
 
 #pragma mark - IBAction Methods
 
