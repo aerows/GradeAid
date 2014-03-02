@@ -55,7 +55,9 @@
             textField.text = _teacherAquirementDescription.caption;
         } else {
             [_textField resignFirstResponder];
-            [self performSelector: @selector(deleteTeacherAquirement) withObject: nil afterDelay:0.01];
+            _deleteAquirementBlock();
+
+//            [self performSelector: @selector(deleteTeacherAquirement) withObject: nil afterDelay:0.01];
         }
         return YES;
     }
@@ -68,12 +70,15 @@
 - (IBAction) delete: (UIButton*) button
 {
     [_textField resignFirstResponder];
-    [self performSelector: @selector(deleteTeacherAquirement) withObject: nil afterDelay:0.01];
+    _deleteAquirementBlock();
+
+    //[self performSelector: @selector(deleteTeacherAquirement) withObject: nil afterDelay:0.01];
 }
 
 - (void) deleteTeacherAquirement
 {
-    [TeacherAquirementDescription deleteTeacherAquirement: _teacherAquirementDescription];
+//    _deleteAquirementBlock();
+    //[TeacherAquirementDescription deleteTeacherAquirement: _teacherAquirementDescription];
 }
 
 #warning - Lägg in så att vid slut av editing, inte enter.
@@ -82,6 +87,8 @@
 #pragma mark - Setters and Getters
 
 @synthesize textField = _textField;
+@synthesize teacherAquirementDescription = _teacherAquirementDescription;
+@synthesize deleteAquirementBlock = _deleteAquirementBlock;
 
 - (void) setTextField:(UITextField *)textField
 {
@@ -89,8 +96,6 @@
     [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [_textField setDelegate: self];
 }
-
-@synthesize teacherAquirementDescription = _teacherAquirementDescription;
 
 - (void) setTeacherAquirementDescription:(TeacherAquirementDescription *)teacherAquirementDescription
 {

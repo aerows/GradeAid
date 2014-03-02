@@ -96,12 +96,17 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    TeacherAquirementDescription *aqDesc = [_fetchedAquirementDescriptionController objectAtIndexPath: indexPath];
+    __block TeacherAquirementDescription *aqDesc = [_fetchedAquirementDescriptionController objectAtIndexPath: indexPath];
     
     if (_inEditMode)
     {
         TeacherAquirementDescriptionEditCell *cell = [tableView dequeueReusableCellWithIdentifier: TeacherAquirementEditCellIdentifier forIndexPath:indexPath];
         [cell setTeacherAquirementDescription: aqDesc];
+        cell.deleteAquirementBlock = ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [TeacherAquirementDescription deleteTeacherAquirement: aqDesc];
+            });
+        };
         return cell;
     }
     else

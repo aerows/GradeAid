@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "TeacherAquirementDescription+Create.h"
 
+typedef void(^DeleteAquirementBlock)();
+
 static NSString *const TeacherAquirementEditCellIdentifier = @"TeacherAquirementEditCellIdentifier";
 
 @interface TeacherAquirementDescriptionEditCell : UITableViewCell <UITextFieldDelegate>
@@ -18,5 +20,6 @@ static NSString *const TeacherAquirementEditCellIdentifier = @"TeacherAquirement
 
 @property (nonatomic, strong) TeacherAquirementDescription *teacherAquirementDescription;
 @property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, copy)   DeleteAquirementBlock deleteAquirementBlock;
 
 @end
