@@ -36,24 +36,26 @@
     {
         desc = [NSEntityDescription insertNewObjectForEntityForName: @"CourseDescription" inManagedObjectContext:moc];
         
-        desc.courseID  = [dict objectForKey: KeyForCourseID];
-        desc.name      = [dict objectForKey: KeyForCourseName];
-        desc.level     = [dict objectForKey: KeyForLevel];
-        desc.credits   = [dict objectForKey: KeyForCredits];
-        desc.scope     = [dict objectForKey: KeyForScope];
-        desc.subjectID = [dict objectForKey: KeyForSubjectID];
-        
-        for (NSDictionary *cc in [dict objectForKey: KeyForCentralContentItems])
-        {
-            [desc addCentralContentItemsObject: [CourseCentralContent centralContentWithDict: cc inManagedObjectContext:moc]];
-        }
-        
-        
-        for (NSDictionary *ad in [dict objectForKey: KeyForAquirementsDescriptionItems])
-        {
-            [desc addAquirementDescriptionsObject: [AquirementDescription descriptionWithDict: ad inManagedObjectContext: moc]];
-        }
+
         //desc.subject = [Subject subjectWithID:[dict objectForKey: KeyForSubjectID] inManagedObjectContext:moc];
+    }
+    
+    desc.courseID  = [dict objectForKey: KeyForCourseID];
+    desc.name      = [dict objectForKey: KeyForCourseName];
+    desc.level     = [dict objectForKey: KeyForLevel];
+    desc.credits   = [dict objectForKey: KeyForCredits];
+    desc.scope     = [dict objectForKey: KeyForScope];
+    desc.subjectID = [dict objectForKey: KeyForSubjectID];
+    
+    for (NSDictionary *cc in [dict objectForKey: KeyForCentralContentItems])
+    {
+        [desc addCentralContentItemsObject: [CourseCentralContent centralContentWithDict: cc inManagedObjectContext:moc]];
+    }
+    
+    
+    for (NSDictionary *ad in [dict objectForKey: KeyForAquirementsDescriptionItems])
+    {
+        [desc addAquirementDescriptionsObject: [AquirementDescription descriptionWithDict: ad inManagedObjectContext: moc]];
     }
     
     return desc;

@@ -62,8 +62,13 @@
 
 - (void) setupFetchResultsControllers
 {
+    // aquirementDescription => courseDescription
+    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"Aquirement"];
-    request.predicate = [NSPredicate predicateWithFormat: @"enrollment = %@", _enrollment];
+    
+    request.predicate = [NSPredicate predicateWithFormat: @"(enrollment == %@) AND (aquirementDescription IN %@)", _enrollment, _enrollment.courseDescription.aquirementDescriptions];
+    
+//    request.predicate = [NSPredicate predicateWithFormat: @"enrollment = %@", _enrollment];
     [request setSortDescriptors: @[[NSSortDescriptor sortDescriptorWithKey: @"aquirementDescription.sectionTitle" ascending: YES],
                                    [NSSortDescriptor sortDescriptorWithKey: @"aquirementDescription.aquirementDescriptionID" ascending: YES]]];
     
@@ -225,6 +230,7 @@
 - (void) setEnrollment:(Enrollment *)enrollment
 {
     _enrollment = enrollment;
+    [_enrollment updateEnrollmentInManagedObjectContext: [AppDelegate sharedDelegate].managedObjectContext];
     [self reloadData];
 }
 

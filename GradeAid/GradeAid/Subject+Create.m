@@ -33,25 +33,25 @@
     else
     {
         subject = [NSEntityDescription insertNewObjectForEntityForName: @"Subject" inManagedObjectContext:moc];
-        
-        subject.introCaption        = [dict objectForKey:  KeyForIntroCaption];
-        subject.name                = [dict objectForKey:  KeyForSubjectName];
-        subject.objectiveCaption    = [dict objectForKey:  KeyForObjectiveCaption];
-        subject.subjectID           = [dict objectForKey:  KeyForSubjectID];
-        subject.objectiveItemHeader = [dict objectForKey: KeyForObjectiveItemHeader];
-        
-        for (NSDictionary *objective in [dict objectForKey: KeyForObjectiveItems])
-        {
-            SubjectObjective *subjObj = [SubjectObjective subjectObjectiveWithDict:objective inManagedObjectContext: moc];
-            subjObj.subject = subject;
-            [subject addObjectivesObject: subjObj];
-        }
-        
-        for (NSDictionary *courseDesc in [dict objectForKey: KeyForCourses])
-        {
-            [subject addCoursesObject: [CourseDescription descriptionWithDict:courseDesc inManagedObjectContext: moc]];
-        }
-        
+    }
+    
+    
+    subject.introCaption        = [dict objectForKey:  KeyForIntroCaption];
+    subject.name                = [dict objectForKey:  KeyForSubjectName];
+    subject.objectiveCaption    = [dict objectForKey:  KeyForObjectiveCaption];
+    subject.subjectID           = [dict objectForKey:  KeyForSubjectID];
+    subject.objectiveItemHeader = [dict objectForKey: KeyForObjectiveItemHeader];
+    
+    for (NSDictionary *objective in [dict objectForKey: KeyForObjectiveItems])
+    {
+        SubjectObjective *subjObj = [SubjectObjective subjectObjectiveWithDict:objective inManagedObjectContext: moc];
+        subjObj.subject = subject;
+        [subject addObjectivesObject: subjObj];
+    }
+    
+    for (NSDictionary *courseDesc in [dict objectForKey: KeyForCourses])
+    {
+        [subject addCoursesObject: [CourseDescription descriptionWithDict:courseDesc inManagedObjectContext: moc]];
     }
     
     return subject;

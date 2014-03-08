@@ -124,6 +124,7 @@
 		65AD353218846BF7004775F5 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AD353118846BF7004775F5 /* delete.png */; };
 		65B675C8181128F800C808A7 /* Gradation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B675C7181128F800C808A7 /* Gradation.m */; };
 		65B675D118112CA100C808A7 /* AquirementDescription+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B675D018112CA100C808A7 /* AquirementDescription+Create.m */; };
+		65B91BFB18C355D800C39DC8 /* musik.json in Resources */ = {isa = PBXBuildFile; fileRef = 65B91BFA18C355D800C39DC8 /* musik.json */; };
 		65BE66061835ABF9004EEFE9 /* CentralContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BE66051835ABF9004EEFE9 /* CentralContentTableViewCell.m */; };
 		65BE66091835AED3004EEFE9 /* AquirementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BE66081835AED3004EEFE9 /* AquirementTableViewCell.m */; };
 		65BE660D183625E5004EEFE9 /* PopupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BE660C183625E5004EEFE9 /* PopupTableViewController.m */; };
@@ -227,7 +228,7 @@
 		65F8B106180D98B3003F1DDF /* CourseCentralContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F8B105180D98B3003F1DDF /* CourseCentralContent.m */; };
 		65F8B109180D98D2003F1DDF /* CourseCentralContent+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F8B108180D98D2003F1DDF /* CourseCentralContent+Create.m */; };
 		65F8B11B180D9DCB003F1DDF /* CourseDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F8B11A180D9DCB003F1DDF /* CourseDescription.m */; };
-		65F8B11D180D9FF8003F1DDF /* musik.json in Resources */ = {isa = PBXBuildFile; fileRef = 65F8B11C180D9FF8003F1DDF /* musik.json */; };
+		65F8B11D180D9FF8003F1DDF /* musik2.json in Resources */ = {isa = PBXBuildFile; fileRef = 65F8B11C180D9FF8003F1DDF /* musik2.json */; };
 		65F8B122180DA9E3003F1DDF /* Course+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F8B121180DA9E3003F1DDF /* Course+Create.m */; };
 		65F8B125180DB15D003F1DDF /* Student+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F8B124180DB15D003F1DDF /* Student+Create.m */; };
 		65F8B12A180DB297003F1DDF /* student.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 65F8B129180DB297003F1DDF /* student.jpg */; };
@@ -460,6 +461,7 @@
 		65B675C7181128F800C808A7 /* Gradation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gradation.m; sourceTree = "<group>"; };
 		65B675CF18112CA100C808A7 /* AquirementDescription+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AquirementDescription+Create.h"; sourceTree = "<group>"; };
 		65B675D018112CA100C808A7 /* AquirementDescription+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AquirementDescription+Create.m"; sourceTree = "<group>"; };
+		65B91BFA18C355D800C39DC8 /* musik.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = musik.json; sourceTree = "<group>"; };
 		65BE66041835ABF9004EEFE9 /* CentralContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentralContentTableViewCell.h; sourceTree = "<group>"; };
 		65BE66051835ABF9004EEFE9 /* CentralContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentralContentTableViewCell.m; sourceTree = "<group>"; };
 		65BE66071835AED3004EEFE9 /* AquirementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AquirementTableViewCell.h; sourceTree = "<group>"; };
@@ -646,7 +648,7 @@
 		65F8B108180D98D2003F1DDF /* CourseCentralContent+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CourseCentralContent+Create.m"; sourceTree = "<group>"; };
 		65F8B119180D9DCB003F1DDF /* CourseDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDescription.h; sourceTree = "<group>"; };
 		65F8B11A180D9DCB003F1DDF /* CourseDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDescription.m; sourceTree = "<group>"; };
-		65F8B11C180D9FF8003F1DDF /* musik.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = musik.json; sourceTree = "<group>"; };
+		65F8B11C180D9FF8003F1DDF /* musik2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = musik2.json; sourceTree = "<group>"; };
 		65F8B120180DA9E3003F1DDF /* Course+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Course+Create.h"; sourceTree = "<group>"; };
 		65F8B121180DA9E3003F1DDF /* Course+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Course+Create.m"; sourceTree = "<group>"; };
 		65F8B123180DB15D003F1DDF /* Student+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Student+Create.h"; sourceTree = "<group>"; };
@@ -1536,7 +1538,8 @@
 		65F8B0E6180D4130003F1DDF /* json */ = {
 			isa = PBXGroup;
 			children = (
-				65F8B11C180D9FF8003F1DDF /* musik.json */,
+				65B91BFA18C355D800C39DC8 /* musik.json */,
+				65F8B11C180D9FF8003F1DDF /* musik2.json */,
 			);
 			name = json;
 			sourceTree = "<group>";
@@ -1755,7 +1758,7 @@
 				6544329D17EA0E1D00997437 /* background@2x~ipad.png in Resources */,
 				658A3DE5183CC166000B38D5 /* tabbaritem-schoolclass@2x.png in Resources */,
 				659A92C9189816C50014B3BE /* pen-active.png in Resources */,
-				65F8B11D180D9FF8003F1DDF /* musik.json in Resources */,
+				65F8B11D180D9FF8003F1DDF /* musik2.json in Resources */,
 				6544329E17EA0E1D00997437 /* background~ipad.png in Resources */,
 				658A3DEA183CC1B5000B38D5 /* tabbaritem-school.png in Resources */,
 				65F8B12A180DB297003F1DDF /* student.jpg in Resources */,
@@ -1785,6 +1788,7 @@
 				658A3DE4183CC166000B38D5 /* tabbaritem-school@2x.png in Resources */,
 				6535D1CB17F7061F00259CA7 /* NavigationEditController.xib in Resources */,
 				65C075C3181FB11E00C6A0FF /* teacher.png in Resources */,
+				65B91BFB18C355D800C39DC8 /* musik.json in Resources */,
 				6572EF4B1864802500DE3C9B /* README.md in Resources */,
 				65FE550F182CDEB3006B6FD4 /* SellectionViewController.xib in Resources */,
 			);

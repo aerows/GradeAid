@@ -23,7 +23,7 @@ static NSString *const KeyForCourseID = @"courseID";
     
     bool objectInitalized = [NSManagedObject object: &aquiDesc withEntityName: @"AquirementDescription" predicate: predicate inManagedObjectContext: moc];
     
-    if (!objectInitalized && aquiDesc)
+    if (YES)
     {
         aquiDesc.sectionTitle               = [dict objectForKey: KeyForSectionTitle];
         aquiDesc.sectionIndex               = [dict objectForKey: KeyForSectionIndex];

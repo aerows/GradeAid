@@ -45,9 +45,6 @@
 
 + (BOOL) deleteTeacherAquirement:(TeacherAquirementDescription *) teacherAquirementDescription
 {
-//    CourseEdition *courseEdition = teacherAquirementDescription.courseEdition;
-//    [courseEdition removeTeacherAquirementDescriptionsObject: teacherAquirementDescription];
-//    
     NSManagedObjectContext *moc = [AppDelegate sharedDelegate].managedObjectContext;
     [moc deleteObject: teacherAquirementDescription];
     

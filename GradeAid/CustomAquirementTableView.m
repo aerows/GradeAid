@@ -37,6 +37,9 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
 
 - (void) setupFetchResultsControllers
 {
+    
+    
+    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"TeacherAquirementDescription"];
     request.predicate = [NSPredicate predicateWithFormat: @"SELF IN %@", _course.courseEdition.teacherAquirementDescriptions];
     [request setSortDescriptors: @[[NSSortDescriptor sortDescriptorWithKey: @"caption" ascending: YES]]];
