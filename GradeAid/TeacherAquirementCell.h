@@ -10,12 +10,14 @@
 #import "TeacherAquirement+Create.h"
 
 static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCellIdentifier";
-
+static NSString *const TeacherAquirementCellDidEnableEditNotification = @"TeacherAquirementCellDidEnableEditNotification";
 @interface TeacherAquirementCell : UITableViewCell
 {
     UITapGestureRecognizer *_tapper;
+    UILongPressGestureRecognizer *_presser;
 }
 
 @property (nonatomic, strong) TeacherAquirement *teacherAquirement;
+@property (nonatomic) bool editmode;
 
 @end

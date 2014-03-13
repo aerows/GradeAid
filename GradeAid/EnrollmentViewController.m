@@ -12,6 +12,7 @@
 #import "School+Create.h"
 
 #import "AquirementCell.h"
+#import "TeacherAquirementCell.h"
 #import "ExpandableHeaderCell.h"
 
 #import "AquirementListViewController.h"
@@ -137,6 +138,7 @@ static NSInteger const CourseAquirementsSectionOffset = 1;
     [super viewDidAppear: animated];
     [self reloadViews];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(enableEdit:) name:AquirementCellDidEnableEditNotification object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(enableEdit:) name: TeacherAquirementCellDidEnableEditNotification object: nil];
 }
 
 - (void) viewWillDisappear:(BOOL)animated

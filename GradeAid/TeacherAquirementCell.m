@@ -38,13 +38,36 @@ static NSInteger const numberOfGradations = 3;
     [_tapper setNumberOfTouchesRequired: 1];
     [self.contentView addGestureRecognizer: _tapper];
     [self.contentView setUserInteractionEnabled: YES];
+    
+    _presser = [[UILongPressGestureRecognizer alloc] initWithTarget: self action: @selector(pressGesture:)];
+    [_presser setMinimumPressDuration: 0.8];
+    [self.contentView addGestureRecognizer: _presser];
+    
+    [_tapper requireGestureRecognizerToFail: _presser];
 }
 
 #pragma mark - UIGestureRecognizer Delegate Methods
 
 - (void) tapGesture: (UIGestureRecognizer*) tapper
 {
-    CGPoint tapPoint = [tapper locationInView: self.contentView];
+    if (_editmode)
+    {
+        [self gesture: tapper];
+    }
+}
+
+- (void) pressGesture: (UILongPressGestureRecognizer*) presser
+{
+    if (presser.state == UIGestureRecognizerStateBegan)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName: TeacherAquirementCellDidEnableEditNotification object: nil];
+        [self gesture: presser];
+    }
+}
+
+- (void) gesture: (UIGestureRecognizer*) gesture
+{
+    CGPoint tapPoint = [gesture locationInView: self.contentView];
     CGFloat interval = self.contentView.frame.size.width / numberOfGradations;
     int tappedGrade = floorf((tapPoint.x / interval));
     [self selectGrade: @(tappedGrade)];
@@ -106,6 +129,6 @@ static NSInteger const numberOfGradations = 3;
 }
 
 @synthesize teacherAquirement = _teacherAquirement;
-
+@synthesize editmode = _editmode;
 @end
 

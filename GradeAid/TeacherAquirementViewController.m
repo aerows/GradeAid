@@ -181,7 +181,25 @@
     [_enrollment updateEnrollmentInManagedObjectContext: [AppDelegate sharedDelegate].managedObjectContext];
 }
 
+#pragma mark - Helper methods
+
+- (void) updateEditModeForCells
+{
+    NSArray *indexPaths = [_teacherAquirementTableView indexPathsForVisibleRows];
+    for (NSIndexPath *indexPath in indexPaths)
+    {
+        TeacherAquirementCell *cell = (TeacherAquirementCell*)[_teacherAquirementTableView cellForRowAtIndexPath: indexPath];
+        [cell setEditmode: _inEditMode];
+    }
+}
+
 #pragma mark - Setters and Getters
+
+- (void) setInEditMode:(bool)inEditMode
+{
+    _inEditMode = inEditMode;
+    [self updateEditModeForCells];
+}
 
 - (void) setEnrollment:(Enrollment *)enrollment
 {
