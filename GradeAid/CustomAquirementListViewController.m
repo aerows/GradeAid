@@ -7,10 +7,17 @@
 //
 
 #import "CustomAquirementListViewController.h"
+#import "AquirementDescription+Create.h"
+#import "AppDelegate.h"
+#import "TeacherAquirementDescriptionEditCell.h"
+#import "RoundCorners.h"
 
 // Global
 #import "Session.h"
 #import "AppDelegate.h"
+
+
+static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCellIdentifier";
 
 @interface CustomAquirementListViewController ()
 
@@ -20,16 +27,19 @@
 
 #pragma mark - Constructor Methods
 
+
 #pragma mark - ViewDidLoad
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [_customAquirementTableView setTableViewDelegate: self];
-    [_customAquirementTableView setCourse: _course];
-    [_customAquirementTableView reloadData];
-    
+    [_customAquirementTableView setDelegate: self];
+    [_customAquirementTableView setDataSource: self];
+
+    _customAquirements = [[NSMutableArray alloc] init];
+
+    [self refreshData];
     [self reloadViews];
 }
 
@@ -37,32 +47,103 @@
 
 - (IBAction) addTeacherAquirementDescriptionButton: (UIButton*) addAquirementDescriptionButton
 {
-    CourseEdition *courseEdition = _course.courseEdition;
-    Teacher *teacher = [Session currentSession].teacher;
-    NSString *caption = @"";
-    NSManagedObjectContext *moc = [AppDelegate sharedDelegate].managedObjectContext;
+    TeacherAquirementDescription *tad = [TeacherAquirementDescription teacherAquirementDescriptionWithCourseDescription: _course.courseEdition teacher: [Session currentSession].teacher caption: @"" managedObjectContext: [AppDelegate sharedDelegate].managedObjectContext];
     
-    TeacherAquirementDescription *teacherAquirementDescirption = [TeacherAquirementDescription teacherAquirementDescriptionWithCourseDescription: courseEdition teacher: teacher caption: caption managedObjectContext: moc];
+    NSIndexPath *firstIndex = [NSIndexPath indexPathForRow:0 inSection:0];
     
-    [_customAquirementTableView selectForEditing: teacherAquirementDescirption];
+    [_customAquirementTableView beginUpdates];
+    [_customAquirements insertObject: tad atIndex: 0];
+    [_customAquirementTableView insertRowsAtIndexPaths: @[firstIndex] withRowAnimation: UITableViewRowAnimationAutomatic];
+    [_customAquirementTableView endUpdates];
+    
+    [self tableView: _customAquirementTableView didSelectRowAtIndexPath: firstIndex];
 }
 
-#pragma mark - TableView Delegate Methods
-
-- (void) tableViewDidUpdate:(UITableView *)tableView
+- (void) refreshData
 {
-    
+    self.customAquirements = _course.teacherAquirementDescriptions;
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - TableView DataSource Methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    [super didReceiveMemoryWarning];
+    return 1;
+}
+
+- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [RoundCorners tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section];
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _customAquirements.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    __block TeacherAquirementDescription *aqDesc = [_customAquirements objectAtIndex: indexPath.row];
+    
+    if (_inEditMode)
+    {
+        TeacherAquirementDescriptionEditCell *cell = [tableView dequeueReusableCellWithIdentifier: TeacherAquirementEditCellIdentifier forIndexPath:indexPath];
+        [cell setTeacherAquirementDescription: aqDesc];
+        
+        cell.deleteAquirementBlock = ^{
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                if ([TeacherAquirementDescription deleteTeacherAquirement: aqDesc])
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        int index = [_customAquirements indexOfObject: aqDesc];
+                        
+                        [tableView beginUpdates];
+                        [_customAquirements removeObjectAtIndex: index];
+                        [tableView deleteRowsAtIndexPaths: @[[NSIndexPath indexPathForRow: index inSection:0]]withRowAnimation: UITableViewRowAnimationAutomatic];
+                        [tableView endUpdates];                    });
+                }
+            });
+        };
+        
+        return cell;
+    }
+    else
+    {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: TeacherAquirementCellIdentifier forIndexPath:indexPath];
+        [cell.textLabel setText: aqDesc.caption];
+        return cell;
+    }
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 45.f;
+}
+
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [RoundCorners tableView: tableView willDisplayCell: cell forRowAtIndexPath:indexPath];
+    
 }
 
 - (void) reloadViews
 {
     _addAquirementDescriptionButton.alpha = (_inEditMode) ? 1.0 : 0.0;
-    [_customAquirementTableView setInEditMode: _inEditMode];
+    self.customAquirements = _course.teacherAquirementDescriptions;
+    [_customAquirementTableView reloadData];
+}
+
+#pragma mark - UITableView Delegate Methods
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_inEditMode)
+    {
+        TeacherAquirementDescriptionEditCell *cell = (TeacherAquirementDescriptionEditCell*)[tableView cellForRowAtIndexPath: indexPath];
+        [cell.textField becomeFirstResponder];
+    }
 }
 
 #pragma mark - Getters and Setters
@@ -79,6 +160,11 @@
 @synthesize aquirementDescriptionLabel      = _aquirementDescriptionLabel;
 @synthesize addAquirementDescriptionButton  = _addAquirementDescriptionButton;
 @synthesize noAquirementDescriptionsLabel   = _noAquirementDescriptionsLabel;
+@synthesize customAquirements               = _customAquirements;
 
+- (void) setCustomAquirements:(NSArray *)customAquirements
+{
+    [_customAquirements setArray: customAquirements];
+}
 
 @end

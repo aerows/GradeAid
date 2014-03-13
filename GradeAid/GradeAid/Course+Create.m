@@ -126,6 +126,14 @@
             self.courseEdition.courseDescription.level, self.name];
 }
 
+- (NSArray*) teacherAquirementDescriptions
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"TeacherAquirementDescription"];
+    request.predicate = [NSPredicate predicateWithFormat: @"SELF IN %@", self.courseEdition.teacherAquirementDescriptions];
+    [request setSortDescriptors: @[[NSSortDescriptor sortDescriptorWithKey: @"caption" ascending: YES]]];
+    return [[AppDelegate sharedDelegate].managedObjectContext executeFetchRequest: request error: nil];
+}
+
 @end
 
 

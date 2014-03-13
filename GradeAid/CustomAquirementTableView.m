@@ -70,7 +70,6 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
     NSIndexPath *indexPathForEditing = [_fetchedAquirementDescriptionController indexPathForObject: teacherAquirementDescription];
     TeacherAquirementDescriptionEditCell *cell = (TeacherAquirementDescriptionEditCell*) [self cellForRowAtIndexPath: indexPathForEditing];
     [cell.textField becomeFirstResponder];
-
 }
 
 #pragma mark - Table view data source

@@ -153,4 +153,5 @@
 @synthesize cellLongPressedBlock = _cellLongPressedBlock;
 @synthesize cellTappedBlock = _cellTappedBlock;
 @synthesize deleteiconPressedBlock = _deleteiconPressedBlock;
+
 @end

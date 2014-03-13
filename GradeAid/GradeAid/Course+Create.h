@@ -33,5 +33,6 @@
 - (NSArray*) students;
 
 - (NSString*) fullNameDescription;
+- (NSArray*) teacherAquirementDescriptions;
 
 @end

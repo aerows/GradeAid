@@ -14,4 +14,5 @@
 
 + (BOOL) deleteTeacherAquirement:(TeacherAquirementDescription *) teacherAquirementDescription;
 
+
 @end

@@ -46,18 +46,23 @@
     // Nop
 }
 
+- (BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 - (BOOL) textFieldShouldEndEditing:(UITextField *)textField
 {
+    [_textField resignFirstResponder];
+    
     if (!textField.text.length)
     {
         if (_teacherAquirementDescription.caption.length)
         {
             textField.text = _teacherAquirementDescription.caption;
         } else {
-            [_textField resignFirstResponder];
             _deleteAquirementBlock();
-
-//            [self performSelector: @selector(deleteTeacherAquirement) withObject: nil afterDelay:0.01];
         }
         return YES;
     }
@@ -80,9 +85,6 @@
 //    _deleteAquirementBlock();
     //[TeacherAquirementDescription deleteTeacherAquirement: _teacherAquirementDescription];
 }
-
-#warning - Lägg in så att vid slut av editing, inte enter.
-#warning - Ta bort gamla kriterier
 
 #pragma mark - Setters and Getters
 
