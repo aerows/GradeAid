@@ -597,7 +597,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="381FC6F0-FB23-4919-B6B9-3FC69CB19877" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="505F9078-71E0-450A-A3E2-605D00354549" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="O0n-fq-lRF" id="PWk-pe-FV1"/>
                                         </connections>
@@ -909,7 +909,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="29EADE9A-5AC3-4A0D-B7DB-7C7DCE190D18" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="9071276E-B3A7-4730-97E5-D97F24BF2CBA" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="YkC-ih-QrT" id="z00-Cf-5UE"/>
                                         </connections>
@@ -4178,7 +4178,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="0FBB9625-832E-40E6-ABD7-22BA62111408" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="F09FCBBE-2822-43F2-A547-AABDB56C5411" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="pDE-lT-c4g" id="ceM-N4-aKq"/>
                                         </connections>
@@ -4409,7 +4409,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="tintColor" patternImage="2C3E9010-076D-4A38-8010-BB9E14594654" colorSpace="pattern"/>
+                                        <color key="tintColor" patternImage="B0CAEAB4-AA3E-4AB2-9CC4-C81CB153FDD7" colorSpace="pattern"/>
                                         <connections>
                                             <outlet property="textLabel" destination="Fwr-p1-qdF" id="tZw-ED-hS8"/>
                                         </connections>
@@ -5306,7 +5306,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mbx-gH-nas">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mbx-gH-nas">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.180392161" green="0.37647062539999998" blue="0.54509806630000002" alpha="1" colorSpace="deviceRGB"/>
@@ -5376,6 +5376,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.180392161" green="0.37647062539999998" blue="0.54509806630000002" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="Mbx-gH-nas" firstAttribute="leading" secondItem="bqD-Bs-Stn" secondAttribute="leading" id="KPd-3K-pZx"/>
+                            <constraint firstItem="Ds7-nv-VTh" firstAttribute="top" secondItem="Mbx-gH-nas" secondAttribute="bottom" id="gVT-0e-ehZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Mbx-gH-nas" secondAttribute="trailing" id="lVO-NY-hiJ"/>
+                            <constraint firstItem="Mbx-gH-nas" firstAttribute="top" secondItem="bqD-Bs-Stn" secondAttribute="top" id="yXc-fS-0aL"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="_aquirementTableView" destination="Mbx-gH-nas" id="lnT-8r-6Ol"/>
@@ -5397,7 +5403,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="FHS-xF-HKJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="FHS-xF-HKJ">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.180392161" green="0.37647062539999998" blue="0.54509806630000002" alpha="1" colorSpace="deviceRGB"/>
@@ -5464,6 +5470,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.31372550129999999" green="0.61568629740000003" blue="0.80000007149999997" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="FHS-xF-HKJ" secondAttribute="trailing" id="76Q-0H-fWE"/>
+                            <constraint firstItem="FHS-xF-HKJ" firstAttribute="leading" secondItem="0Tw-Uw-taI" secondAttribute="leading" id="HnY-e3-8pe"/>
+                            <constraint firstItem="vI0-Qp-X1H" firstAttribute="top" secondItem="FHS-xF-HKJ" secondAttribute="bottom" id="Wbt-td-hgU"/>
+                            <constraint firstItem="FHS-xF-HKJ" firstAttribute="top" secondItem="0Tw-Uw-taI" secondAttribute="top" id="tWl-pJ-tyh"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="_teacherAquirementTableView" destination="FHS-xF-HKJ" id="cSw-fu-wSM"/>
@@ -5743,7 +5755,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="0FBB9625-832E-40E6-ABD7-22BA62111408" width="256" height="256">
+        <image name="505F9078-71E0-450A-A3E2-605D00354549" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -10185,7 +10197,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="29EADE9A-5AC3-4A0D-B7DB-7C7DCE190D18" width="256" height="256">
+        <image name="9071276E-B3A7-4730-97E5-D97F24BF2CBA" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -14627,7 +14639,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="2C3E9010-076D-4A38-8010-BB9E14594654" width="256" height="256">
+        <image name="B0CAEAB4-AA3E-4AB2-9CC4-C81CB153FDD7" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -19069,7 +19081,7 @@ BA6JAAQOkQAEDp4ABA6jAAQOpQAEDqcABA6sAAQOtAAEDrcABA68AAQOxAAEDscABA7ZAAQO3AAEDuEA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
 </mutableData>
         </image>
-        <image name="381FC6F0-FB23-4919-B6B9-3FC69CB19877" width="256" height="256">
+        <image name="F09FCBBE-2822-43F2-A547-AABDB56C5411" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
