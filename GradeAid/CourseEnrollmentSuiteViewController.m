@@ -143,7 +143,6 @@
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(enrollmentWasSelected:) name:EnrolllmentWasSelectedNotification object: nil];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(dismissViewController:) name:WillDismissViewControllerNotifification object: _courseViewController];
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(enrollmentViewDone:) name:WillDismissViewControllerNotifification object: _enrollmentViewController];
-
 }
 
 - (void) viewWillDisappear:(BOOL)animated

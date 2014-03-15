@@ -19,5 +19,6 @@ static NSString *const TeacherAquirementCellDidEnableEditNotification = @"Teache
 
 @property (nonatomic, strong) TeacherAquirement *teacherAquirement;
 @property (nonatomic) bool editmode;
+@property (nonatomic) bool shadowed;
 
 @end

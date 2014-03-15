@@ -80,6 +80,7 @@
     
     TeacherAquirementCell *cell = [tableView dequeueReusableCellWithIdentifier: TeacherAquirementCellIdentifier forIndexPath:indexPath];
     [cell setTeacherAquirement: aquirement];
+    [cell setShadowed: !(indexPath.row%2)];
     
     return cell;
 }

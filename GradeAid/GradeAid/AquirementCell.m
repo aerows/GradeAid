@@ -144,21 +144,7 @@ NSInteger const textSize = 14;
     labelFrame.origin.y = CGRectGetMaxY(frame);
     [labelContainer setFrame: labelFrame];
     
-    [self updateBackground];
-}
-
-- (void) updateBackground
-{
-    if ([_grade isEqualToNumber: @0])
-    {
-        [self.contentView setBackgroundColor: [UIColor colorWithWhite:235.f/255.f alpha:1.0]];
-        [captionTextView setAlpha: 0.8];
-    }
-    else
-    {
-        [self.contentView setBackgroundColor: [UIColor whiteColor]];
-        [captionTextView setAlpha: 1.0];
-    }
+    //[self updateBackground];
 }
 
 #pragma mark - Getters and Setters
@@ -176,7 +162,7 @@ NSInteger const textSize = 14;
     _grade = grade;
     [captionTextView setAttributedText: [_aquirement attributedStringForCurrentGrade: _grade.intValue]];
     [self updateLabels];
-    [self updateBackground];
+    //[self updateBackground];
 }
 
 - (void) setEditmode:(bool)editmode
@@ -189,5 +175,21 @@ NSInteger const textSize = 14;
 @synthesize grade = _grade;
 @synthesize editmode = _editmode;
 @synthesize enableEdit = _enableEdit;
+@synthesize shadowed = _shadowed;
+
+- (void) setShadowed:(bool)shadowed
+{
+    _shadowed = shadowed;
+    if (_shadowed)
+    {
+        [self.contentView setBackgroundColor: [UIColor colorWithWhite:235.f/255.f alpha:1.0]];
+        [captionTextView setAlpha: 0.8];
+    }
+    else
+    {
+        [self.contentView setBackgroundColor: [UIColor whiteColor]];
+        [captionTextView setAlpha: 1.0];
+    }
+}
 
 @end

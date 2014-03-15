@@ -37,9 +37,6 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
 
 - (void) setupFetchResultsControllers
 {
-    
-    
-    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: @"TeacherAquirementDescription"];
     request.predicate = [NSPredicate predicateWithFormat: @"SELF IN %@", _course.courseEdition.teacherAquirementDescriptions];
     [request setSortDescriptors: @[[NSSortDescriptor sortDescriptorWithKey: @"caption" ascending: YES]]];
@@ -84,7 +81,6 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
     return [RoundCorners tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (_fetchedAquirementDescriptionController.sections.count)
@@ -97,7 +93,6 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     __block TeacherAquirementDescription *aqDesc = [_fetchedAquirementDescriptionController objectAtIndexPath: indexPath];
     
     if (_inEditMode)
@@ -123,13 +118,11 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
 {
     return 45.f;
 }
+
 - (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [RoundCorners tableView: self willDisplayCell: cell forRowAtIndexPath:indexPath];
-
 }
-
-
 
 #pragma mark - UITableView Delegate Methods
 
@@ -144,7 +137,6 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
 {
     [self beginUpdates];
 }
-
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
@@ -161,7 +153,6 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
             break;
     }
 }
-
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
@@ -210,7 +201,6 @@ static NSString *const TeacherAquirementCellIdentifier = @"TeacherAquirementCell
 //        [cell setAccessoryType: UITableViewCellAccessoryNone];
 //        [cell.detailTextLabel setText: @"Open"];
 //    }
-    
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller

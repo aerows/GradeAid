@@ -130,5 +130,22 @@ static NSInteger const numberOfGradations = 3;
 
 @synthesize teacherAquirement = _teacherAquirement;
 @synthesize editmode = _editmode;
+@synthesize shadowed = _shadowed;
+
+- (void) setShadowed:(bool)shadowed
+{
+    _shadowed = shadowed;
+    if (_shadowed)
+    {
+        [self.contentView setBackgroundColor: [UIColor colorWithWhite:235.f/255.f alpha:1.0]];
+        [captionTextView setAlpha: 0.8];
+    }
+    else
+    {
+        [self.contentView setBackgroundColor: [UIColor whiteColor]];
+        [captionTextView setAlpha: 1.0];
+    }
+}
+
 @end
 

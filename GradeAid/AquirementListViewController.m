@@ -114,6 +114,7 @@
      {
          
      }];
+    [cell setShadowed: !(indexPath.row % 2)];
     return cell;
 }
 

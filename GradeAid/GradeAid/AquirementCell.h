@@ -30,5 +30,6 @@ static NSString *const AquirementCellCellIdentifier = @"AquirementCellIdentifier
 @property (nonatomic, strong) NSNumber *grade;
 @property (nonatomic) bool editmode;
 @property (nonatomic, copy) EnableEdit enableEdit;
+@property (nonatomic) bool shadowed;
 
 @end

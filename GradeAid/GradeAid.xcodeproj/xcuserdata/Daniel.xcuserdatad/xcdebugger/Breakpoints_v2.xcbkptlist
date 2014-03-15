@@ -1088,11 +1088,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GradeAid/AquirementCell.m"
-            timestampString = "414410923.858865"
+            timestampString = "416576227.877403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "@implementation AquirementCell"
             landmarkType = "3">
          </BreakpointContent>
@@ -1648,11 +1648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CustomAquirementTableView.m"
-            timestampString = "416398226.990107"
+            timestampString = "416577357.327901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "-numberOfSectionsInTableView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2014,11 +2014,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AquirementListViewController.m"
-            timestampString = "415457009.496029"
+            timestampString = "416576227.877403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "-tableView:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3586,11 +3586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AquirementListViewController.m"
-            timestampString = "415457009.496029"
+            timestampString = "416576227.877403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "-updateEditModeForCells"
             landmarkType = "5">
          </BreakpointContent>
@@ -3746,11 +3746,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AquirementListViewController.m"
-            timestampString = "415456994.114431"
+            timestampString = "416576227.877403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "-setEnrollment:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3838,7 +3838,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GradeAid/EnrollmentTableView.m"
@@ -3854,7 +3854,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CourseEnrollmentSuiteViewController.m"
